@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta name="description" content="Sistema de entrada de dados do laboratório Nugap">
+	<meta name="author" content="Christiane M. Okamoto e Luiz Fernando M. Carvalho">
+	<title>Nugap</title>
+
+	<%= stylesheet_link_tag "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+
+	<% if valida_id_sessao %>
+
+		<!-- MENU PRINCIPAL -->	
+		<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+		<div class="container">
+
+			
+
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+				
+				<li><%= link_to 'Amostras', amostras_path, :class => 'brand' %></li>		
+				<li><%= link_to 'Empresas', empresas_path %></li>
+				<li><%= link_to 'Produtos', produtos_path %></li>
+				<li><%= link_to 'Embalagens', embalagems_path %></li>
+				<li><%= link_to 'Análises', tipo_analises_path %></li>
+				<li><%= link_to 'Parâmetros', parametros_path %></li>
+				<li><%= link_to 'Assinaturas', assinaturas_path %></li>
+				<% if user_is_administrador? %>
+					<li><%= link_to 'Usuários', usuarios_path %></li>
+				<% end %>				
+				<li>
+					<div class='logado'>
+						<% usuario = Usuario.find(session[:id]) %>
+						<% if user_is_administrador? %>
+	            			Logado como <%= usuario.login %> (Administrador)
+	           			<% end %>
+	            		<% if user_is_tecnico? %>
+	                		Logado como <%= usuario.login %> (Técnico)
+	            		<% end %>
+	            		<% if user_is_estagiario? %>
+	                		Logado como <%= usuario.login %> (Estagiário)
+	            		<% end %>
+       				 </div>
+					<span class="logout"><%= link_to 'Logout', logout_path, :class => 'logout' %></span>
+				</li>
+				<!--li class="logout"><button class="btn btn-info" type="submit">Logout</li-->
+				</ul>
+			</div>
+		</div>
+		</div>
+		</div>
+		<div class="margem-padrao-nugap">
+			<br /><br /><br /><br />
+	    		<%= yield %>
+		</div>
+
+	    <footer>
+			<div class="footerNugap">
+				<br><br>
+				<center>
+					<img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
+					<i>Nugap - Todos os direitos reservados</i>
+				</center>
+			</div>
+		</footer>
+
+		<%else%>
+
+			<div class="container">
+		   		<%= yield %>
+		  	</div>
+
+		<%end%>
+
+
+		  
+
+		  
+
+
+  </body>
+</html>

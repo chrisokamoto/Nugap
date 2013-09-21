@@ -1,0 +1,21 @@
+<%= form_for(@embalagem) do |f| %>
+  <% if @embalagem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@embalagem.errors.count, "erro") %> ocorreram:</h2>
+
+      <ul>
+      <% @embalagem.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tipo %><br>
+    <%= f.text_field :tipo %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Salvar", :class => 'btn btn-info' %>
+  </div>
+<% end %>

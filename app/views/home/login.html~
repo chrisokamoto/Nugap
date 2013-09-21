@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <title>Nugap</title>
+    <meta name="description" content="">
+    <meta name="author" content="Christiane M. Okamoto e Luiz Fernando M. Carvalho">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+    <link href="css/datepicker.css" rel="stylesheet">
+    <script src="js/prettify.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script>('.datepicker').datepicker()</script>
+    
+    <script>
+    if (top.location != location) {
+	    top.location.href = document.location.href ;
+    }
+    $(function(){
+		    window.prettyPrint && prettyPrint();
+		    $('#fabricacao').datepicker();
+		    $('#validade').datepicker();
+		    $('#entrada').datepicker();
+    });
+    </script>
+    
+
+        
+</head>
+
+<br/><br/>
+<br/><br/>
+
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Insere margem padrao-->
+<div class="margem-padrao-nugap">
+
+  <!-- Form Name -->
+  <legend>Novo protocolo</legend>
+
+  <!-- Número do protocolo/ID -->
+  <div class="control-group">
+    <label class="control-label" for="textinput">Identificador do protocolo</label>
+    <div class="controls">
+      <input id="textinput" name="textinput" type="text" placeholder="" class="input-xlarge">
+    </div>
+  </div>
+ 
+
+  <!-- Produto -->
+  <div class="control-group">
+    <label class="control-label" for="selectbasic">Produto</label>
+    <div class="controls">
+      <select id="selectbasic" name="selectbasic" class="input-xlarge">
+      <% 15.times{ %>
+	<option>Produtos</option>
+      <% } %>
+      </select>
+    </div>
+  </div>
+
+	  
+  <!-- Embalagem, conteúdo e unidade -->
+  <div class="row-fluid">
+      <div class="span4">
+	    <!-- Embalagem -->
+	    <div class="control-group">
+	      <label class="control-label" for="selectbasic">Embalagem</label>
+	      <div class="controls">
+		<select id="selectbasic" name="selectbasic" class="input-xlarge">
+		<% 15.times{ %>
+		  <option>Embalagens</option>
+		<% } %>
+		</select>
+	      </div>
+	    </div>
+      </div>
+      <div class="span2">
+	      <!-- Conteudo -->
+	    <div class="control-group">
+	      <label class="control-label" for="textinput">Conteúdo</label>
+	      <div class="controls">
+		<input id="textinput" name="textinput" type="text" placeholder="" class="input-mini">
+	      </div>
+	    </div>
+      </div>      
+      <div class="span2">
+	      <!-- Unidade -->
+	      <div class="control-group">
+		<label class="control-label" for="selectbasic">Unidade</label>
+		<div class="controls">
+		  <select id="selectbasic" name="selectbasic" class="input-mini">
+		    <option>g</option>
+		    <option>ml</option>
+		  </select>
+		</div>
+	      </div>
+      </div>
+  </div>
+
+  
+  <!-- Marca -->
+  <div class="control-group">
+    <label class="control-label" for="selectbasic">Marca</label>
+    <div class="controls">
+      <select id="selectbasic" name="selectbasic" class="input-xlarge">
+      <% 15.times{ %>
+	<option>Opcao</option>
+      <% } %>
+      </select>
+    </div>
+  </div>
+  
+  <!-- Datas de fabricacao e validade -->
+  <div class="row-fluid">
+  
+    <div class="span4"> 
+	<!-- Data de fabricacao -->
+	<div class="control-group">
+	  <label class="control-label" for="selectbasic">Data de fabricação</label>
+	  <div class="controls">
+	      <input type="text" class="input-small" value="" data-date-format="dd/mm/yyyy" id="fabricacao" readOnly="true" style="background-color:white">
+	  </div>
+	</div>
+    </div>
+    
+    <div class="offset4"> 
+	<!-- Data de validade -->
+	<div class="control-group">
+	  <label class="control-label" for="selectbasic">Data de validade</label>
+	  <div class="controls">
+	      <input type="text" class="input-small" value="" data-date-format="dd/mm/yyyy" id="validade" readOnly="true" style="background-color:white">
+	  </div>
+	</div> 
+     </div>
+     
+       <!-- Data de chegada -->
+	<div class="control-group">
+	  <label class="control-label" for="selectbasic">Data de entrada</label>
+	  <div class="controls">
+	      <input type="text" class="input-small" value="" data-date-format="dd/mm/yyyy" id="entrada" readOnly="true" style="background-color:white">
+	  </div>
+	</div>
+  </div>
+ 
+  <!-- Lote -->
+  <div class="control-group">
+    <label class="control-label" for="textinput">Lote</label>
+    <div class="controls">
+      <input id="textinput" name="textinput" type="text" placeholder="" class="input-xlarge">
+    </div>
+  </div>
+  
+  <!-- Amostragem -->
+  <div class="control-group">
+    <label class="control-label" for="textinput">Amostragem</label>
+    <div class="controls">
+      <input id="textinput" name="textinput" type="text" placeholder="de responsabilidade do solicitante" class="input-xlarge" readOnly="true" style="background-color:white">
+    </div>
+  </div>
+  
+  <!-- Descricao -->
+  <div class="control-group">
+    <label class="control-label" for="textarea">Descrição da amostra</label>
+    <div class="controls">                     
+      <textarea id="textarea" name="textarea"></textarea>
+    </div>
+  </div>
+  
+  <!-- Solicitante -->
+  <div class="control-group">
+    <label class="control-label" for="selectbasic">Solicitante</label>
+    <div class="controls">
+      <select id="selectbasic" name="selectbasic" class="input-xlarge">
+      <% 15.times{ %>
+	<option>Solicitante</option>
+      <% } %>
+      </select>
+    </div>
+  </div>
+  
+</div>

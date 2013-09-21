@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nome: MyString
+  referencia: MyString
+  metodo: MyString
+  valor_referencia: MyString
+
+two:
+  nome: MyString
+  referencia: MyString
+  metodo: MyString
+  valor_referencia: MyString

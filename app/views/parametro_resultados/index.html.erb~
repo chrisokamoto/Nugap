@@ -1,0 +1,32 @@
+<h1>Listing parametro_resultados</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tipo</th>
+      <th>Parametro</th>
+      <th>Resultado</th>      
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @parametro_resultados.each do |parametro_resultado| %>
+      <tr>
+        <td><%= parametro_resultado.tipo %></td>
+        <td><%= parametro_resultado.parametro_id %></td>
+        <td><%= parametro_resultado.resultado %></td>
+        
+        <td><%= link_to 'Show', parametro_resultado %></td>
+        <td><%= link_to 'Edit', edit_parametro_resultado_path(parametro_resultado) %></td>
+        <td><%= link_to 'Destroy', parametro_resultado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Parametro resultado', new_parametro_resultado_path %>

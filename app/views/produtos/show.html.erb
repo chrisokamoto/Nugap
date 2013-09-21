@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @produto.tipo %>
+</p>
+
+<%= link_to 'Editar', edit_produto_path(@produto), :class => 'btn btn-info' %> |
+<%= link_to 'Voltar', produtos_path, :class => 'btn btn-info' %>

@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @assinatura.nome %>
+</p>
+
+<p>
+  <strong>CRFMG:</strong>
+  <%= @assinatura.crfmg %>
+</p>
+
+
+<%= link_to 'Editar', edit_assinatura_path(@assinatura), :class => 'btn btn-info' %>
+<%= link_to 'Voltar', assinaturas_path, :class => 'btn btn-info' %>
+

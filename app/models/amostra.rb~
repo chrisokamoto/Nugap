@@ -1,0 +1,2 @@
+class Amostra < ActiveRecord::Base
+end

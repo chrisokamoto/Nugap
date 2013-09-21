@@ -1,0 +1,31 @@
+<script type="text/javascript" language="javascript">
+$(document).ready(function() {
+	$('#example').dataTable( {
+		"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+			"sLengthMenu": "_MENU_ records per page"
+		}
+	} );
+} );
+</script>
+
+<legend>Amostras cadastradas</legend>
+
+<table cellpadding="0" cellspacing="0" border="1" class="table table-striped table-bordered" id="example" width="70%">
+  <thead>
+    <tr>
+      <th>Teste</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td>Bla</td>
+      </tr>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nova Amostra', new_amostra_path, :class => 'btn btn-info' %>

@@ -1,0 +1,104 @@
+<%= form_for(@amostra) do |f| %>
+  <% if @amostra.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@amostra.errors.count, "erro") %> ocorreram:</h2>
+
+      <ul>
+      <% @amostra.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :certificado %>
+    <%= f.text_field :certificado %>
+  </div>
+  <div class="field">
+    <%= f.label :solicitante_id %>
+    <%= collection_select(:amostra, :solicitante_id, Empresa.all, :id, :nome) %>
+  </div>
+  <div class="field">
+    <%= f.label :produto_id %>
+    <%= collection_select(:amostra, :produto_id, Produto.all, :id, :tipo) %>
+  </div>
+  <div class="field">
+    <%= f.label :embalagem_id %>
+    <%= collection_select(:amostra, :embalagem_id, Embalagem.all, :id, :tipo) %>
+  </div>
+  <div class="field">
+    <%= f.label "Data de fabricação" %>
+    <%= f.date_select :data_fabricacao, :order => [:day, :month, :year] %>
+  </div>
+  <div class="field">
+    <%= f.label "Data de validade" %>
+    <%= f.date_select :data_validade, :order => [:day, :month, :year] %>
+  </div>
+  <div class="field">
+    <%= f.label :lote %>
+    <%= f.text_field :lote %>
+  </div>
+  <div class="field">
+    <%= f.label "Conteúdo" %><%= f.text_field :conteudo %>
+  </div>
+  <div class="field">
+    <%= f.label :unidade %>
+    <%= f.text_field :unidade %>
+  </div>
+  <div class="field">
+    <%= f.label "Descrição" %>
+    <%= f.text_area :descricao %>
+  </div>
+  <div class="field">
+    <%= f.label :marca %>
+    <%= f.text_field :marca %>
+  </div>
+  <div class="field">
+    <%= f.label :fabricante_id %>
+    <%= collection_select(:amostra, :fabricante_id, Empresa.all, :id, :nome) %>
+  </div>
+  <div class="field">
+    <%= f.label "Características organolépticas" %>
+    <%= f.text_area :caracteristicas %>
+  </div>
+  <div class="field">
+    <%= f.label "Responsável técnico" %>
+    <%= collection_select(:amostra, :assinatura_id, Assinatura.all, :id, :nome) %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Data de entrada no laboratório" %>
+    <%= f.date_select :data_entrada, :order => [:day, :month, :year] %>
+  </div>
+  <div class="field">
+    <%= f.label "Data de entrega do certificado" %>
+    <%= f.date_select :data_saida, :order => [:day, :month, :year] %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Observações" %>
+    <%= f.text_area :observacoes %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Status" %>
+    <%= collection_select(:amostra, :status, Status.all, :id, :tipo) %>
+  </div>
+
+
+<br><br>
+<fieldset>
+      
+  <%= render('parametrosResultados_table', :f => f) %>
+	<br><br>
+      <center><%= link_to_add_fields("Adicionar Resultados", f, :parametro_resultados, :class => "btn", :title => "Adicionar Resultados") %></center>
+      <p></p>
+    </fieldset> 
+
+<br><br>
+<div class="actions">
+    <%= f.submit "Salvar", :class => 'btn btn-info' %>
+  </div>
+
+
+<% end %>

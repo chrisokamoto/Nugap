@@ -1,0 +1,6 @@
+<h1>Editing assinatura</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @assinatura %> |
+<%= link_to 'Back', assinaturas_path %>

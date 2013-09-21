@@ -1,0 +1,18 @@
+<table id="parametro-resultados-display-table" class="table table-hover table-striped">
+  <thead>
+      <th>Tipo Análise</th>
+      <th>Parâmetro</th>
+      <th>Resultado</th> 
+      <th>Conclusão</th> 
+  </thead>
+  <tbody>
+      <% @amostra.parametro_resultados.each do |parametro_resultado| %>
+          <tr class="fields">            
+            <td><%= parametro_resultado.tipo %></td>            
+            <td><%= parametro_resultado.parametro %></td>
+            <td><%= parametro_resultado.resultado %></td>
+            <td><%= parametro_resultado.conclusao %></td>
+          </tr>
+      <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,20 @@
+<table id="parametro-resultados-display-table" class="table table-hover table-striped">
+  <thead>
+      <th>Tipo Análise</th>
+      <th>Parâmetro</th>
+      <th>Resultado</th> 
+      <th>Conclusão</th> 
+  </thead>
+  <tbody>
+      <% @amostra.parametro_resultados.each do |parametro_resultado| %>
+          <tr class="fields">
+            <% tipo_analise = TipoAnalise.find(parametro_resultado.tipo)  %>
+            <td><%= tipo_analise.tipo %></td>
+            <% parametro_resultados = Parametro.find(parametro_resultado.parametro_id)  %>
+            <td><%= parametro_resultado.nome %></td>
+            <td><%= parametro_resultado.resultado %></td>
+            <td><%= parametro_resultado.conclusao %></td>
+          </tr>
+      <% end %>
+  </tbody>
+</table>

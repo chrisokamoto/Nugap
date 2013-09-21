@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  valor: MyString
+  parametro_id: 1
+  amostra_id: MyString
+
+two:
+  valor: MyString
+  parametro_id: 1
+  amostra_id: MyString

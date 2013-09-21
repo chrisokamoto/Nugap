@@ -1,0 +1,6 @@
+<%= link_to 'Empresas', empresas_path %><br />
+<%= link_to 'Usuarios', usuarios_path %><br />
+<%= link_to 'Embalagems', embalagems_path %><br />
+<%= link_to 'Unidades', unidades_path %><br />
+<%= link_to 'Assinaturas', assinaturas_path %><br />
+<%= link_to 'Produtos', produtos_path %><br />

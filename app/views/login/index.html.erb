@@ -1,0 +1,60 @@
+
+
+  <div class="bs-docs-section">
+  <div style="height:150px">
+  <% unless flash[:error].nil? %>
+  <div class="row">
+    <div style="height:30px"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Login Erro</h3>
+        </div>
+        <div class="panel-body">
+          <%= flash[:error] %>
+        </div>
+      </div>
+    <div class="col-lg-3"></div>
+    </div>
+  </div>
+  <% end %>
+  </div>
+
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="col-lg-30"></div>
+        <div class="col-lg-30">
+        <div class="login-form">
+          <h2>Login</h2>          
+            <%= form_tag controller: 'login', action:'login' do%>
+            <fieldset>
+              <div class="clearfix">
+                <%= text_field_tag :login, nil, class: 'form-control', placeholder: 'Usuário' %>
+              </div>
+              <div class="clearfix">
+                <%= password_field_tag :senha, nil, class: 'form-control', placeholder: 'Senha'%>
+              </div>
+		<br>
+		<%= submit_tag 'Entrar', class: 'btn btn-info' %>
+            </fieldset>
+            <% end %>   
+            </div>
+      </div>       
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="footerNugap">
+    <br><br>
+      <center>
+        <img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
+        <i>Nugap - Todos os direitos reservados</i>
+      </center>
+  </div>
+

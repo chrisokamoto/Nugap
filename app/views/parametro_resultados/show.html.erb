@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @parametro_resultado.tipo %>
+</p>
+
+<p>
+  <strong>Parâmetro:</strong>
+  <%= @parametro_resultado.parametro_id %>
+</p>
+
+<p>
+  <strong>Resultado:</strong>
+  <%= @parametro_resultado.resultado %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_parametro_resultado_path(@parametro_resultado) %> |
+<%= link_to 'Back', parametro_resultados_path %>

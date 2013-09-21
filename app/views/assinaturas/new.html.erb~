@@ -1,0 +1,6 @@
+<legend>Nova assinatura</legend>
+
+<%= render 'form' %>
+
+<%= link_to 'Voltar', assinaturas_path %>
+

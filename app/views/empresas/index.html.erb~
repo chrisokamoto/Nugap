@@ -1,0 +1,34 @@
+<legend>Empresas cadastradas</legend>
+
+<table cellpadding="0" cellspacing="0" border="1" class="table table-striped table-bordered" id="example" width="70%">
+  <thead>
+    <tr>
+      <th width="40%" style="word-wrap:break-word;"><center>Nome</center></th>
+      <th width="20%" style="word-wrap:break-word;"><center>Cidade</center></th>
+      <th width="15%" style="word-wrap:break-word;"><center>CNPJ</center></th>
+      <th width="15%" style="word-wrap:break-word;"><center>Telefone</center></th>
+      <th width="5%" style="word-wrap:break-word;"></th>
+      <th width="5%" style="word-wrap:break-word;"></th>
+      <!--th width="5%" style="word-wrap:break-word;"></th-->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @empresas.each do |empresa| %>
+      <tr>
+        <td><center><%= empresa.nome %></center> </td>
+        <td><center><%= empresa.cidade %></center> </td>
+        <td><center><%= empresa.telefone %></center> </td>
+        <td><center><%= empresa.CNPJ %></center> </td>
+        <td><center><%= link_to 'Detalhes', empresa, :class => 'btn btn-small' %></center> </td>
+        <td><center><%= link_to 'Editar', edit_empresa_path(empresa), :class => 'btn btn-small' %></center> </td>
+        <!--td><center><%= link_to 'Excluir', empresa, method: :delete, data: { confirm: 'Are you sure?' } %></center> </td-->
+        
+     </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nova empresa', new_empresa_path, :class => 'btn btn-info'%>

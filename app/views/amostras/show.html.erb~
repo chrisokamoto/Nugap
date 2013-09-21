@@ -1,0 +1,101 @@
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Certificado:</strong>
+  <%= @amostra.certificado %>
+</p>
+
+<p>
+  <strong>Produto:</strong>
+  <% produto = Produto.find(@amostra.produto_id) %>
+  <%= produto.tipo %>
+</p>
+
+<p>
+  <strong>Embalagem:</strong>
+  <% embalagem = Embalagem.find(@amostra.embalagem_id) %>
+  <%= embalagem.tipo %>
+</p>
+
+<p>
+  <strong>Conteúdo:</strong>
+  <%= @amostra.conteudo  %>
+  <%= @amostra.unidade %>
+</p>
+
+<p>
+  <strong>Marca:</strong>
+  <%= @amostra.marca %>
+</p>
+
+<p>
+  <strong>Fabricante:</strong>
+  <% fabricante = Empresa.find(@amostra.fabricante_id) %>
+  <%= fabricante.nome %>  
+</p>
+
+<p>
+  <strong>Data de fabricação:</strong>
+  <%= @amostra.data_fabricacao.strftime("%d/%m/%Y") %>
+</p>
+
+<p>
+  <strong>Data de validade:</strong>
+  <%= @amostra.data_validade.strftime("%d/%m/%Y") %>
+</p>
+
+<p>
+  <strong>Lote:</strong>
+  <%= @amostra.lote %>
+</p>
+
+
+<p>
+  <strong>Descrição:</strong>
+  <%= @amostra.descricao %>
+</p>
+
+<p>
+  <strong>Solicitante:</strong>
+  <% solicitante = Empresa.find(@amostra.solicitante_id) %>
+  <%= solicitante.nome %>
+</p>
+
+<p>
+  <strong>Características organolépticas:</strong>
+  <%= @amostra.caracteristicas %>
+</p>
+
+<p>
+  <strong>Data de entrada no laboratório:</strong>
+  <%= @amostra.data_entrada.strftime("%d/%m/%Y") %>
+</p>
+
+<p>
+  <strong>Data de entrega do certificado:</strong>
+  <%= @amostra.data_saida.strftime("%d/%m/%Y") %>
+</p>
+
+<p>
+  <strong>Observações:</strong>
+  <%= @amostra.observacoes %>
+</p>
+
+<p>
+  <strong>Assinatura:</strong>
+  <% assinatura = Assinatura.find(@amostra.assinatura_id) %>
+  <%= assinatura.nome %>
+</p>
+
+
+<% if ParametroResultado.exists?(:amostra_id => @amostra.id) %>
+<fieldset>
+  <%= render('parametro_resultados_display') %>
+</fieldset>
+<% end %>
+<br /><br /><br />
+<center><%= link_to "Gerar PDF", amostra_path(@amostra, :format => 'pdf'), :class => 'btn' %></center>
+<br /><br /><br />
+<%= link_to 'Editar', edit_amostra_path(@amostra), :class => 'btn btn-info' %>
+<%= link_to 'Voltar', amostras_path, :class => 'btn btn-info' %>

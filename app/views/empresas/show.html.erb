@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @empresa.nome %>
+</p>
+
+<p>
+  <strong>Logradouro:</strong>
+  <%= @empresa.logradouro %>
+</p>
+
+<p>
+  <strong>Número:</strong>
+  <%= @empresa.numero %>
+</p>
+
+<p>
+  <strong>Bairro:</strong>
+  <%= @empresa.bairro %>
+</p>
+
+<p>
+  <strong>Cidade:</strong>
+  <%= @empresa.cidade %>
+</p>
+
+<p>
+  <strong>UF:</strong>
+  <%= @empresa.UF %>
+</p>
+
+<p>
+  <strong>CEP:</strong>
+  <%= @empresa.CEP %>
+</p>
+
+<p>
+  <strong>CNPJ:</strong>
+  <%= @empresa.CNPJ %>
+</p>
+
+<p>
+  <strong>Telefone:</strong>
+  <%= @empresa.telefone %>
+</p>
+
+<%= link_to 'Editar', edit_empresa_path(@empresa), :class => 'btn btn-info' %> 
+<%= link_to 'Voltar', empresas_path, :class => 'btn btn-info' %>

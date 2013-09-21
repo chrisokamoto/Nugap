@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @parametro.nome %>
+</p>
+
+<p>
+  <strong>Referencia:</strong>
+  <%= @parametro.referencia %>
+</p>
+
+<p>
+  <strong>Metodo:</strong>
+  <%= @parametro.metodo %>
+</p>
+
+<p>
+  <strong>Valor de Referência:</strong>
+  <%= @parametro.valor_referencia %>
+</p>
+
+
+<%= link_to 'Editar', edit_parametro_path(@parametro), :class => 'btn btn-info' %>
+<%= link_to 'Voltar', parametros_path, :class => 'btn btn-info' %>

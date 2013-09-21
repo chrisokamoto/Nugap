@@ -1,0 +1,32 @@
+<legend>Usuarios cadastrados</legend>
+<style>#session_button:visited { color:#FFF; }</style>
+<table cellpadding="0" cellspacing="0" border="1" class="table table-striped table-bordered" id="example" width="70%">
+  <thead>
+    <tr>
+      <th width="25%" style="word-wrap:break-word;"><center>Nome</center></th>
+      <th width="25%" style="word-wrap:break-word;"><center>Sobrenome</center></th>
+      <th width="20%" style="word-wrap:break-word;"><center>Login</center></th>
+      <th width="15%" style="word-wrap:break-word;"><center>Permissao</center></th>
+      <th width="5%" style="word-wrap:break-word;"><center></center></th>
+      <th width="5%" style="word-wrap:break-word;"><center></center></th>      
+      <th width="5%" style="word-wrap:break-word;"><center></center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @usuarios.each do |usuario| %>
+      <tr>
+        <td width="25%" style="word-wrap:break-word;"><center><%= usuario.nome %></center></td>
+        <td width="25%" style="word-wrap:break-word;"><center><%= usuario.sobrenome %></center></td>
+        <td width="20%" style="word-wrap:break-word;"><center><%= usuario.login %></center></td>
+        <td width="15%" style="word-wrap:break-word;"><center><%= usuario.permissao %></center></td>
+        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', usuario %></center></td>
+        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_usuario_path(usuario) %></center></td>
+        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Excluir', usuario, method: :delete, data: { confirm: 'Are you sure?' } %></center></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo usuario', new_usuario_path, :class => 'btn btn-info'%>

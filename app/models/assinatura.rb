@@ -1,0 +1,2 @@
+class Assinatura < ActiveRecord::Base
+end

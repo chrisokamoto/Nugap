@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  parametro: MyString
+  resultado: MyString
+  tipo: MyString
+  amostra_id: 1
+  conclusao: MyString
+
+two:
+  parametro: MyString
+  resultado: MyString
+  tipo: MyString
+  amostra_id: 1
+  conclusao: MyString

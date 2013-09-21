@@ -1,0 +1,21 @@
+development:
+  adapter: mysql
+  database: nugap
+  username: chrisfernando
+  password: 0831nugap
+  host: localhost
+  encoding: utf8
+test:
+  adapter: mysql
+  database: nugap
+  username: chrisfernando
+  password: 0831nugap
+  host: localhost
+  encoding: utf8
+production:
+  adapter: mysql
+  database: nugap
+  username: chrisfernando
+  password: 0831nugap
+  host: localhost
+  encoding: utf8

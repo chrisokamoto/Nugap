@@ -1,0 +1,74 @@
+<%= form_for(@empresa) do |f| %>
+  <% if @empresa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@empresa.errors.count, "erro") %> ocorreram:</h2>
+
+      <ul>
+      <% @empresa.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome %>
+    <%= f.text_field :nome %>
+  </div>
+
+<!--div class="control-group">
+  <label class="control-label" for="selectbasic">Logradouro</label>
+  <div class="controls">
+    <select id="selectbasic" name="selectbasic" class="input-large">
+      <option>Rua</option>
+      <option>Avenida</option>
+      <option>Rodovia</option>
+      <option>Praça</option>
+    </select>
+  </div>
+</div-->
+
+  <div class="field">
+    <%= f.label :logradouro %>
+    <%= f.text_field :logradouro %>
+  </div>
+  <div class="field">
+    <%= f.label "Número" %>
+    <%= f.number_field :numero %>
+  </div>
+  <div class="field">
+    <%= f.label :bairro %>
+    <%= f.text_field :bairro %>
+  </div>
+  <div class="field">
+    <%= f.label :cidade %>
+    <%= f.text_field :cidade %>
+  </div>
+  <div class="field">
+    <%= f.label "UF" %>
+    <%= f.text_field :UF %>
+  </div>
+  <div class="field">
+    <%= f.label "CEP" %>
+    <%= f.text_field :CEP %>
+  </div>
+  <div class="field">
+    <%= f.label "CNPJ" %>
+    <%= f.text_field :CNPJ %>
+  </div>
+
+<div class="large-2 columns">
+   <%= f.label :telefone %>
+   <%= f.text_field :telefone, :id => "phone", :placeholder => "Primary Phone"%>
+</div>
+
+  <!--div class="field">
+    <%= f.label :telefone %>
+    <%= f.text_field :telefone %>
+    <%= f.text_field :telefone, data: {autonumeric: {dGroup: '9', aDec: ',', aSep: '.'}} %>
+  </div-->
+
+  <div class="actions">
+    <%= f.submit "Salvar", :class => 'btn btn-info' %>
+  </div>
+<% end %>

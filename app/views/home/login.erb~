@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <title>Nugap</title>
+    <meta name="description" content="">
+    <meta name="author" content="Christiane M. Okamoto e Luiz Fernando M. Carvalho">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag :defaults %>
+    <%= csrf_meta_tags %>
+</head>
+
+<body>
+
+  <ui:include src="master.xhtml">
+
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="login-form">
+          <h2>Login</h2>
+          <form action="">
+            <fieldset>
+              <div class="clearfix">
+                <input type="text" placeholder="Username">
+              </div>
+              <div class="clearfix">
+                <input type="password" placeholder="Password">
+              </div>
+		<br>
+		<button class="btn btn-info" type="submit">Entrar</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="footerNugap">
+    <br><br>
+      <center>
+        <img src="public/image/logoMini.png" alt="Nugap" width="50" height="50">
+        <i>Nugap - Todos os direitos reservados</i>
+      </center>
+  </div>
+  </ui>
+</body>
+
+</html>

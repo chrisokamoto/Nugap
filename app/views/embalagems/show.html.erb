@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @embalagem.tipo %>
+</p>
+
+<%= link_to 'Editar', edit_embalagem_path(@embalagem), :class => 'btn btn-info' %> |
+<%= link_to 'Voltar', embalagems_path, :class => 'btn btn-info' %>

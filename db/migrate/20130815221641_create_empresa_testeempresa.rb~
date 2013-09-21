@@ -1,0 +1,6 @@
+class CreateEmpresaTesteempresa < ActiveRecord::Migration
+  def change
+    create_table :empresa_testeempresas do |t|
+    end
+  end
+end

@@ -1,0 +1,6 @@
+<h1>Editing amostra</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @amostra %> |
+<%= link_to 'Back', amostras_path %>

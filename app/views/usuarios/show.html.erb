@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Login:</strong>
+  <%= @usuario.login %>
+</p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @usuario.nome %>
+</p>
+
+<p>
+  <strong>Sobrenome:</strong>
+  <%= @usuario.sobrenome %>
+</p>
+
+<p>
+  <strong>Senha:</strong>
+  <%= @usuario.senha %>
+</p>
+
+<p>
+  <strong>Confirmacao:</strong>
+  <%= @usuario.confirmacao %>
+</p>
+
+<p>
+  <strong>Permissao:</strong>
+  <%= @usuario.permissao %>
+</p>
+
+<%= link_to 'Editar', edit_usuario_path(@usuario), :class => 'btn btn-info' %>
+<%= link_to 'Voltar', usuarios_path, :class => 'btn btn-info' %>

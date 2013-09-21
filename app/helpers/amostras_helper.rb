@@ -1,0 +1,2 @@
+module AmostrasHelper
+end

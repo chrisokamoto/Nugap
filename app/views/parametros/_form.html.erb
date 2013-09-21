@@ -1,0 +1,33 @@
+<%= form_for(@parametro) do |f| %>
+  <% if @parametro.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@parametro.errors.count, "erro") %> ocorreram:</h2>
+
+      <ul>
+      <% @parametro.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome %>
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label "Referência" %>
+    <%= f.text_area :referencia %>
+  </div>
+  <div class="field">
+    <%= f.label "Método" %>
+    <%= f.text_area :metodo %>
+  </div>
+  <div class="field">
+    <%= f.label "Valor de Referência" %>
+    <%= f.text_field :valor_referencia %>
+  </div>  
+  <div class="actions">
+    <%= f.submit "Salvar", :class => 'btn btn-info' %>
+  </div>
+<% end %>

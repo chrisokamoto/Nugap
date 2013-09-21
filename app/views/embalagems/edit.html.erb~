@@ -1,0 +1,6 @@
+<legend>Editar embalagem</legend>
+
+<%= render 'form' %>
+
+<%= link_to 'Detalhes', @embalagem, :class => 'btn btn-info' %>   
+<%= link_to 'Voltar', embalagems_path, :class => 'btn btn-info' %>
