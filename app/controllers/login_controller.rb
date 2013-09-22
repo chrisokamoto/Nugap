@@ -12,13 +12,16 @@ class LoginController < ApplicationController
 
 		return envia_mensagem_de_erro("Preencha o usuário.") if login.empty?
 		return envia_mensagem_de_erro("Preencha a senha.") if senha.empty?
-		
-		
-		if	busca_usuario_banco(login, senha)
-			redirect_to home_path
-		else
-			return envia_mensagem_de_erro("Falha na autenticação.")
-		end
+
+		usuario = Usuario.autenticacao(params[:login], params[:senha])
+
+		if usuario
+		    session[:id] = usuario.id
+    		redirect_to home_path
+  		else
+    		return envia_mensagem_de_erro("Falha na autenticação.")
+  		end
+
 	end
 
 	def logout
@@ -26,20 +29,7 @@ class LoginController < ApplicationController
 		redirect_to login_path
 	end
 
-	private
-		def busca_usuario_banco(login, senha)
-			u = Usuario.find_by_login(login)
-			if !u.nil?
-				if u.senha == senha			
-					session[:id] = u.id
-					true
-				else
-					false
-				end
-			else
-				false
-			end
-		end
+	private		
 
 		def envia_mensagem_de_erro(str)
 			redirect_to login_path, :flash => {error: str}	

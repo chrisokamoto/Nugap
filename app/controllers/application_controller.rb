@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
   	end
   end
 
+  
+
   def user_is_administrador?
     Usuario.find_by_id(session[:id]).is_administrador?
   end
@@ -40,5 +42,7 @@ class ApplicationController < ActionController::Base
   def valida_permissao_adm
     redirect_to root_path unless user_is_administrador?
   end
+
+  
 
 end

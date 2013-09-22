@@ -1,7 +1,7 @@
 <%= form_for(@parametro_resultado) do |f| %>
   <% if @parametro_resultado.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@parametro_resultado.errors.count, "error") %> prohibited this parametro_resultado from being saved:</h2>
+      <h2><%= pluralize(@parametro_resultado.errors.count, "erro") %>:</h2>
 
       <ul>
       <% @parametro_resultado.errors.full_messages.each do |msg| %>

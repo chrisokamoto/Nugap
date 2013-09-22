@@ -2,6 +2,17 @@ class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao, :valida_permissao_adm
 
+  before_filter :valida_permissao_chrisfernando, only: [:show, :edit, :update, :destroy]
+
+
+  def valida_permissao_chrisfernando
+    if session[:id] != 1
+      if @usuario.id == 1
+        redirect_to root_path
+      end
+    end
+  end
+
   # GET /usuarios
   # GET /usuarios.json
   def index
@@ -21,6 +32,7 @@ class UsuariosController < ApplicationController
   # GET /usuarios/1/edit
   def edit
   end
+
 
   # POST /usuarios
   # POST /usuarios.json
@@ -70,6 +82,6 @@ class UsuariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def usuario_params
-      params.require(:usuario).permit(:login, :nome, :sobrenome, :senha, :confirmacao, :permissao)
+      params.require(:usuario).permit(:login, :nome, :senha, :sobrenome, :confirmacao, :permissao)
     end
 end

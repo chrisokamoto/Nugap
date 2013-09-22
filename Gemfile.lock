@@ -49,6 +49,7 @@ GEM
     atomic (1.1.13)
     autonumeric-rails (0.1.9.15)
       jquery-rails (>= 2.0.2)
+    bcrypt-ruby (3.0.1)
     builder (3.1.4)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -153,6 +154,7 @@ PLATFORMS
 
 DEPENDENCIES
   autonumeric-rails
+  bcrypt-ruby
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-datatables-rails!

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130921212532) do
+ActiveRecord::Schema.define(version: 20130922191655) do
 
   create_table "amostras", force: true do |t|
     t.date     "data_fabricacao"
@@ -136,8 +136,8 @@ ActiveRecord::Schema.define(version: 20130921212532) do
     t.string   "login"
     t.string   "nome"
     t.string   "sobrenome"
-    t.string   "senha"
-    t.string   "confirmacao"
+    t.string   "senha_hash"
+    t.string   "senha_salt"
     t.string   "permissao"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -11,8 +11,9 @@
       <th width="5%" style="word-wrap:break-word;"><center></center></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody>   
     <% @usuarios.each do |usuario| %>
+      <% if usuario.id != 1 %>
       <tr>
         <td width="25%" style="word-wrap:break-word;"><center><%= usuario.nome %></center></td>
         <td width="25%" style="word-wrap:break-word;"><center><%= usuario.sobrenome %></center></td>
@@ -20,8 +21,9 @@
         <td width="15%" style="word-wrap:break-word;"><center><%= usuario.permissao %></center></td>
         <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', usuario %></center></td>
         <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_usuario_path(usuario) %></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Excluir', usuario, method: :delete, data: { confirm: 'Are you sure?' } %></center></td>
+        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Excluir', usuario, method: :delete, data: { confirm: 'Tem certeza?' } %></center></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

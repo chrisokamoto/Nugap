@@ -4,14 +4,14 @@ one:
   login: MyString
   nome: MyString
   sobrenome: MyString
-  senha: MyString
-  confirmacao: MyString
+  senha_hash: MyString
+  senha_salt: MyString
   permissao: MyString
 
 two:
   login: MyString
   nome: MyString
   sobrenome: MyString
-  senha: MyString
-  confirmacao: MyString
+  senha_hash: MyString
+  senha_salt: MyString
   permissao: MyString
