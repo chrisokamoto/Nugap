@@ -17,7 +17,7 @@ class LoginController < ApplicationController
 
 		if usuario
 		    session[:id] = usuario.id
-    		redirect_to home_path
+    		redirect_to amostras_path
   		else
     		return envia_mensagem_de_erro("Falha na autenticação.")
   		end

@@ -17,17 +17,17 @@
   </div>
 
   <div class="field">
-    <%= f.label :solicitante_id %>
+    <%= f.label :solicitante %>
     <%= collection_select(:amostra, :solicitante, Empresa.all, :nome, :nome) %>
   </div>
 
   <div class="field">
-    <%= f.label :produto_id %>
+    <%= f.label :produto %>
     <%= collection_select(:amostra, :produto, Produto.all, :tipo, :tipo) %>
   </div>
 
   <div class="field">
-    <%= f.label :embalagem_id %>
+    <%= f.label :embalagem %>
     <%= collection_select(:amostra, :embalagem, Embalagem.all, :tipo, :tipo) %>
   </div>
 
@@ -66,7 +66,7 @@
 
   <div class="field">
     <%= f.label :fabricante_id %>
-    <%= collection_select(:amostra, :fabricante, Empresa.all, :nome, :nome) %>
+    <%= collection_select(:amostra, :fabricante, Empresa.all, :nome, :nome) %>      
   </div>
 
   <div class="field">

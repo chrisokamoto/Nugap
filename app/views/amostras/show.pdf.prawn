@@ -18,10 +18,6 @@ text_box  "Certificado de análise #{@amostra.certificado}", :style => :bold, :s
 move_down 170
 pdf.font_size 11
 
-fabricante = Empresa.find_by_nome(@amostra.fabricante)
-solicitante = Empresa.find_by_nome(@amostra.solicitante)
-assinatura = Assinatura.find_by_nome(@amostra.assinatura)
-
 
 # DADOS DO PEDIDO
 table  [ ["<b>DADOS DA AMOSTRA</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
@@ -31,13 +27,13 @@ data = [ ["Embalagem: #{@amostra.embalagem}", "Conteúdo: #{@amostra.conteudo} #
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["Data de fabricação: #{@amostra.data_fabricacao.strftime("%d/%m/%Y")}", "Data de Validade: #{@amostra.data_validade.strftime("%d/%m/%Y")}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Fabricante: #{@amostra.fabricante}", "CNPJ: #{fabricante.CNPJ}"] ]
+data = [ ["Fabricante: #{@amostra.fabricante}", "CNPJ: #{@amostra.fabricante_CNPJ}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["#{fabricante.logradouro}, #{fabricante.numero}", "Bairro: #{fabricante.bairro}"] ]
+data = [ ["Endereço: #{@amostra.fabricante_rua}, #{@amostra.fabricante_numero}", "Bairro: #{@amostra.fabricante_bairro}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Cidade: #{fabricante.cidade}", "UF: #{fabricante.UF}"] ]
+data = [ ["Cidade: #{@amostra.fabricante_cidade}", "UF: #{@amostra.fabricante_UF}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["CEP: #{fabricante.CEP}", "Telefone: #{fabricante.telefone}"] ]
+data = [ ["CEP: #{@amostra.fabricante_CEP}", "Telefone: #{@amostra.fabricante_telefone}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["Data de entrada no laboratório: #{@amostra.data_entrada.strftime("%d/%m/%Y")}", "Data de entrega do certificado:: #{@amostra.data_saida.strftime("%d/%m/%Y")}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
@@ -51,13 +47,13 @@ end
 #SOLICITANTE
 move_down 30
 table  [ ["<b>SOLICITANTE</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
-data = [ ["Solicitante: #{@amostra.solicitante}", "CNPJ: #{solicitante.CNPJ}"] ]
+data = [ ["Solicitante: #{@amostra.solicitante}", "CNPJ: #{@amostra.solicitante_CNPJ}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["#{solicitante.logradouro}, #{solicitante.numero}", "Bairro: #{solicitante.bairro}"] ]
+data = [ ["Endereço: #{@amostra.solicitante_rua}, #{@amostra.solicitante_numero}", "Bairro: #{@amostra.solicitante_bairro}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Cidade: #{solicitante.cidade}", "UF: #{solicitante.UF}"] ]
+data = [ ["Cidade: #{@amostra.solicitante_cidade}", "UF: #{@amostra.solicitante_UF}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["CEP: #{solicitante.CEP}", "Telefone: #{solicitante.telefone}"] ]
+data = [ ["CEP: #{@amostra.solicitante_CEP}", "Telefone: #{@amostra.solicitante_telefone}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 
 #CARACTERÍSTICAS
@@ -126,7 +122,7 @@ end
 # ASSINATURA
 move_down 70
 text  "__________________________________", :size => 16, :align => :center
-text  "#{@amostra.assinatura} - #{assinatura.tipo_conselho} #{assinatura.numero_conselho}", :size => 14, :align => :center
+text  "#{@amostra.assinatura} - #{@amostra.assinatura_tipo_conselho} #{@amostra.assinatura_numero_conselho}", :size => 14, :align => :center
 text  "Responsável Técnico", :size => 14, :align => :center
 
 
