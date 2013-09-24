@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130922191655) do
+ActiveRecord::Schema.define(version: 20130924020157) do
 
   create_table "amostras", force: true do |t|
     t.date     "data_fabricacao"
@@ -32,6 +32,24 @@ ActiveRecord::Schema.define(version: 20130922191655) do
     t.date     "data_entrada"
     t.date     "data_saida"
     t.string   "observacoes"
+    t.string   "fabricante_rua"
+    t.integer  "fabricante_numero"
+    t.string   "fabricante_bairro"
+    t.string   "fabricante_cidade"
+    t.string   "fabricante_UF"
+    t.string   "fabricante_CEP"
+    t.string   "fabricante_CNPJ"
+    t.string   "fabricante_telefone"
+    t.string   "solicitante_rua"
+    t.integer  "solicitante_numero"
+    t.string   "solicitante_bairro"
+    t.string   "solicitante_cidade"
+    t.string   "solicitante_UF"
+    t.string   "solicitante_CEP"
+    t.string   "solicitante_CNPJ"
+    t.string   "solicitante_telefone"
+    t.string   "assinatura_tipo_conselho"
+    t.string   "assinatura_numero_conselho"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
