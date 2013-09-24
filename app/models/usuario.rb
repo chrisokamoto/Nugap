@@ -5,7 +5,7 @@ class Usuario < ActiveRecord::Base
 
 	validates :nome, :presence => { :message => " precisa ser preenchido." }
 	validates :sobrenome, :presence => { :message => " precisa ser preenchido." }
-	validates :login, :presence => { :message => " precisa ser preenchido." }, :uniqueness => true
+	validates :login, :presence => { :message => " precisa ser preenchido." }, :uniqueness => { :message => "já existe." }
 	validates :senha, :presence => { :message => " precisa ser preenchida." }  	
   	validates :permissao, :presence => { :message => " precisa ser preenchida." }  	  	
   	validate :confirmacao_e_senha_sao_iguais

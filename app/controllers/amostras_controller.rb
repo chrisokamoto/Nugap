@@ -105,36 +105,42 @@ class AmostrasController < ApplicationController
          if !@amostra.fabricante.nil?
 
         fabricante = Empresa.find_by_nome(@amostra.fabricante)
-        @amostra.fabricante_rua = fabricante.rua
-        @amostra.fabricante_numero = fabricante.numero
-        @amostra.fabricante_bairro = fabricante.bairro
-        @amostra.fabricante_cidade = fabricante.cidade
-        @amostra.fabricante_UF = fabricante.UF
-        @amostra.fabricante_CEP = fabricante.CEP
-        @amostra.fabricante_CNPJ = fabricante.CNPJ
-        @amostra.fabricante_telefone = fabricante.telefone
+        if !fabricante.nil?
+          @amostra.fabricante_rua = fabricante.rua
+          @amostra.fabricante_numero = fabricante.numero
+          @amostra.fabricante_bairro = fabricante.bairro
+          @amostra.fabricante_cidade = fabricante.cidade
+          @amostra.fabricante_UF = fabricante.UF
+          @amostra.fabricante_CEP = fabricante.CEP
+          @amostra.fabricante_CNPJ = fabricante.CNPJ
+          @amostra.fabricante_telefone = fabricante.telefone
+        end
 
       end
 
       if !@amostra.solicitante.nil?
 
         solicitante = Empresa.find_by_nome(@amostra.solicitante)
-        @amostra.solicitante_rua = solicitante.rua
-        @amostra.solicitante_numero = solicitante.numero
-        @amostra.solicitante_bairro = solicitante.bairro
-        @amostra.solicitante_cidade = solicitante.cidade
-        @amostra.solicitante_UF = solicitante.UF
-        @amostra.solicitante_CEP = solicitante.CEP
-        @amostra.solicitante_CNPJ = solicitante.CNPJ
-        @amostra.solicitante_telefone = solicitante.telefone
+        if !solicitante.nil?
+          @amostra.solicitante_rua = solicitante.rua
+          @amostra.solicitante_numero = solicitante.numero
+          @amostra.solicitante_bairro = solicitante.bairro
+          @amostra.solicitante_cidade = solicitante.cidade
+          @amostra.solicitante_UF = solicitante.UF
+          @amostra.solicitante_CEP = solicitante.CEP
+          @amostra.solicitante_CNPJ = solicitante.CNPJ
+          @amostra.solicitante_telefone = solicitante.telefone
+        end
 
       end
 
       if !@amostra.assinatura.nil?
 
         assinatura = Assinatura.find_by_nome(@amostra.assinatura)
-        @amostra.assinatura_tipo_conselho = assinatura.tipo_conselho
-        @amostra.assinatura_numero_conselho = assinatura.numero_conselho
+        if !assinatura.nil?
+          @amostra.assinatura_tipo_conselho = assinatura.tipo_conselho
+          @amostra.assinatura_numero_conselho = assinatura.numero_conselho
+        end
 
       end
 
