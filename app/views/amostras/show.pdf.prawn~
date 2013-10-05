@@ -1,7 +1,7 @@
-#image "public/image/logo2.png", :position => :center, :vposition => :center
-image "public/image/logo.png", :position => :left, :height => 60, :width => 55, :at => [0, 700]
+font "Times-Roman"
 
-text_box  "Núcleo Global de Análise e Pesquisa\n\n", :style => :bold, :size => 18, :align => :center, :at => [0, 687]
+image "public/image/logo.png", :position => :left, :height => 100, :width => 90, :at => [0, 735]
+text_box  "Núcleo Global de Análise e Pesquisa\n\n", :style => :bold, :size => 18, :align => :center, :at => [0, 690]
 
 text_box "Av. Amazonas, 4080-Sala 203-Prado-Belo Horizonte/MG\n"+
 "CEP: 30.411-250 Telefax (31) 3313.1616\n"+
@@ -9,63 +9,52 @@ text_box "Av. Amazonas, 4080-Sala 203-Prado-Belo Horizonte/MG\n"+
 "Portaria No 217 de 14 de julho de 2009\n", 
 :align => :center,
 :size => 12,
-:at => [0, 663],
+:at => [0, 660],
 :height => 100,
 :width => 550
 
 
 text_box  "Certificado de análise #{@amostra.certificado}", :style => :bold, :size => 16, :align => :center, :at => [0, 590]
-move_down 170
-pdf.font_size 11
+move_down 160
 
-
-produto = Produto.find(@amostra.produto_id)
-embalagem = Embalagem.find(@amostra.embalagem_id)
-assinatura = Assinatura.find(@amostra.assinatura_id)
-solicitante = Empresa.find(@amostra.solicitante_id)
-fabricante = Empresa.find(@amostra.fabricante_id)
-
-# NÚMERO DA PÁGINA
-pdf.bounding_box([pdf.bounds.right - 50,pdf.bounds.bottom + 10], :width => 60, :height => 20) do
-	pagecount = pdf.page_count
-	pdf.text "Página #{pagecount}"
-end
+pdf.font_size 10
+font "Times-Roman"
 
 # DADOS DO PEDIDO
 table  [ ["<b>DADOS DA AMOSTRA</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
-data = [ ["Produto: #{produto.tipo}", "Marca: #{@amostra.marca}"] ]
+data = [ ["Produto: #{@amostra.produto}", "Marca: #{@amostra.marca}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Embalagem: #{embalagem.tipo}", "Conteúdo: #{@amostra.conteudo} #{@amostra.unidade}"] ]
+data = [ ["Embalagem: #{@amostra.embalagem}", "Conteúdo: #{@amostra.conteudo} #{@amostra.unidade}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["Data de fabricação: #{@amostra.data_fabricacao.strftime("%d/%m/%Y")}", "Data de Validade: #{@amostra.data_validade.strftime("%d/%m/%Y")}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Fabricante: #{fabricante.nome}", "CNPJ: #{fabricante.CNPJ}"] ]
+data = [ ["Fabricante: #{@amostra.fabricante}", "CNPJ: #{@amostra.fabricante_CNPJ}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["#{fabricante.logradouro}, #{fabricante.numero}", "Bairro: #{fabricante.bairro}"] ]
+data = [ ["Endereço: #{@amostra.fabricante_rua}, #{@amostra.fabricante_numero}", "Bairro: #{@amostra.fabricante_bairro}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Cidade: #{fabricante.cidade}", "UF: #{fabricante.UF}"] ]
+data = [ ["Cidade: #{@amostra.fabricante_cidade}", "UF: #{@amostra.fabricante_UF}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["CEP: #{fabricante.CEP}", "Telefone: #{fabricante.telefone}"] ]
+data = [ ["CEP: #{@amostra.fabricante_CEP}", "Telefone: #{@amostra.fabricante_telefone}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Data de entrada no laboratório: #{@amostra.data_entrada.strftime("%d/%m/%Y")}", "Data de entrega do certificado:: #{@amostra.data_saida.strftime("%d/%m/%Y")}"] ]
+data = [ ["Data de entrada no laboratório: #{@amostra.data_entrada.strftime("%d/%m/%Y")}", "Data de entrega do certificado: #{@amostra.data_saida.strftime("%d/%m/%Y")}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["Amostragem: de responsabilidade do solicitante"] ]
 table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
 if @amostra.descricao != ""
-	data = [ ["Descricao: #{@amostra.descricao}"] ]
+	data = [ ["Descrição: #{@amostra.descricao}"] ]
 	table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
 end
 
 #SOLICITANTE
 move_down 30
 table  [ ["<b>SOLICITANTE</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
-data = [ ["Solicitante: #{solicitante.nome}", "CNPJ: #{solicitante.CNPJ}"] ]
+data = [ ["Solicitante: #{@amostra.solicitante}", "CNPJ: #{@amostra.solicitante_CNPJ}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["#{solicitante.logradouro}, #{solicitante.numero}", "Bairro: #{solicitante.bairro}"] ]
+data = [ ["Endereço: #{@amostra.solicitante_rua}, #{@amostra.solicitante_numero}", "Bairro: #{@amostra.solicitante_bairro}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Cidade: #{solicitante.cidade}", "UF: #{solicitante.UF}"] ]
+data = [ ["Cidade: #{@amostra.solicitante_cidade}", "UF: #{@amostra.solicitante_UF}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["CEP: #{solicitante.CEP}", "Telefone: #{solicitante.telefone}"] ]
+data = [ ["CEP: #{@amostra.solicitante_CEP}", "Telefone: #{@amostra.solicitante_telefone}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 
 #CARACTERÍSTICAS
@@ -78,50 +67,90 @@ end
 
 #RESULTADOS
 @parametro_resultados = ParametroResultado.all
+
+# MONTA UM VETOR TIPOS COM OS TIPOS DE ANALISES DIFERENTES QUE APARECEM NA AMOSTRA
+tipos = Array.new
+contem = 0
+count = 0
 @parametro_resultados.each do |resultado|
-	if resultado.amostra_id == @amostra.id
-		analise = TipoAnalise.find(resultado.tipo)
-		parametro = Parametro.find(resultado.parametro_id)
-		move_down 30
-		table  [ ["<b>Resultado de #{analise.tipo}</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
-
-		data = [ ["Parâmetro: #{parametro.nome}"] ]
-		table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
-
-		data = [ ["Resultado: #{resultado.resultado}"] ]
-		table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
-
-		data = [ ["Método: #{parametro.metodo}"] ]
-		table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
-
-		data = [ ["Referência: #{parametro.referencia}"] ]
-		table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
-
-		#if parametro.valor_maximo.to_s.strip.length != 0 && parametro.valor_minimo.to_s.strip.length != 0
-		#	data = [ ["Valor máximo do parâmetro: #{parametro.valor_maximo}", "Valor mínimo do parâmetro: #{parametro.valor_minimo}"] ]
-		#	table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-		#end
-		#if parametro.valor_maximo.to_s.strip.length == 0 && parametro.valor_minimo.to_s.strip.length != 0
-		#	data = [ ["Valor mínimo do parâmetro: #{parametro.valor_minimo}"] ]
-		#	table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
-		#end
-		#if parametro.valor_maximo.to_s.strip.length != 0 && parametro.valor_minimo.to_s.strip.length == 0
-		#	data = [ ["Valor máximo do parâmetro: #{parametro.valor_maximo}"] ]
-		#	table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
-		#end
-
-# Descomentar quando criar os campos
-		if parametro.valor_referencia != ""
-			data = [ ["Valor de referência: #{parametro.valor_referencia}"] ]
-			table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
+	contem = 0
+	for tipo in tipos
+		if (resultado.tipo == tipo)
+			contem = 1	
 		end
-		if resultado.conclusao != ""
-			data = [ ["Conclusão: #{resultado.conclusao}"] ]
-			table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
-		end
+	end
+	if contem == 0
+		tipos.insert(count, resultado.tipo)
+		puts "Novo tipo: #{resultado.tipo} na posicao #{count} VER: #{tipos[count]}"
+		count = count + 1
 		
 	end
 end
+
+# PARA CADA TIPO, PERCORRE OS RESULTADOS IMPRIMINDO APENAS AQUELE TIPO
+for tipo in tipos
+
+	move_down 30
+	table  [ ["<b>Resultado de #{tipo}</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
+
+# PARA CADA TIPO, GERA VETOR DE METODOS E REFERENCIAS PARA AGRUPAR
+	metRefs = Array.new
+	contem = 0
+	count = 0
+	@parametro_resultados.each do |resultado|
+		if (resultado.tipo == tipo)
+			parametro = Parametro.find_by_nome(resultado.parametro)
+			contem = 0
+			for metRef in metRefs
+				if ("#{parametro.metodo}--#{parametro.referencia}" == metRef)
+					contem = 1	
+				end
+			end
+			if contem == 0
+				metRefs.insert(count, "#{parametro.metodo}--#{parametro.referencia}")
+				count = count + 1
+			end
+		end
+	end
+
+	for metRef in metRefs
+
+	# PARA CADA TIPO, PARA CADA MET/REF, IMPRIME OS DADOS AGRUPADOS
+		@parametro_resultados.each do |resultado|
+			parametro = Parametro.find_by_nome(resultado.parametro)
+			if (resultado.tipo == tipo)
+			if ("#{parametro.metodo}--#{parametro.referencia}" == metRef)
+			if resultado.amostra_id == @amostra.id		
+
+				data = [ ["Parâmetro: #{resultado.parametro}"] ]
+				table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
+
+				data = [ ["Resultado: #{resultado.resultado}"] ]
+				table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
+
+				if parametro.valor_referencia != ""
+					data = [ ["Valor de referência: #{parametro.valor_referencia}"] ]
+					table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
+				end
+				if resultado.conclusao != ""
+					data = [ ["Conclusão: #{resultado.conclusao}"] ]
+					table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
+				end
+
+			end
+			end
+			end
+		end
+
+		data = [ ["<b>Método: #{metRef}<b>"] ]
+		table(data, :cell_style => {:inline_format => true}, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
+
+		data = [ ["<b>Referência: #{metRef}<b>"] ]
+		table(data, :cell_style => {:inline_format => true}, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
+	end
+
+end
+
 
 #OBSERVAÇÕES
 move_down 40
@@ -135,13 +164,18 @@ end
 # ASSINATURA
 move_down 70
 text  "__________________________________", :size => 16, :align => :center
-text  "#{assinatura.nome} - #{assinatura.tipo_conselho} #{assinatura.numero_conselho}", :size => 14, :align => :center
+text  "#{@amostra.assinatura} - #{@amostra.assinatura_tipo_conselho} #{@amostra.assinatura_numero_conselho}", :size => 14, :align => :center
 text  "Responsável Técnico", :size => 14, :align => :center
 
 
 # NÚMERO DA PÁGINA
-pdf.bounding_box([pdf.bounds.right - 50,pdf.bounds.bottom + 10], :width => 60, :height => 20) do
-	pagecount = pdf.page_count
-	pdf.text "Página #{pagecount}"
-end
+number_pages "Página <page> / <total>", { :start_count_at => 0, :page_filter => :all, :at => [bounds.right - 80, pdf.bounds.bottom - 30], :align => :right, :size => 14 }
 
+repeat :all do
+	# LOGO
+	image "public/image/logo2.png", :height => 40, :width => 35, :at => [bounds.left+5, pdf.bounds.bottom-15]
+	# RUBRICA
+	bounding_box([bounds.left, pdf.bounds.bottom-15], :width => 40, :height => 40) do
+		transparent(1) { stroke_bounds }
+	end
+end

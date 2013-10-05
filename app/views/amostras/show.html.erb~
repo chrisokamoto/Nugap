@@ -7,15 +7,13 @@
 </p>
 
 <p>
-  <strong>Produto:</strong>
-  <% produto = Produto.find(@amostra.produto_id) %>
-  <%= produto.tipo %>
+  <strong>Produto:</strong>  
+  <%= @amostra.produto %>
 </p>
 
 <p>
-  <strong>Embalagem:</strong>
-  <% embalagem = Embalagem.find(@amostra.embalagem_id) %>
-  <%= embalagem.tipo %>
+  <strong>Embalagem:</strong>  
+  <%= @amostra.embalagem %>
 </p>
 
 <p>
@@ -30,19 +28,18 @@
 </p>
 
 <p>
-  <strong>Fabricante:</strong>
-  <% fabricante = Empresa.find(@amostra.fabricante_id) %>
-  <%= fabricante.nome %>  
+  <strong>Fabricante:</strong>  
+  <%= @amostra.fabricante %>  
 </p>
 
 <p>
   <strong>Data de fabricação:</strong>
-  <%= @amostra.data_fabricacao.strftime("%d/%m/%Y") %>
+  <%= @amostra.data_fabricacao %>
 </p>
 
 <p>
   <strong>Data de validade:</strong>
-  <%= @amostra.data_validade.strftime("%d/%m/%Y") %>
+  <%= @amostra.data_validade %>
 </p>
 
 <p>
@@ -57,9 +54,8 @@
 </p>
 
 <p>
-  <strong>Solicitante:</strong>
-  <% solicitante = Empresa.find(@amostra.solicitante_id) %>
-  <%= solicitante.nome %>
+  <strong>Solicitante:</strong>  
+  <%= @amostra.solicitante %>
 </p>
 
 <p>
@@ -83,9 +79,13 @@
 </p>
 
 <p>
-  <strong>Assinatura:</strong>
-  <% assinatura = Assinatura.find(@amostra.assinatura_id) %>
-  <%= assinatura.nome %>
+  <strong>Status:</strong>
+  <%= @amostra.status %>
+</p>
+
+<p>
+  <strong>Responsável técnico:</strong>  
+  <%= @amostra.assinatura %>
 </p>
 
 

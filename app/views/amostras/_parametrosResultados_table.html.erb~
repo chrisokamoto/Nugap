@@ -11,9 +11,10 @@
   <tbody>
     <%= f.fields_for(:parametro_resultados) do |parametro_resultados_form| %>
       <tr class="fields">
-        <td><%= parametro_resultados_form.collection_select( :tipo, TipoAnalise.all, :id, :tipo) %> </td>
-        <td><%= parametro_resultados_form.collection_select( :parametro_id, Parametro.all, :id, :nome) %> </td>
-        <td><%= parametro_resultados_form.text_field(:resultado) %></td>                
+        <td><%= parametro_resultados_form.collection_select( :tipo, TipoAnalise.all, :tipo, :tipo) %> </td>
+        <td><%= parametro_resultados_form.collection_select( :parametro, Parametro.all, :nome, :nome) %> </td>
+        <td><%= parametro_resultados_form.text_field(:resultado) %></td>    
+        <td><%= parametro_resultados_form.text_field(:conclusao) %></td>              
         
             <td>
               <%= link_to_remove_fields("Excluir", parametro_resultados_form, :title => "Excluir") %>

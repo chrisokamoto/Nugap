@@ -147,9 +147,9 @@ if ( $.fn.DataTable.TableTools ) {
 
 /* Table initialisation */
 $(document).ready(function() {
-	$('#amostras').dataTable( {
+	$('#tabela').dataTable( {
 		"sDom": "<'margem-padrao-nugap'<'span5'l><'span6'f>r>t<'margem-padrao-nugap'<'span5'i><'span6'p>>",
-		"sPaginationType": "full_numbers",
+		"sPaginationType": "bootstrap",
 		"oLanguage": {
 			"sLengthMenu": "_MENU_ registros por pagina"
 		}

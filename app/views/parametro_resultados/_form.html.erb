@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= f.label :parametro_id %>
-    <%= f.collection_select( :parametro_id, Parametro.all, :id, :nome) %>          
+    <%= f.collection_select( :parametro_id, Parametro.order('nome'), :id, :nome) %>          
   </div>
   <div class="field">
     <%= f.label :resultado %>

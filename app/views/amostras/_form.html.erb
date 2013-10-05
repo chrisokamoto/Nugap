@@ -1,3 +1,4 @@
+
 <%= form_for(@amostra) do |f| %>
   <% if @amostra.errors.any? %>
     <div id="error_explanation">
@@ -11,35 +12,42 @@
     </div>
   <% end %>
 
+
   <div class="field">
     <%= f.label :certificado %>
     <%= f.text_field :certificado %>
   </div>
 
   <div class="field">
+    <%= f.label "Descrição do pedido" %>
+    <%= f.text_area :descricao_pedido %>
+  </div>
+
+  <div class="field">
     <%= f.label :solicitante %>
-    <%= collection_select(:amostra, :solicitante, Empresa.all, :nome, :nome) %>
+    <%= collection_select(:amostra, :solicitante, Empresa.order('nome'), :nome, :nome) %>
   </div>
 
   <div class="field">
     <%= f.label :produto %>
-    <%= collection_select(:amostra, :produto, Produto.all, :tipo, :tipo) %>
+    <%= collection_select(:amostra, :produto, Produto.order('tipo'), :tipo, :tipo) %>
   </div>
 
   <div class="field">
     <%= f.label :embalagem %>
-    <%= collection_select(:amostra, :embalagem, Embalagem.all, :tipo, :tipo) %>
+    <%= collection_select(:amostra, :embalagem, Embalagem.order('tipo'), :tipo, :tipo) %>
   </div>
 
   <div class="field">
     <%= f.label "Data de fabricação" %>
-    <%= f.date_select :data_fabricacao, :order => [:day, :month, :year] %>
-  </div>
-  <div class="field">
-    <%= f.label "Data de validade" %>
-    <%= f.date_select :data_validade, :order => [:day, :month, :year] %>
+    <%= f.text_field  :data_fabricacao %>
   </div>
 
+  <div class="field">
+    <%= f.label "Data de validade" %>
+    <%= f.text_field  :data_validade %>
+  </div>
+  
   <div class="field">
     <%= f.label :lote %>
     <%= f.text_field :lote %>
@@ -66,7 +74,7 @@
 
   <div class="field">
     <%= f.label :fabricante_id %>
-    <%= collection_select(:amostra, :fabricante, Empresa.all, :nome, :nome) %>      
+    <%= collection_select(:amostra, :fabricante, Empresa.order('nome'), :nome, :nome) %>      
   </div>
 
   <div class="field">
@@ -90,7 +98,7 @@
 
   <div class="field">
     <%= f.label "Responsável técnico" %>
-    <%= collection_select(:amostra, :assinatura, Assinatura.all, :nome, :nome) %>
+    <%= collection_select(:amostra, :assinatura, Assinatura.order('nome'), :nome, :nome) %>
   </div>
 
   <div class="field">

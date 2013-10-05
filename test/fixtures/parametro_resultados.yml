@@ -6,6 +6,9 @@ one:
   tipo: MyString
   amostra_id: 1
   conclusao: MyString
+  referencia_parametro: MyString
+  metodo_parametro: MyString
+  valor_referencia_parametro: MyString
 
 two:
   parametro: MyString
@@ -13,3 +16,6 @@ two:
   tipo: MyString
   amostra_id: 1
   conclusao: MyString
+  referencia_parametro: MyString
+  metodo_parametro: MyString
+  valor_referencia_parametro: MyString

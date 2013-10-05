@@ -13,9 +13,11 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require autonumeric
 //= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
+
 //= require_tree .
 
 function remove_fields(link) {

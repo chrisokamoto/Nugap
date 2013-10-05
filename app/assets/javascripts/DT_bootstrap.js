@@ -147,7 +147,7 @@ if ( $.fn.DataTable.TableTools ) {
 
 /* Table initialisation */
 $(document).ready(function() {
-	$('#amostras').dataTable( {
+	$('#tabela').dataTable( {
 		"sDom": "<'margem-padrao-nugap'<'span5'l><'span6'f>r>t<'margem-padrao-nugap'<'span5'i><'span6'p>>",
 		"sPaginationType": "bootstrap",
 		"oLanguage": {
@@ -155,3 +155,9 @@ $(document).ready(function() {
 		}
 	} );
 } );
+
+ /* enable chosen js */
+$('.chosen-select').chosen
+allow_single_deselect: true
+no_results_text: 'No results matched'
+width: '200px'

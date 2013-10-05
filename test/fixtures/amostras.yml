@@ -1,8 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  data_fabricacao: 2013-09-23
-  data_validade: 2013-09-23
+  data_fabricacao: MyString
+  data_validade: MyString
   lote: MyString
   conteudo: 1.5
   descricao: MyText
@@ -16,11 +16,11 @@ one:
   status: MyString
   certificado: MyString
   marca: MyString
-  data_entrada: 2013-09-23
-  data_saida: 2013-09-23
+  data_entrada: 2013-10-05
+  data_saida: 2013-10-05
   observacoes: MyString
   fabricante_rua: MyString
-  fabricante_numero: 1
+  fabricante_numero: MyString
   fabricante_bairro: MyString
   fabricante_cidade: MyString
   fabricante_UF: MyString
@@ -28,7 +28,7 @@ one:
   fabricante_CNPJ: MyString
   fabricante_telefone: MyString
   solicitante_rua: MyString
-  solicitante_numero: 1
+  solicitante_numero: MyString
   solicitante_bairro: MyString
   solicitante_cidade: MyString
   solicitante_UF: MyString
@@ -37,10 +37,13 @@ one:
   solicitante_telefone: MyString
   assinatura_tipo_conselho: MyString
   assinatura_numero_conselho: MyString
+  descricao_pedido: MyString
+  fabricacao_informada: false
+  validade_informada: false
 
 two:
-  data_fabricacao: 2013-09-23
-  data_validade: 2013-09-23
+  data_fabricacao: MyString
+  data_validade: MyString
   lote: MyString
   conteudo: 1.5
   descricao: MyText
@@ -54,11 +57,11 @@ two:
   status: MyString
   certificado: MyString
   marca: MyString
-  data_entrada: 2013-09-23
-  data_saida: 2013-09-23
+  data_entrada: 2013-10-05
+  data_saida: 2013-10-05
   observacoes: MyString
   fabricante_rua: MyString
-  fabricante_numero: 1
+  fabricante_numero: MyString
   fabricante_bairro: MyString
   fabricante_cidade: MyString
   fabricante_UF: MyString
@@ -66,7 +69,7 @@ two:
   fabricante_CNPJ: MyString
   fabricante_telefone: MyString
   solicitante_rua: MyString
-  solicitante_numero: 1
+  solicitante_numero: MyString
   solicitante_bairro: MyString
   solicitante_cidade: MyString
   solicitante_UF: MyString
@@ -75,3 +78,6 @@ two:
   solicitante_telefone: MyString
   assinatura_tipo_conselho: MyString
   assinatura_numero_conselho: MyString
+  descricao_pedido: MyString
+  fabricacao_informada: false
+  validade_informada: false

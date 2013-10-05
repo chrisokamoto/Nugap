@@ -8,7 +8,7 @@
       <div class="control-group">
         <%= "Tipo Análise" %>
         <div class="controls">
-          <%= f.collection_select( :tipo, TipoAnalise.all, :tipo, :tipo) %>          
+          <%= f.collection_select( :tipo, TipoAnalise.order('tipo'), :tipo, :tipo) %>          
 
         </div>        
       </div>
@@ -16,7 +16,7 @@
       <div class="control-group">
         <%= "Parâmetro" %>
         <div class="controls">
-          <%= f.collection_select( :parametro, Parametro.all, :nome, :nome) %>          
+          <%= f.collection_select( :parametro, Parametro.order('nome'), :nome, :nome) %>          
 
         </div>        
       </div>
@@ -34,7 +34,14 @@
            <%= f.text_field(:conclusao, :class => "input-xlarge field") %>        
         </div>        
       </div>
+
       
+      <%if !Parametro.find_by_nome(:parametro).nil?%>
+      <% parametro = Parametro.find_by_nome(:parametro) %>
+      <%= parametro.nome %>
+      <%= f.hidden_field(:referencia_parametro, :value => parametro.referencia ) %>
+      <%end%>
+
       <%= f.hidden_field(:_destroy, :class => "field") %>
     </fieldset>
   </div>

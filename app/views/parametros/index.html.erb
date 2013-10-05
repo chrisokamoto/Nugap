@@ -1,11 +1,11 @@
 <legend>Parâmetros cadastrados</legend>
 
-<table cellpadding="0" cellspacing="0" border="1" class="table table-striped table-bordered" id="example" width="70%">
+<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="95%">
   <thead>
     <tr>
       <th width="20%" style="word-wrap:break-word;"><center>Nome</center></th>
-      <th width="20%" style="word-wrap:break-word;"><center>Referência</center></th>
-      <th width="20%" style="word-wrap:break-word;"><center>Método</center></th>
+      <th width="28%" style="word-wrap:break-word;"><center>Referência</center></th>
+      <th width="28%" style="word-wrap:break-word;"><center>Método</center></th>
       <th width="15%" style="word-wrap:break-word;"><center>Valor de Referência</center></th>    
       <th width="5%" style="word-wrap:break-word;"><center></center></th>
       <!--th width="5%" style="word-wrap:break-word;"><center></center></th-->
@@ -16,12 +16,12 @@
   <tbody>
     <% @parametros.each do |parametro| %>
       <tr>
-        <td width="5%" style="word-wrap:break-word;"><center><%= parametro.nome %></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= parametro.referencia %></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= parametro.metodo %></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= parametro.valor_referencia %></center></td>        
+        <td><center><%= parametro.nome %></center></td>
+        <td><center><%= parametro.referencia %></center></td>
+        <td><center><%= parametro.metodo %></center></td>
+        <td><center><%= parametro.valor_referencia %></center></td>        
         <!--td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', parametro %></center></td-->
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_parametro_path(parametro), :class => 'btn btn-small' %></center></td>
+        <td><center><%= link_to 'Editar', edit_parametro_path(parametro), :class => 'btn btn-small' %></center></td>
         <!--td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Excluir', parametro, method: :delete, data: { confirm: 'Are you sure?' } %></center></td-->
       </tr>
     <% end %>

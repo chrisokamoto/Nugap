@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130924020157) do
+ActiveRecord::Schema.define(version: 20131005191202) do
 
   create_table "amostras", force: true do |t|
-    t.date     "data_fabricacao"
-    t.date     "data_validade"
+    t.string   "data_fabricacao"
+    t.string   "data_validade"
     t.string   "lote"
     t.float    "conteudo"
     t.text     "descricao"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20130924020157) do
     t.date     "data_saida"
     t.string   "observacoes"
     t.string   "fabricante_rua"
-    t.integer  "fabricante_numero"
+    t.string   "fabricante_numero"
     t.string   "fabricante_bairro"
     t.string   "fabricante_cidade"
     t.string   "fabricante_UF"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20130924020157) do
     t.string   "fabricante_CNPJ"
     t.string   "fabricante_telefone"
     t.string   "solicitante_rua"
-    t.integer  "solicitante_numero"
+    t.string   "solicitante_numero"
     t.string   "solicitante_bairro"
     t.string   "solicitante_cidade"
     t.string   "solicitante_UF"
@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(version: 20130924020157) do
     t.string   "solicitante_telefone"
     t.string   "assinatura_tipo_conselho"
     t.string   "assinatura_numero_conselho"
+    t.string   "descricao_pedido"
+    t.boolean  "fabricacao_informada"
+    t.boolean  "validade_informada"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -78,9 +81,8 @@ ActiveRecord::Schema.define(version: 20130924020157) do
 
   create_table "empresas", force: true do |t|
     t.string   "nome"
-    t.string   "logradouro"
     t.string   "rua"
-    t.integer  "numero"
+    t.string   "numero"
     t.string   "bairro"
     t.string   "cidade"
     t.string   "UF"
@@ -104,6 +106,9 @@ ActiveRecord::Schema.define(version: 20130924020157) do
     t.string   "tipo"
     t.integer  "amostra_id"
     t.string   "conclusao"
+    t.string   "referencia_parametro"
+    t.string   "metodo_parametro"
+    t.string   "valor_referencia_parametro"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

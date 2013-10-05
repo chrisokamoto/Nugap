@@ -2,9 +2,8 @@
 
 one:
   nome: MyString
-  logradouro: MyString
   rua: MyString
-  numero: 1
+  numero: MyString
   bairro: MyString
   cidade: MyString
   UF: MyString
@@ -14,9 +13,8 @@ one:
 
 two:
   nome: MyString
-  logradouro: MyString
   rua: MyString
-  numero: 1
+  numero: MyString
   bairro: MyString
   cidade: MyString
   UF: MyString

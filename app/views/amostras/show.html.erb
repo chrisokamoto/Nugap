@@ -7,6 +7,11 @@
 </p>
 
 <p>
+  <strong>Descrição do pedido:</strong>
+  <%= @amostra.descricao_pedido %>
+</p>
+
+<p>
   <strong>Produto:</strong>  
   <%= @amostra.produto %>
 </p>
@@ -34,12 +39,12 @@
 
 <p>
   <strong>Data de fabricação:</strong>
-  <%= @amostra.data_fabricacao.strftime("%d/%m/%Y") %>
+  <%= @amostra.data_fabricacao %>
 </p>
 
 <p>
   <strong>Data de validade:</strong>
-  <%= @amostra.data_validade.strftime("%d/%m/%Y") %>
+  <%= @amostra.data_validade %>
 </p>
 
 <p>
