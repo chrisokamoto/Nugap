@@ -167,9 +167,9 @@ end
 #OBSERVAÇÕES
 move_down 40
 if @amostra.observacoes == ""
-	text  "Obervação:<i> Resultado válido para a amostra analisada.</i>", :indent_paragraphs => 30, :inline_format => true
+	text  "Observação:<i> Resultado válido para a amostra analisada.</i>", :indent_paragraphs => 30, :inline_format => true
 else
-	text  "Obervações:\n<i>Resultado válido para a amostra analisada.\n#{@amostra.observacoes}</i>", :indent_paragraphs => 30, :inline_format => true
+	text  "Observações:\n<i>Resultado válido para a amostra analisada.\n#{@amostra.observacoes}</i>", :indent_paragraphs => 30, :inline_format => true
 end
 
 
