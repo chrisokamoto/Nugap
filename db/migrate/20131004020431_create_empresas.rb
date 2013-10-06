@@ -3,7 +3,7 @@ class CreateEmpresas < ActiveRecord::Migration
     create_table :empresas do |t|
       t.string :nome
       t.string :rua
-      t.integer :numero
+      t.string :numero
       t.string :bairro
       t.string :cidade
       t.string :UF
