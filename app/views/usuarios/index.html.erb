@@ -19,9 +19,9 @@
         <td width="25%" style="word-wrap:break-word;"><center><%= usuario.sobrenome %></center></td>
         <td width="20%" style="word-wrap:break-word;"><center><%= usuario.login %></center></td>
         <td width="15%" style="word-wrap:break-word;"><center><%= usuario.permissao %></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', usuario %></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_usuario_path(usuario) %></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Excluir', usuario, method: :delete, data: { confirm: 'Tem certeza?' } %></center></td>
+        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', usuario, :class => 'btn btn-small'%></center></td>
+        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_usuario_path(usuario), :class => 'btn btn-small' %></center></td>
+        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Excluir', usuario, method: :delete, data: { confirm: 'Tem certeza?' }, :class => 'btn btn-small' %></center></td>
       </tr>
       <% end %>
     <% end %>
