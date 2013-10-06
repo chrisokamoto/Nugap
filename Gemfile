@@ -34,7 +34,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :assets do
+#group :assets do
   gem 'sass-rails', '~> 4.0.0'
   gem 'coffee-rails', '~> 4.0.0'
   gem 'compass-rails'
@@ -42,7 +42,7 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 #  gem 'jquery-ui-rails'
 #  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
-end
+#end
 
 #  gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
