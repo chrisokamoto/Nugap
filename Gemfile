@@ -45,7 +45,7 @@ end
 #end
 
 #  gem 'jquery-ui-rails'
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'jquery-datatables-rails', :github => 'rweng/jquery-datatables-rails'
 gem 'jquery-rails'
 gem 'autonumeric-rails'
 
