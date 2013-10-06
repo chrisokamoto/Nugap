@@ -74,16 +74,18 @@ contem = 0
 count = 0
 @parametro_resultados.each do |resultado|
 	contem = 0
-	for tipo in tipos
-		if (resultado.tipo == tipo && resultado.tipo != "")
-			contem = 1	
+	if !resultado.nil?
+		for tipo in tipos
+			if (resultado.tipo == tipo && resultado.tipo != "")
+				contem = 1	
+			end
 		end
-	end
-	if contem == 0
-		tipos.insert(count, resultado.tipo)
-		puts "Novo tipo: #{resultado.tipo} na posicao #{count} VER: #{tipos[count]}"
-		count = count + 1
-		
+		if contem == 0
+			tipos.insert(count, resultado.tipo)
+			puts "Novo tipo: #{resultado.tipo} na posicao #{count} VER: #{tipos[count]}"
+			count = count + 1
+			
+		end
 	end
 end
 
