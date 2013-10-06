@@ -74,7 +74,7 @@ contem = 0
 count = 0
 @parametro_resultados.each do |resultado|
 	contem = 0
-	if !resultado.nil?
+	if resultado.amostra_id == @amostra.id
 		for tipo in tipos
 			if (resultado.tipo == tipo && resultado.tipo != "")
 				contem = 1	
