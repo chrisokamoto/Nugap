@@ -24,9 +24,9 @@ font "Times-Roman"
 table  [ ["<b>DADOS DA AMOSTRA</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
 data = [ ["Produto: #{@amostra.produto}", "Marca: #{@amostra.marca}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Embalagem: #{@amostra.embalagem}", "Conteúdo: #{@amostra.conteudo} #{@amostra.unidade}"] ]
+data = [ ["Embalagem: #{@amostra.embalagem}", "Conteúdo: #{@amostra.conteudo}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Data de fabricação: #{@amostra.data_fabricacao}", "Data de Validade: #{@amostra.data_validade}"] ]
+data = [ ["Data de fabricação: #{@amostra.data_fabricacao}", "Data de validade: #{@amostra.data_validade}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["Fabricante: #{@amostra.fabricante}", "CNPJ: #{@amostra.fabricante_CNPJ}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
@@ -64,7 +64,7 @@ table(data, :column_widths => [250, 250], :position => :center, :row_colors => [
 #CARACTERÍSTICAS
 if @amostra.caracteristicas != ""
 	move_down 30
-	table  [ ["<b>CARACTERÍSTICAS ORGANOLÉPTICAS</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
+	table  [ ["<b>Características Organolépticas</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
 	data = [ ["#{@amostra.caracteristicas}"] ]
 	table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
 end

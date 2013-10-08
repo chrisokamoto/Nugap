@@ -23,7 +23,7 @@
 
 <p>
   <strong>Conteúdo:</strong>
-  <%= @amostra.conteudo  %>
+  <%= @amostra.conteudo %>
   <%= @amostra.unidade %>
 </p>
 

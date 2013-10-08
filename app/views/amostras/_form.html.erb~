@@ -40,18 +40,12 @@
 
   <div class="field">
     <%= f.label "Data de fabricação" %>
-    <%= f.radio_button :fabricacao_informada, "0" %>
-    <%= label :fabricacao_informada, 'Não informado' %>
-    <%= f.radio_button :fabricacao_informada, "1", :checked => true, wrapper_html: {id: "people"} %>
-    <%= f.date_select :data_fabricacao, :order => [:day, :month, :year] %>
+    <%= f.text_field  :data_fabricacao %>
   </div>
 
   <div class="field">
     <%= f.label "Data de validade" %>
-    <%= f.radio_button :validade_informada, "0" %>
-    <%= label :validade_informada, 'Não informado' %>
-    <%= f.radio_button :validade_informada, "1", :checked => true, wrapper_html: {id: "people"} %>
-    <%= f.date_select :data_validade, :order => [:day, :month, :year] %>
+    <%= f.text_field  :data_validade %>
   </div>
   
   <div class="field">
@@ -63,10 +57,10 @@
     <%= f.label "Conteúdo" %><%= f.text_field :conteudo %>
   </div>
 
-  <div class="field">
+  <!--div class="field">
     <%= f.label :unidade %>
     <%= f.text_field :unidade %>
-  </div>
+  </div-->
 
   <div class="field">
     <%= f.label "Descrição" %>
