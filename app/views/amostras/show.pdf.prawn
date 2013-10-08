@@ -30,7 +30,13 @@ data = [ ["Data de fabricação: #{@amostra.data_fabricacao}", "Data de Validade
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["Fabricante: #{@amostra.fabricante}", "CNPJ: #{@amostra.fabricante_CNPJ}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
+
+if @amostra.fabricante_numero != ""
 data = [ ["Endereço: #{@amostra.fabricante_rua}, #{@amostra.fabricante_numero}", "Bairro: #{@amostra.fabricante_bairro}"] ]
+else
+data = [ ["Endereço: #{@amostra.fabricante_rua}", "Bairro: #{@amostra.fabricante_bairro}"] ]
+end
+
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["Cidade: #{@amostra.fabricante_cidade}", "UF: #{@amostra.fabricante_UF}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
