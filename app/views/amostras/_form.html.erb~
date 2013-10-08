@@ -54,7 +54,8 @@
   </div>
 
   <div class="field">
-    <%= f.label "Conteúdo" %><%= f.text_field :conteudo %>
+    <%= f.label "Conteúdo" %>
+    <%= f.text_field :conteudo %>
   </div>
 
   <!--div class="field">
