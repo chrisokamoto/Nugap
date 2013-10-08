@@ -180,9 +180,17 @@ class AmostrasController < ApplicationController
         end
       end
 
-      @amostra.update(params[:amostra][:parametro_resultados_attributes][:referencia_parametro])
-      @amostra.update(params[:amostra][:parametro_resultados_attributes][:metodo_parametro])
-      @amostra.update(params[:amostra][:parametro_resultados_attributes][:valor_referencia_parametro])
+      if(!params[:amostra][:parametro_resultados_attributes].nil?)
+        if (!params[:amostra][:parametro_resultados_attributes][:referencia_parametro].nil)
+          @amostra.update(params[:amostra][:parametro_resultados_attributes][:referencia_parametro])
+        end
+        if (!params[:amostra][:parametro_resultados_attributes][:metodo_parametro].nil)
+          @amostra.update(params[:amostra][:parametro_resultados_attributes][:metodo_parametro])
+        end
+        if (!params[:amostra][:parametro_resultados_attributes][:valor_referencia_parametro].nil)
+          @amostra.update(params[:amostra][:parametro_resultados_attributes][:valor_referencia_parametro])
+        end
+      end
   end
 
   # DELETE /amostras/1
