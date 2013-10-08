@@ -31,13 +31,9 @@ table(data, :column_widths => [250, 250], :position => :center, :row_colors => [
 data = [ ["Fabricante: #{@amostra.fabricante}", "CNPJ: #{@amostra.fabricante_CNPJ}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 
-if @amostra.fabricante_numero != ""
-data = [ ["Endereço: #{@amostra.fabricante_rua}, #{@amostra.fabricante_numero}", "Bairro: #{@amostra.fabricante_bairro}"] ]
-else
-data = [ ["Endereço: #{@amostra.fabricante_rua}, #{@amostra.fabricante_numero}", "Bairro: #{@amostra.fabricante_bairro}"] ]
-end
-
+data = [ ["Endereço: #{@amostra.fabricante_rua}", "Bairro: #{@amostra.fabricante_bairro}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
+
 data = [ ["Cidade: #{@amostra.fabricante_cidade}", "UF: #{@amostra.fabricante_UF}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["CEP: #{@amostra.fabricante_CEP}", "Telefone: #{@amostra.fabricante_telefone}"] ]
@@ -56,8 +52,16 @@ move_down 30
 table  [ ["<b>SOLICITANTE</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
 data = [ ["Solicitante: #{@amostra.solicitante}", "CNPJ: #{@amostra.solicitante_CNPJ}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Endereço: #{@amostra.solicitante_rua}, #{@amostra.solicitante_numero}", "Bairro: #{@amostra.solicitante_bairro}"] ]
+
+if @amostra.solicitante_numero != ""
+data = [ ["Logradouro: #{@amostra.solicitante_rua}", "Número: #{@amostra.solicitante_numero}", "Bairro: #{@amostra.solicitante_bairro}"] ]
+table(data, :column_widths => [230, 70, 200], :position => :center, :row_colors => ["FFFFFF"])
+else
+data = [ ["Logradouro: #{@amostra.solicitante_rua}", "Bairro: #{@amostra.solicitante_bairro}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
+end
+
+
 data = [ ["Cidade: #{@amostra.solicitante_cidade}", "UF: #{@amostra.solicitante_UF}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["CEP: #{@amostra.solicitante_CEP}", "Telefone: #{@amostra.solicitante_telefone}"] ]

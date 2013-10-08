@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong></strong>
-  <%= @empresa.logradouro %>
+  <strong>Endereço:</strong>
+  <%= @empresa.rua %>
 </p>
 
 <p>

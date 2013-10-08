@@ -34,7 +34,7 @@
   </div>
   <div class="field">
     <%= f.label "Número" %>
-    <%= f.number_field :numero %>
+    <%= f.text_field :numero %>
   </div>
   <div class="field">
     <%= f.label :bairro %>
