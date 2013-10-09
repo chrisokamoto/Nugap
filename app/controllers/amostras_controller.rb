@@ -194,17 +194,12 @@ class AmostrasController < ApplicationController
 
   # DELETE /amostras/1
   # DELETE /amostras/1.json
-  def destroy
-    deletar_parametro = 0
+  def destroy    
 
     if(!@amostra.parametro_resultados.nil?)
-      @parametro_resultados = ParametroResultado.find_by_amostra_id(@amostra.id)
-      deletar_parametro = 1
-    end
-
-    if(deletar_parametro == 1)
-      if !@parametro_resultados.nil? 
-      @parametro_resultados.destroy
+      @amostra.parametro_resultados.each do |parametro_resultado|
+        parametro_resultado.destroy
+      end
     end
     
     @amostra.destroy
@@ -212,7 +207,6 @@ class AmostrasController < ApplicationController
       format.html { redirect_to amostras_url }
       format.json { head :no_content }
     end
-  end
   end
 
   private
