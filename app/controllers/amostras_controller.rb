@@ -165,11 +165,14 @@ class AmostrasController < ApplicationController
       end
     end
      
+     atualizou_parametro = 0
 
       if(!@amostra.parametro_resultados.nil?)
          @amostra.parametro_resultados.each do |parametro_resultado|
 
           if !parametro_resultado.parametro.nil?
+
+            atualizou_parametro = 1;
 
             parametro = Parametro.find_by_nome(parametro_resultado.parametro)
             parametro_resultado.referencia_parametro = parametro.referencia
@@ -180,16 +183,12 @@ class AmostrasController < ApplicationController
         end
       end
 
-      if(!params[:amostra][:parametro_resultados_attributes].nil?)
-        if (!params[:amostra][:parametro_resultados_attributes][:referencia_parametro].nil?)
-          @amostra.update(params[:amostra][:parametro_resultados_attributes][:referencia_parametro])
-        end
-        if (!params[:amostra][:parametro_resultados_attributes][:metodo_parametro].nil?)
-          @amostra.update(params[:amostra][:parametro_resultados_attributes][:metodo_parametro])
-        end
-        if (!params[:amostra][:parametro_resultados_attributes][:valor_referencia_parametro].nil?)
+      if(atualizou_parametro == 1)
+
+          @amostra.update(params[:amostra][:parametro_resultados_attributes][:referencia_parametro])        
+          @amostra.update(params[:amostra][:parametro_resultados_attributes][:metodo_parametro])        
           @amostra.update(params[:amostra][:parametro_resultados_attributes][:valor_referencia_parametro])
-        end
+                  
       end
   end
 
