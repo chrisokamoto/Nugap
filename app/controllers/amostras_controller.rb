@@ -188,16 +188,24 @@ class AmostrasController < ApplicationController
           @amostra.update(params[:amostra][:parametro_resultados_attributes][:referencia_parametro])        
           @amostra.update(params[:amostra][:parametro_resultados_attributes][:metodo_parametro])        
           @amostra.update(params[:amostra][:parametro_resultados_attributes][:valor_referencia_parametro])
-                  
+
       end
   end
 
   # DELETE /amostras/1
   # DELETE /amostras/1.json
   def destroy
-    @parametro_resultados = ParametroResultado.find_by_amostra_id(@amostra.id)
-    if !@parametro_resultados.nil? 
+    deletar_parametro = 0
+
+    if(!@amostra.parametro_resultados.nil?)
+      @parametro_resultados = ParametroResultado.find_by_amostra_id(@amostra.id)
+      deletar_parametro = 1
+    end
+
+    if(deletar_parametro == 1)
+      if !@parametro_resultados.nil? 
       @parametro_resultados.destroy
+    end
     
     @amostra.destroy
     respond_to do |format|
