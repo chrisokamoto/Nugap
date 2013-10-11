@@ -24,7 +24,7 @@ font "Times-Roman"
 table  [ ["<b>DADOS DA AMOSTRA</b>"] ], :cell_style => { :inline_format => true, :align => :center }, :column_widths => [500], :position => :center, :row_colors => ["EEEEEE"]
 data = [ ["Produto: #{@amostra.produto}", "Marca: #{@amostra.marca}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Embalagem: #{@amostra.embalagem}", "Conteúdo: #{@amostra.conteudo}"] ]
+data = [ ["Embalagem: #{@amostra.embalagem}", "Conteúdo: #{@amostra.conteudo} #{@amostra.unidade}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["Data de fabricação: #{@amostra.data_fabricacao}", "Data de validade: #{@amostra.data_validade}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
@@ -40,8 +40,8 @@ data = [ ["CEP: #{@amostra.fabricante_CEP}", "Telefone: #{@amostra.fabricante_te
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 data = [ ["Data de entrada no laboratório: #{@amostra.data_entrada.strftime("%d/%m/%Y")}", "Data de entrega do certificado: #{@amostra.data_saida.strftime("%d/%m/%Y")}"] ]
 table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
-data = [ ["Amostragem: de responsabilidade do solicitante"] ]
-table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
+data = [ ["Amostragem: de responsabilidade do solicitante", "Lote: #{@amostra.lote}"] ]
+table(data, :column_widths => [250, 250], :position => :center, :row_colors => ["FFFFFF"])
 if @amostra.descricao != ""
 	data = [ ["Descrição: #{@amostra.descricao}"] ]
 	table(data, :column_widths => [500], :position => :center, :row_colors => ["FFFFFF"])
