@@ -19,10 +19,10 @@ class AmostrasController < ApplicationController
 	format.pdf { render :layout => false } # Add this line
 	prawnto :filename => "laudo #{@amostra.certificado} #{@amostra.produto} #{@amostra.marca}", :prawn => {  
       		#:background => "public/image/logo2.png",          
-      		#:left_margin => 0,  
-     		#:right_margin => 0,  
-     		:top_margin => 50,  
-     		:bottom_margin => 70,  
+      		:left_margin => 0,  
+     		:right_margin => 0,  
+     		:top_margin => 30,  
+     		:bottom_margin => 30,  
      		:page_size => 'A4' 
 	}
 	end

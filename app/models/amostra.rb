@@ -1,6 +1,6 @@
 class Amostra < ActiveRecord::Base
 	
-	has_many :parametro_resultados	
+	has_many :parametro_resultados
 
 
 	accepts_nested_attributes_for :parametro_resultados,

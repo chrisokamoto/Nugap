@@ -4,7 +4,7 @@ one:
   data_fabricacao: MyString
   data_validade: MyString
   lote: MyString
-  conteudo: 1.5
+  conteudo: MyString
   descricao: MyText
   caracteristicas: MyText
   solicitante: MyString
@@ -12,15 +12,14 @@ one:
   produto: MyString
   embalagem: MyString
   assinatura: MyString
-  unidade: MyString
   status: MyString
   certificado: MyString
   marca: MyString
-  data_entrada: 2013-10-05
-  data_saida: 2013-10-05
+  data_entrada: 2013-10-15
+  data_saida: 2013-10-15
   observacoes: MyString
   fabricante_rua: MyString
-  fabricante_numero: MyString
+  fabricante_numero: 1
   fabricante_bairro: MyString
   fabricante_cidade: MyString
   fabricante_UF: MyString
@@ -28,7 +27,7 @@ one:
   fabricante_CNPJ: MyString
   fabricante_telefone: MyString
   solicitante_rua: MyString
-  solicitante_numero: MyString
+  solicitante_numero: 1
   solicitante_bairro: MyString
   solicitante_cidade: MyString
   solicitante_UF: MyString
@@ -38,14 +37,12 @@ one:
   assinatura_tipo_conselho: MyString
   assinatura_numero_conselho: MyString
   descricao_pedido: MyString
-  fabricacao_informada: false
-  validade_informada: false
 
 two:
   data_fabricacao: MyString
   data_validade: MyString
   lote: MyString
-  conteudo: 1.5
+  conteudo: MyString
   descricao: MyText
   caracteristicas: MyText
   solicitante: MyString
@@ -53,15 +50,14 @@ two:
   produto: MyString
   embalagem: MyString
   assinatura: MyString
-  unidade: MyString
   status: MyString
   certificado: MyString
   marca: MyString
-  data_entrada: 2013-10-05
-  data_saida: 2013-10-05
+  data_entrada: 2013-10-15
+  data_saida: 2013-10-15
   observacoes: MyString
   fabricante_rua: MyString
-  fabricante_numero: MyString
+  fabricante_numero: 1
   fabricante_bairro: MyString
   fabricante_cidade: MyString
   fabricante_UF: MyString
@@ -69,7 +65,7 @@ two:
   fabricante_CNPJ: MyString
   fabricante_telefone: MyString
   solicitante_rua: MyString
-  solicitante_numero: MyString
+  solicitante_numero: 1
   solicitante_bairro: MyString
   solicitante_cidade: MyString
   solicitante_UF: MyString
@@ -79,5 +75,3 @@ two:
   assinatura_tipo_conselho: MyString
   assinatura_numero_conselho: MyString
   descricao_pedido: MyString
-  fabricacao_informada: false
-  validade_informada: false

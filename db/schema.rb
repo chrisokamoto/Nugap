@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131005191202) do
+ActiveRecord::Schema.define(version: 20131015225114) do
 
   create_table "amostras", force: true do |t|
     t.string   "data_fabricacao"
     t.string   "data_validade"
     t.string   "lote"
-    t.float    "conteudo"
+    t.string   "conteudo"
     t.text     "descricao"
     t.text     "caracteristicas"
     t.string   "solicitante"
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20131005191202) do
     t.string   "produto"
     t.string   "embalagem"
     t.string   "assinatura"
-    t.string   "unidade"
     t.string   "status"
     t.string   "certificado"
     t.string   "marca"
@@ -33,7 +32,7 @@ ActiveRecord::Schema.define(version: 20131005191202) do
     t.date     "data_saida"
     t.string   "observacoes"
     t.string   "fabricante_rua"
-    t.string   "fabricante_numero"
+    t.integer  "fabricante_numero"
     t.string   "fabricante_bairro"
     t.string   "fabricante_cidade"
     t.string   "fabricante_UF"
@@ -41,7 +40,7 @@ ActiveRecord::Schema.define(version: 20131005191202) do
     t.string   "fabricante_CNPJ"
     t.string   "fabricante_telefone"
     t.string   "solicitante_rua"
-    t.string   "solicitante_numero"
+    t.integer  "solicitante_numero"
     t.string   "solicitante_bairro"
     t.string   "solicitante_cidade"
     t.string   "solicitante_UF"
@@ -51,8 +50,6 @@ ActiveRecord::Schema.define(version: 20131005191202) do
     t.string   "assinatura_tipo_conselho"
     t.string   "assinatura_numero_conselho"
     t.string   "descricao_pedido"
-    t.boolean  "fabricacao_informada"
-    t.boolean  "validade_informada"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
