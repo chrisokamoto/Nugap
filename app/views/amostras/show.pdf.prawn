@@ -98,7 +98,7 @@ end
 for tipo in tipos
 	if !tipo.nil?
 		move_down 7
-		tipoNovo = tipo
+		tipoNovo = tipo.dup
 		tipoNovo.gsub!("á", "Á")
 		tipoNovo.gsub!("à", "À")
 		tipoNovo.gsub!("ã", "Ã")
@@ -112,6 +112,7 @@ for tipo in tipos
 		tipoNovo.gsub!("ú", "Ú")
 		tipoNovo.gsub!("ç", "Ç")
 		table  [ ["<b>RESULTADO DE #{tipoNovo.upcase}</b>"] ], :cell_style => { :inline_format => true, :align => :center, :border_width => 0.5 }, :column_widths => [540], :position => :center, :row_colors => ["EEEEEE"]
+
 	end
 
 # PARA CADA TIPO, GERA VETOR DE METODOS E REFERENCIAS PARA AGRUPAR
@@ -152,24 +153,24 @@ for tipo in tipos
 					end	
 
 					if (resultado.valor_referencia_parametro != "" and resultado.conclusao == "")
-						data = [ ["Parâmetro: #{resultado.parametro}","Resultado: #{resultado.resultado}"] ]
+						data = [ ["Parâmetro: #{resultado.parametro}\nValor de referência: #{resultado.valor_referencia_parametro}","Resultado: #{resultado.resultado}"] ]
 						table(data, :column_widths => [270,270], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5})
-						data = [ ["Valor de referência: #{resultado.valor_referencia_parametro}"] ]
-						table(data, :column_widths => [540], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:borders => [:left, :right], :border_width => 0.5})
+						#data = [ ["Valor de referência: #{resultado.valor_referencia_parametro}"] ]
+						#table(data, :column_widths => [540], :position => :center, :row_colors => ["FFFFFF"], :cell_style => { :border_width => 0.5})
 					end
 
 					if (resultado.valor_referencia_parametro == "" and resultado.conclusao != "")
-						data = [ ["Parâmetro: #{resultado.parametro}","Resultado: #{resultado.resultado}"] ]
+						data = [ ["Parâmetro: #{resultado.parametro}\nConclusão: #{resultado.conclusao}","Resultado: #{resultado.resultado}"] ]
 						table(data, :column_widths => [270,270], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5})
-						data = [ ["Conclusão: #{resultado.conclusao}"] ]
-						table(data, :column_widths => [540], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:borders => [:bottom, :left, :right], :border_width => 0.5})
+						#data = [ ["Conclusão: #{resultado.conclusao}"] ]
+						#table(data, :column_widths => [540], :position => :center, :row_colors => ["FFFFFF"], :cell_style => { :border_width => 0.5})
 					end
 
 					if (resultado.valor_referencia_parametro != "" and resultado.conclusao != "")
-						data = [ ["Parâmetro: #{resultado.parametro}","Resultado: #{resultado.resultado}"] ]
+						data = [ ["Parâmetro: #{resultado.parametro}\nValor de referência: #{resultado.valor_referencia_parametro}","Resultado: #{resultado.resultado}\nConclusão: #{resultado.conclusao}"] ]
 						table(data, :column_widths => [270,270], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5, :borders => [:left, :right, :top]})
-						data = [ ["Valor de referência: #{resultado.valor_referencia_parametro}", "Conclusão: #{resultado.conclusao}"] ]
-						table(data, :column_widths => [270, 270], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:borders => [:bottom, :left, :right], :border_width => 0.5})
+						#data = [ ["Valor de referência: #{resultado.valor_referencia_parametro}", "Conclusão: #{resultado.conclusao}"] ]
+						#table(data, :column_widths => [270, 270], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:borders => [:bottom, :left, :right], :border_width => 0.5})
 					end
 
 				end
@@ -182,9 +183,6 @@ for tipo in tipos
 			data = [ ["<b>Método:</b> #{metRef[0, metRef.index('--')]}\n<b>Referência:</b> #{metRef[metRef.index('--')+2, metRef.length]}"] ]
 			table(data, :cell_style => {:border_width => 0.5, :borders => [:top, :left, :right, :bottom], :inline_format => true}, :column_widths => [540], :position => :center, :row_colors => ["FFFFFF"])
 
-			#data = [ ["<b>Referência:</b> #{metRef[metRef.index('--')+2, metRef.length]}"] ]
-			#table(data, :cell_style => {:border_width => 0.5, :borders => [:bottom, :left, :right], :inline_format => true}, :column_widths => [540], :position => :center, :row_colors => ["FFFFFF"])
-
 			tem_resultado = 0
 		end
 		end
@@ -195,6 +193,11 @@ end
 
 #OBSERVAÇÕES
 move_down 20
+if (cursor < 80)
+	start_new_page
+	move_down 20
+end
+
 if @amostra.observacoes == ""
 	text  "Observação:<i> Resultado válido para a amostra analisada.</i>", :indent_paragraphs => 30, :inline_format => true
 else
@@ -205,11 +208,10 @@ end
 
 
 # ASSINATURA
-move_down 20
+move_down 30
 text  "________________________________________", :size => 16, :align => :center
 text  "#{@amostra.assinatura} - #{@amostra.assinatura_tipo_conselho} #{@amostra.assinatura_numero_conselho}", :size => 10, :align => :center
 text  "Responsável Técnico", :size => 10, :align => :center
-
 
 # NÚMERO DA PÁGINA
 number_pages "Certificado #{@amostra.certificado}  -  Pág. <page> / <total>", { :start_count_at => 0, :page_filter => :all, :at => [400, pdf.bounds.bottom], :align => :center, :size => 9 }
