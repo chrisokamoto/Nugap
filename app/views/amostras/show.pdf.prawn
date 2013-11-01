@@ -5,7 +5,7 @@ text_box  "NÚCLEO GLOBAL DE ANÁLISE E PESQUISA\n\n", :style => :bold, :size =>
 
 text_box "Av. Amazonas, 4080, Sala 203-Prado-Belo Horizonte/MG-CEP: 30.411-250-Telefax (31) 3313.1616\n"+
 "Laboratório credenciado pelo MAPA para análises de microscopia do café e seus derivados\n"+
-"Portaria No 217 de 14 de julho de 2009\n", 
+"Portaria Nº 217 de 14 de julho de 2009\n", 
 :align => :center,
 :size => 10,
 :at => [70, 755],

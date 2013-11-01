@@ -193,10 +193,10 @@ end
 
 #OBSERVAÇÕES
 move_down 20
-#if (cursor < 80)
-#	start_new_page
-#	move_down 20
-#end
+if (cursor < 80)
+	start_new_page
+	move_down 20
+end
 
 if @amostra.observacoes == ""
 	text  "Observação:<i> Resultado válido para a amostra analisada.</i>", :indent_paragraphs => 30, :inline_format => true
