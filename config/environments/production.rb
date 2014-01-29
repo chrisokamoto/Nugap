@@ -63,6 +63,22 @@ NugapSystem::Application.configure do
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
 
+  config.assets.precompile << Proc.new { |path|
+  if path =~ /\.(css|js)\z/
+    full_path = Rails.application.assets.resolve(path).to_path
+    app_assets_path = Rails.root.join('app', 'assets').to_path
+    vendor_assets_path = Rails.root.join('vendor', 'assets').to_path
+
+    if ((full_path.starts_with? app_assets_path) || (full_path.starts_with? vendor_assets_path)) && (!path.starts_with? '_')
+      puts "\t" + full_path.slice(Rails.root.to_path.size..-1)
+      true
+    else
+      false
+    end
+  else
+    false
+  end
+}
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
