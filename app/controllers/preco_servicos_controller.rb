@@ -24,7 +24,7 @@ class PrecoServicosController < ApplicationController
   end
 
   def formata_preco
-      @preco_servico.preco.to_f
+      params[:preco].to_f
       #number_to_currency(@preco_servico.preco, :precision => 0, :format => "-%u%n")
   end
 

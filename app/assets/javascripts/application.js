@@ -49,6 +49,9 @@ jQuery(function($) {
 	    })
 	  return false;
 	});
+
+
+	$('#preco').regexMask(/^\d+$/);
 })
 
 
