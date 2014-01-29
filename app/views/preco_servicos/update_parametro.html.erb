@@ -1,0 +1,8 @@
+<%= "Parâmetro" %>
+<br /><br />
+<% if @sub_parametros.size >= 1 %>
+	<%= collection_select(:preco_servico, :parametro, @sub_parametros, :nome, :nome, options ={:prompt =>
+""}) %>
+<% else %>
+Não existem Parâmetros sem preço para este conjunto de Produto e Análise.
+<% end %>

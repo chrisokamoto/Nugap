@@ -12,5 +12,6 @@ class Amostra < ActiveRecord::Base
 	validates :produto, :presence => { :message => " precisa ser preenchido." }
 	validates :assinatura, :presence => { :message => " precisa ser preenchida." }
 	validates :solicitante, :presence => { :message => " precisa ser preenchido." }
-	validates :fabricante, :presence => { :message => " precisa ser preenchida." }
+	validates :fabricante, :presence => { :message => " precisa ser preenchida." }	
+
 end

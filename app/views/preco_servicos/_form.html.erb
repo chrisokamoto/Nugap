@@ -1,0 +1,38 @@
+<%= form_for(@preco_servico) do |f| %>
+  <% if @preco_servico.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@preco_servico.errors.count, "erro") %>:</h2>
+
+      <ul>
+      <% @preco_servico.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :produto %>
+    <%= collection_select(:preco_servico, :produto, Produto.order('tipo'), :tipo, :tipo, options ={:prompt =>
+""}) %>
+  </div>
+  <div class="field" id="analise_collection_select", :remote >
+    <%= f.label "Análise" %>
+    <%= collection_select(:preco_servico, :analise, TipoAnalise.order('tipo'), :tipo, :tipo, options ={:prompt =>""}) %>
+  </div>
+  <div id="parametro-select", :remote >    
+  </div>  
+  <div class="field" >
+    <%= f.label "Preço" %>
+    <%= f.text_field :preco, data: {autonumeric: {dGroup: '9', aDec: ',', aSep: '.'}} %>
+  </div>
+  <div class="field">
+    <%= f.label "Legislação" %>
+    <%= f.text_field :legislacao %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Salvar", :class => 'btn btn-info' %>
+  </div>
+<% end %>
+
+

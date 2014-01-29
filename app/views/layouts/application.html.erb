@@ -33,8 +33,11 @@
 				<li><%= link_to 'Parâmetros', parametros_path %></li>
 				<li><%= link_to 'Assinaturas', assinaturas_path %></li>
 				<% if user_is_administrador? %>
+					<li><%= link_to 'Preço Serviços', preco_servicos_path %></li>
+				<% end %>	
+				<% if user_is_administrador? %>
 					<li><%= link_to 'Usuários', usuarios_path %></li>
-				<% end %>				
+				<% end %>							
 				<li>
 					<div class='logado'>
 						<% usuario = Usuario.find(session[:id]) %>
@@ -56,20 +59,11 @@
 		</div>
 		</div>
 		</div>
-		<div class="margem-padrao-nugap">
-			<br /><br /><br /><br />
+		<div class="margem-padrao-nugap">				    		
 	    		<%= yield %>
 		</div>
 
-	    <footer>
-			<div class="footerNugap">
-				<br><br>
-				<center>
-					<img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
-					<i>Nugap - Todos os direitos reservados</i>
-				</center>
-			</div>
-		</footer>
+	    
 
 		<%else%>
 

@@ -1,0 +1,46 @@
+<br /><br /><br /><br />
+<legend>Preços cadastrados</legend>
+
+<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="95%">
+  <thead>
+    <tr>
+      <th width="15%" style="word-wrap:break-word;"><center>Produto</center></th>
+      <th width="40%" style="word-wrap:break-word;"><center>Análise</center></th>
+      <th width="20%" style="word-wrap:break-word;"><center>Parâmetro</center></th>      
+      <th width="15%" style="word-wrap:break-word;"><center>Preço (R$)</center></th>      
+      <th width="5%" style="word-wrap:break-word;"></th>
+      <th width="5%" style="word-wrap:break-word;"></th>
+      <th width="5%" style="word-wrap:break-word;"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @preco_servicos.each do |preco_servico| %>
+      <tr>
+        <td><center><%= preco_servico.produto %></center></td>  
+        <td><center><%= preco_servico.analise %></center></td>
+        <td><center><%= preco_servico.parametro %></center></td>            
+        <td><center><%= number_to_currency(preco_servico.preco, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %></center></td>
+         <td><center><%= link_to 'Detalhes', preco_servico, :class => 'btn btn-small' %></center> </td>
+        <td><center><%= link_to 'Editar', edit_preco_servico_path(preco_servico), :class => 'btn btn-small' %></center> </td>
+        <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', preco_servico, method: :delete, :class => 'btn btn-small', data: { confirm: "Tem certeza?" } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo Preço', new_preco_servico_path, :class => 'btn btn-info' %>
+
+
+
+<footer>
+      <div class="footerNugap">
+        <br><br>
+        <center>
+          <img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
+          <i>Nugap - Todos os direitos reservados</i>
+        </center>
+      </div>
+    </footer>

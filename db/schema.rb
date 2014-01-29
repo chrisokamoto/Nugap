@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131015225114) do
+ActiveRecord::Schema.define(version: 20140122010239) do
 
   create_table "amostras", force: true do |t|
     t.string   "data_fabricacao"
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(version: 20131015225114) do
     t.string   "referencia"
     t.string   "metodo"
     t.string   "valor_referencia"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "preco_servicos", force: true do |t|
+    t.string   "analise"
+    t.string   "parametro"
+    t.string   "produto"
+    t.string   "legislacao"
+    t.decimal  "preco",      precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

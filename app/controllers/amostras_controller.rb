@@ -1,6 +1,6 @@
 class AmostrasController < ApplicationController
   before_action :set_amostra, only: [:show, :edit, :update, :destroy]
-  before_action :valida_sessao
+  before_action :valida_sessao  
 
   # GET /amostras
   # GET /amostras.json
@@ -31,7 +31,7 @@ class AmostrasController < ApplicationController
 
   # GET /amostras/new
   def new
-    @amostra = Amostra.new
+    @amostra = Amostra.new    
   end
 
   # GET /amostras/1/edit
@@ -39,10 +39,122 @@ class AmostrasController < ApplicationController
     @amostra = Amostra.find(params[:id])  
   end
 
+  # GET /amostras/1/copy
+  def copy
+    @existing_amostra = Amostra.find(params[:id])      
+    #@existing_parametro_resultado = ParametroResultado.find_by_amostra_id(id) 
+
+    #create new object with attributes of existing record 
+    @amostra = Amostra.new    
+    @amostra.certificado = ""  
+    @amostra.conteudo = @existing_amostra.conteudo
+    @amostra.solicitante = @existing_amostra.solicitante
+    @amostra.observacoes = @existing_amostra.observacoes
+    @amostra.produto = @existing_amostra.produto
+    @amostra.assinatura = @existing_amostra.assinatura
+    @amostra.fabricante = @existing_amostra.fabricante
+    @amostra.status = @existing_amostra.status    
+    @amostra.descricao = @existing_amostra.descricao
+    @amostra.data_fabricacao = @existing_amostra.data_fabricacao        
+    @amostra.data_validade  = @existing_amostra.data_validade
+    @amostra.lote = @existing_amostra.lote
+    @amostra.caracteristicas = @existing_amostra.caracteristicas
+    @amostra.embalagem = @existing_amostra.embalagem
+    @amostra.marca = @existing_amostra.marca
+    @amostra.data_entrada = @existing_amostra.data_entrada
+    @amostra.data_saida = @existing_amostra.data_saida
+    @amostra.fabricante_rua = @existing_amostra.fabricante_rua
+    @amostra.fabricante_numero = @existing_amostra.fabricante_numero                   
+    @amostra.fabricante_bairro = @existing_amostra.fabricante_bairro
+    @amostra.fabricante_cidade = @existing_amostra.fabricante_cidade
+    @amostra.fabricante_UF = @existing_amostra.fabricante_UF
+    @amostra.fabricante_CEP = @existing_amostra.fabricante_CEP
+    @amostra.fabricante_CNPJ = @existing_amostra.fabricante_CNPJ
+    @amostra.fabricante_telefone = @existing_amostra.fabricante_telefone 
+    @amostra.solicitante_rua = @existing_amostra.solicitante_rua
+    @amostra.solicitante_numero = @existing_amostra.solicitante_numero
+    @amostra.solicitante_bairro = @existing_amostra.solicitante_bairro
+    @amostra.solicitante_cidade = @existing_amostra.solicitante_cidade
+    @amostra.solicitante_UF = @existing_amostra.solicitante_UF
+    @amostra.solicitante_CEP = @existing_amostra.solicitante_CEP
+    @amostra.solicitante_CNPJ = @existing_amostra.solicitante_CNPJ
+    @amostra.solicitante_telefone = @existing_amostra.solicitante_telefone
+    @amostra.assinatura_tipo_conselho = @existing_amostra.assinatura_tipo_conselho
+    @amostra.assinatura_numero_conselho = @existing_amostra.assinatura_numero_conselho
+    @amostra.descricao_pedido = @existing_amostra.descricao_pedido
+  end
+
+  def save
+    
+    respond_to do |format|
+    
+
+    @amostra = Amostra.new(amostra_params2)
+    retorno =  @amostra.save
+
+      if !params[:amostra][:fabricante].nil?
+
+        fabricante = Empresa.find_by_nome(params[:amostra][:fabricante])
+        if !fabricante.nil?
+          params[:amostra][:fabricante_rua] = fabricante.rua
+          params[:amostra][:fabricante_numero] = fabricante.numero
+          params[:amostra][:fabricante_bairro] = fabricante.bairro
+          params[:amostra][:fabricante_cidade] = fabricante.cidade
+          params[:amostra][:fabricante_UF] = fabricante.UF
+          params[:amostra][:fabricante_CEP] = fabricante.CEP
+          params[:amostra][:fabricante_CNPJ] = fabricante.CNPJ
+          params[:amostra][:fabricante_telefone] = fabricante.telefone
+        end
+
+      end
+
+      if !params[:amostra][:solicitante].nil?
+
+        solicitante = Empresa.find_by_nome(params[:amostra][:solicitante])
+        if !solicitante.nil?
+          params[:amostra][:solicitante_rua] = solicitante.rua
+          params[:amostra][:solicitante_numero] = solicitante.numero
+          params[:amostra][:solicitante_bairro] = solicitante.bairro
+          params[:amostra][:solicitante_cidade] = solicitante.cidade
+          params[:amostra][:solicitante_UF] = solicitante.UF
+          params[:amostra][:solicitante_CEP] = solicitante.CEP
+          params[:amostra][:solicitante_CNPJ] = solicitante.CNPJ
+          params[:amostra][:solicitante_telefone] = solicitante.telefone
+        end
+
+      end
+
+      if !params[:amostra][:assinatura].nil?
+
+        assinatura = Assinatura.find_by_nome(params[:amostra][:assinatura])
+        if !assinatura.nil?
+          params[:amostra][:assinatura_tipo_conselho] = assinatura.tipo_conselho
+          params[:amostra][:assinatura_numero_conselho] = assinatura.numero_conselho
+        end
+
+      end
+
+      if @amostra.update(amostra_params2) && retorno 
+        format.html { redirect_to @amostra, notice: 'Amostra criada com sucesso!' }
+        format.json { render action: 'show', status: :created, location: @amostra }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @amostra.errors, status: :unprocessable_entity }
+      end
+    
+    end
+    #update
+       
+
+    
+    
+  end
+
   # POST /amostras
-  # POST /amostras.json
-  def create
-    @amostra = Amostra.new(amostra_params)
+  # POST /amostras.json  
+  def create    
+
+    @amostra = Amostra.new(amostra_params)        
 
     respond_to do |format|
 
@@ -81,8 +193,18 @@ class AmostrasController < ApplicationController
         @amostra.assinatura_numero_conselho = assinatura.numero_conselho
 
       end
+      
 
-      if(!@amostra.parametro_resultados.nil?)
+      if @amostra.save
+
+        format.html { redirect_to @amostra, notice: 'Amostra criada com sucesso!' }
+        format.json { render action: 'show', status: :created, location: @amostra }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @amostra.errors, status: :unprocessable_entity }
+      end
+
+      if(!@amostra.parametro_resultados.nil?)        
          @amostra.parametro_resultados.each do |parametro_resultado|
 
           if !parametro_resultado.parametro.nil?
@@ -96,14 +218,6 @@ class AmostrasController < ApplicationController
         end
       end
 
-      if @amostra.save
-
-        format.html { redirect_to @amostra, notice: 'Amostra criada com sucesso!' }
-        format.json { render action: 'show', status: :created, location: @amostra }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @amostra.errors, status: :unprocessable_entity }
-      end
     end
   end
 
@@ -154,6 +268,8 @@ class AmostrasController < ApplicationController
 
       end
 
+      @amostra.save(amostra_params3)
+
       if @amostra.update(amostra_params)
         
 
@@ -168,6 +284,7 @@ class AmostrasController < ApplicationController
      atualizou_parametro = 0
 
       if(!@amostra.parametro_resultados.nil?)
+        
          @amostra.parametro_resultados.each do |parametro_resultado|
 
           if !parametro_resultado.parametro.nil?
@@ -178,6 +295,7 @@ class AmostrasController < ApplicationController
             parametro_resultado.referencia_parametro = parametro.referencia
             parametro_resultado.metodo_parametro = parametro.metodo
             parametro_resultado.valor_referencia_parametro = parametro.valor_referencia
+
 
           end
         end
@@ -222,7 +340,7 @@ class AmostrasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     private
     def amostra_params
-      params.require(:amostra).permit(:data_fabricacao, :data_validade, :lote, :conteudo, 
+      params.require(:amostra).permit(:id, :data_fabricacao, :data_validade, :lote, :conteudo, 
         :descricao, :caracteristicas, :observacao, :solicitante, :fabricante, :produto, 
         :embalagem, :assinatura, :unidade, :status, :certificado, :marca, :data_entrada, 
         :data_saida, :observacoes, :fabricante_rua, :fabricante_numero, :fabricante_bairro, 
@@ -233,6 +351,26 @@ class AmostrasController < ApplicationController
           :descricao_pedido, :fabricacao_informada, :validade_informada,           
         parametro_resultados_attributes: [:id, :conclusao, :parametro, :resultado, :amostra_id,
           :tipo, :referencia_parametro, :metodo_parametro, :valor_referencia_parametro, 
+          :_destroy])
+    end
+
+    def amostra_params2
+      params.require(:amostra).permit(:id, :data_fabricacao, :data_validade, :lote, :conteudo, 
+        :descricao, :caracteristicas, :observacao, :solicitante, :fabricante, :produto, 
+        :embalagem, :assinatura, :unidade, :status, :certificado, :marca, :data_entrada, 
+        :data_saida, :observacoes, :fabricante_rua, :fabricante_numero, :fabricante_bairro, 
+          :fabricante_cidade, :fabricante_UF, :fabricante_CEP, :fabricante_CNPJ,
+          :fabricante_telefone, :solicitante_rua, :solicitante_numero, :solicitante_bairro,
+          :solicitante_cidade, :solicitante_UF, :solicitante_CEP, :solicitante_CNPJ,
+          :solicitante_telefone, :assinatura_tipo_conselho, :assinatura_numero_conselho, 
+          :descricao_pedido, :fabricacao_informada, :validade_informada          
+        )
+    end
+
+    def amostra_params3
+      params.require(:amostra).permit(   :id,     
+      parametro_resultados_attributes: [  :id, :conclusao, :parametro, :resultado, :amostra_id,
+          :tipo, :referencia_parametro, :metodo_parametro, :valor_referencia_parametro,
           :_destroy])
     end
 

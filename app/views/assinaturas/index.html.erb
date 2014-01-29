@@ -1,3 +1,4 @@
+<br /><br /><br /><br />
 <legend>Assinaturas cadastradas</legend>
 
 <table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="70%">
@@ -8,7 +9,9 @@
       <th width="20%" style="word-wrap:break-word;"><center>Número</center></th>
       <th width="5%" style="word-wrap:break-word;"><center></center></th>
       <!--th width="5%" style="word-wrap:break-word;"><center></center></th-->
-      <!--th width="5%" style="word-wrap:break-word;"><center></center></th-->
+      <% if user_is_administrador? %>
+        <th width="5%" style="word-wrap:break-word;"><center></center></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -20,7 +23,9 @@
         <td><center><%= assinatura.numero_conselho %></center></td>
         <!--td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', assinatura %></center></td-->
         <td><center><%= link_to 'Editar', edit_assinatura_path(assinatura), :class => 'btn btn-small' %></center></td>
-        <!--td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Excluir', assinatura, method: :delete, data: { confirm: 'Are you sure?' } %></center></td-->
+        <% if user_is_administrador? %>
+          <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', assinatura, method: :delete, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a assinatura #{assinatura.nome}?" } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -30,3 +35,14 @@
 
 <%= link_to 'Nova Assinatura', new_assinatura_path, :class => 'btn btn-info'%>
 
+
+
+<footer>
+      <div class="footerNugap">
+        <br><br>
+        <center>
+          <img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
+          <i>Nugap - Todos os direitos reservados</i>
+        </center>
+      </div>
+    </footer>

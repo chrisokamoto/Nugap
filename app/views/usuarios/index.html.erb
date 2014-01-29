@@ -1,3 +1,4 @@
+<br /><br /><br /><br />
 <legend>Usuários cadastrados</legend>
 <table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="80%">
   <thead>
@@ -21,7 +22,7 @@
         <td width="15%" style="word-wrap:break-word;"><center><%= usuario.permissao %></center></td>
         <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', usuario, :class => 'btn btn-small'%></center></td>
         <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_usuario_path(usuario), :class => 'btn btn-small' %></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Excluir', usuario, method: :delete, data: { confirm: 'Tem certeza?' }, :class => 'btn btn-small' %></center></td>
+        <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', usuario, method: :delete, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o usuário #{usuario.nome}?" } %></td>
       </tr>
       <% end %>
     <% end %>
@@ -31,3 +32,14 @@
 <br>
 
 <%= link_to 'Novo usuário', new_usuario_path, :class => 'btn btn-info'%>
+
+
+<footer>
+      <div class="footerNugap">
+        <br><br>
+        <center>
+          <img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
+          <i>Nugap - Todos os direitos reservados</i>
+        </center>
+      </div>
+    </footer>

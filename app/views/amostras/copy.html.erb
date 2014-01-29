@@ -1,5 +1,9 @@
+<br /><br /><br /><br />
+<legend>Copiar amostra</legend>
 
-<%= form_for(@amostra) do |f| %>
+
+
+<%= form_for (@amostra) , :url => {:action => "save"}  do |f| %>
   <% if @amostra.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@amostra.errors.count, "erro") %>:</h2>
@@ -103,16 +107,6 @@
   </div>
 
 
-<br><br>
-<% if !user_is_estagiario? %>
-  <fieldset>
-        
-    <%= render('parametrosResultados_table', :f => f) %>
-  	<br><br>
-        <center><%= link_to_add_fields("Adicionar Resultados", f, :parametro_resultados, :class => "btn", :title => "Adicionar Resultados") %></center>
-        <p></p>
-  </fieldset> 
-<% end %>
 
 <br><br>
 <div class="actions">
@@ -122,3 +116,20 @@
 
 
 <% end %>
+
+
+
+
+<%= link_to 'Detalhes', @amostra, :class => 'btn btn-info' %>
+<%= link_to 'Voltar', amostras_path, :class => 'btn btn-info' %>
+
+
+<footer>
+      <div class="footerNugap">
+        <br><br>
+        <center>
+          <img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
+          <i>Nugap - Todos os direitos reservados</i>
+        </center>
+      </div>
+    </footer>

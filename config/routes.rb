@@ -1,6 +1,8 @@
 NugapSystem::Application.routes.draw do 
   
 
+  resources :preco_servicos
+
   resources :statuses
 
   resources :tipo_analises
@@ -13,7 +15,7 @@ NugapSystem::Application.routes.draw do
 
   resources :analises
 
-  resources :amostras
+  resources :amostras 
 
   resources :usuarios
 
@@ -41,12 +43,19 @@ NugapSystem::Application.routes.draw do
   match '/login' => 'login#login', :via => [:post]
   match '/logout' => 'login#logout', :via => [:get]  
 
+  #post ':preco_servicos/:update_parametro/:produto/:analise', :controller=>'preco_servicos', :action => 'update_parametro'
+  get ':preco_servicos/:update_parametro/:produto/:analise', :controller=>'preco_servicos', :action => 'update_parametro'
+  post ':preco_servicos/:update_parametro/:produto/:analise', :controller=>'preco_servicos', :action => 'update_parametro'
+
   root :to => 'application#index'
   #root :to => 'welcome#index'
 
   match '/home' => 'home#index', via: [:get]
 
-
+  get '/amostras/:id/copy' => 'amostras#copy', as:  :copy_amostra
+  #patch '/amostras/:id/copy' => 'amostras#copy', as:  :copy_amostra
+  post '/amostras/:id/copy' => 'amostras#save', as:  :save_amostra
+  #post '/amostras/:id/save' => 'amostras#save', as:  :save_amostra
 
   #get 'usuarios/create' => 'usuarios#create', :path => 'usuario/novo'
   #post 'usuarios/create' => 'usuarios#create', :path => 'usuario/novo'

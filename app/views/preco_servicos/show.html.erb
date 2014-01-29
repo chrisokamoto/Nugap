@@ -1,0 +1,41 @@
+<br /><br /><br /><br />
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Análise:</strong>
+  <%= @preco_servico.analise %>
+</p>
+
+<p>
+  <strong>Parâmetro:</strong>
+  <%= @preco_servico.parametro %>
+</p>
+
+<p>
+  <strong>Produto:</strong>
+  <%= @preco_servico.produto %>
+</p>
+
+<p>
+  <strong>Preço:</strong>
+  R$ <%= number_to_currency(@preco_servico.preco, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %>
+</p>
+
+<p>
+  <strong>Legislação:</strong>
+  <%= @preco_servico.legislacao %>
+</p>
+
+
+<%= link_to 'Editar', edit_preco_servico_path(@preco_servico), :class => 'btn btn-info' %> 
+<%= link_to 'Voltar', preco_servicos_path, :class => 'btn btn-info' %>
+
+<footer>
+      <div class="footerNugap">
+        <br><br>
+        <center>
+          <img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
+          <i>Nugap - Todos os direitos reservados</i>
+        </center>
+      </div>
+    </footer>
