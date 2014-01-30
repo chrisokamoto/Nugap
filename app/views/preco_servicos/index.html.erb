@@ -6,8 +6,8 @@
     <tr>
       <th width="15%" style="word-wrap:break-word;"><center>Produto</center></th>
       <th width="40%" style="word-wrap:break-word;"><center>Análise</center></th>
-      <th width="20%" style="word-wrap:break-word;"><center>Parâmetro</center></th>      
-      <th width="15%" style="word-wrap:break-word;"><center>Preço (R$)</center></th>      
+      <th width="20%" style="word-wrap:break-word;"><center>Parâmetro</center></th>
+      <th width="15%" style="word-wrap:break-word;"><center>Preço (R$)</center></th>
       <th width="5%" style="word-wrap:break-word;"></th>
       <th width="5%" style="word-wrap:break-word;"></th>
       <th width="5%" style="word-wrap:break-word;"></th>
@@ -17,9 +17,9 @@
   <tbody>
     <% @preco_servicos.each do |preco_servico| %>
       <tr>
-        <td><center><%= preco_servico.produto %></center></td>  
+        <td><center><%= preco_servico.produto %></center></td>
         <td><center><%= preco_servico.analise %></center></td>
-        <td><center><%= preco_servico.parametro %></center></td>            
+        <td><center><%= preco_servico.parametro %></center></td>
         <td><center><%= number_to_currency(preco_servico.preco, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %></center></td>
          <td><center><%= link_to 'Detalhes', preco_servico, :class => 'btn btn-small' %></center> </td>
         <td><center><%= link_to 'Editar', edit_preco_servico_path(preco_servico), :class => 'btn btn-small' %></center> </td>

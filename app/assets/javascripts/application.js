@@ -51,8 +51,11 @@ jQuery(function($) {
 	});
 
 
-	$('#preco').regexMask(/^\d+$/);
+	$('#preco').maskMoney();
 })
+
+
+
 
 
 

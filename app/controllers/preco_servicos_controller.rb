@@ -68,10 +68,10 @@ class PrecoServicosController < ApplicationController
     end
   end
 
-  def update_parametro    
-    @precos = PrecoServico.where(:analise => params[:analise], :produto => params[:produto])   
+  def update_parametro
+    @precos = PrecoServico.where(:analise => params[:analise], :produto => params[:produto])
 
-    @sub_parametros = [] 
+    @sub_parametros = []
     existentes = [""]
     
 
