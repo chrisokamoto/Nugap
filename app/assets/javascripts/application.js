@@ -51,7 +51,7 @@ jQuery(function($) {
 	});
 
 	//https://github.com/plentz/jquery-maskmoney
-	$('#preco').maskMoney();
+//	$('#preco').maskMoney();
 
 })
 
