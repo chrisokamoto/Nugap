@@ -50,8 +50,9 @@ jQuery(function($) {
 	  return false;
 	});
 
-
+	//https://github.com/plentz/jquery-maskmoney
 	$('#preco').maskMoney();
+
 })
 
 
