@@ -199,10 +199,11 @@ Prawn::Document.new() do |pdf|
 	end
 
 	move_down 25
-
-	valor_desconto =  (@orcamento.valor_bruto * @orcamento.desconto / 100.0).round(2)
 	
-	if !("#{@orcamento.desconto}" == "0")
+	
+	if !("#{@orcamento.desconto}" == "0" || "#{@orcamento.desconto}" == nil)
+		valor_desconto =  (@orcamento.valor_bruto * @orcamento.desconto / 100.0).round(2)
+
 		text  "Desconto #{@orcamento.desconto}%: #{valor_desconto}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
 	end
 	text  "Prazo de Entrega: #{@orcamento.prazo}", :size => 10, :indent_paragraphs => 30, :inline_format => true
