@@ -24,7 +24,9 @@ Prawn::Document.new() do |pdf|
 	font "Times-Roman"
 
 	# DADOS DO ORCAMENTO	
-	text  "Solicitante: #{@orcamento.empresa_solicitante}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
+	if !("#{@orcamento.empresa_solicitante}" == "")
+		text  "Solicitante: #{@orcamento.empresa_solicitante}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
+	end
 
 	empresa = Empresa.find_by_nome(@orcamento.empresa_solicitante)
 	dados_empresa = "Dados da empresa: "
@@ -62,8 +64,12 @@ Prawn::Document.new() do |pdf|
 	if !("#{@orcamento.pessoa_solicitante}" == "")
 		text  "A/C: #{@orcamento.pessoa_solicitante}", :size => 10, :indent_paragraphs => 30, :inline_format => true		
 	end
-	text  "Telefone: #{@orcamento.telefone}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
-	text  "Email: #{@orcamento.email}", :size => 10, :indent_paragraphs => 30, :inline_format => true		
+	if !("#{@orcamento.telefone}" == "")
+		text  "Telefone: #{@orcamento.telefone}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
+	end
+	if !("#{@orcamento.email}" == "")
+		text  "Email: #{@orcamento.email}", :size => 10, :indent_paragraphs => 30, :inline_format => true		
+	end
 	move_down 25	
 
 	#DADOS DO PRODUTO
@@ -175,8 +181,12 @@ Prawn::Document.new() do |pdf|
 		move_down 25
 	end
 	
-	text  "Observação: #{@orcamento.observacao}", :size => 10, :indent_paragraphs => 30, :inline_format => true
-	text  "Quantidade: #{@orcamento.quantidade}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+	if !("#{@orcamento.observacao}" == "")
+		text  "Observação: #{@orcamento.observacao}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+	end
+	if !("#{@orcamento.quantidade}" == "")
+		text  "Quantidade: #{@orcamento.quantidade}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+	end
 
 	move_down 25
 
@@ -201,12 +211,14 @@ Prawn::Document.new() do |pdf|
 	move_down 25
 	
 	
-	if !("#{@orcamento.desconto}" == "0" || "#{@orcamento.desconto}" == nil)
+	if !(("#{@orcamento.desconto}" == "0") || (@orcamento.desconto.nil? ))
 		valor_desconto =  (@orcamento.valor_bruto * @orcamento.desconto / 100.0).round(2)
 
 		text  "Desconto #{@orcamento.desconto}%: #{valor_desconto}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
 	end
-	text  "Prazo de Entrega: #{@orcamento.prazo}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+	if !("#{@orcamento.prazo}" == "")
+		text  "Prazo de Entrega: #{@orcamento.prazo}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+	end
 	text  "Forma de Pagamento: #{@orcamento.pagamento}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	#text  "Total Orçamento sem Impostos: #{@orcamento.valor_bruto}", :size => 10, indent_paragraphs => 30, :inline_format => true
 
