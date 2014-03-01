@@ -1,0 +1,15 @@
+<% if(request.original_url.include? "preco_servicos") %>	
+	$('#parametro_preco_selection').empty();
+		<% if ((!@parametros_preco.nil?) && (@parametros_preco.size == 0)) %>
+			$('#parametro_preco_selection').append( $('<option>Parâmetros já precificados.</option>'));
+			document.getElementById("preco").disabled = true; 			
+			document.getElementById("botaoSalvarPreco").disabled = true; 
+		<% else %>			
+			document.getElementById("preco").disabled = false; 			
+			document.getElementById("botaoSalvarPreco").disabled = false; 
+			<% @parametros_preco.each do |parametro| %>
+		  	$('#parametro_preco_selection').append($('<option value="<%= parametro.nome %>"><%= parametro.nome %></option>'));
+		 <%end%>
+	<% end %>
+
+<% end %>

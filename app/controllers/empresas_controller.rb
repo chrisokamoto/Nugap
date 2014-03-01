@@ -32,7 +32,7 @@ class EmpresasController < ApplicationController
       end
     end
   end
-
+  
   def update
     respond_to do |format|
       if @empresa.update(empresa_params)

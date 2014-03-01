@@ -1,0 +1,117 @@
+<br /><br /><br /><br />
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Número:</strong>
+  <%= @orcamento.numero %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @orcamento.data %>
+</p>
+
+
+
+<p>
+  <strong>Pessoa Solicitante:</strong>
+  <%= @orcamento.pessoa_solicitante %>
+</p>
+
+<p>
+  <strong>Empresa Solicitante:</strong>
+  <%= @orcamento.empresa_solicitante %>
+</p>
+
+<p>
+  <strong>Telefone:</strong>
+  <%= @orcamento.telefone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @orcamento.email %>
+</p>
+
+<p>
+  <strong>Observação:</strong>
+  <%= @orcamento.observacao %>
+</p>
+
+<br />
+
+<% if ServicoOrcamento.exists?(:orcamento_id => @orcamento.id) %>
+<fieldset>
+  <%= render('servico_orcamentos_display') %>
+</fieldset>
+<% end %>
+<br />
+
+<p>
+  <strong>Quantidade:</strong>
+  <%= @orcamento.quantidade %>
+</p>
+
+<p>
+  <strong>Prazo:</strong>
+  <%= @orcamento.prazo %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @orcamento.status %>
+</p>
+
+<p>
+  <strong>IR:</strong>
+  <%= @orcamento.ir %>
+</p>
+
+<p>
+  <strong>PIS:</strong>
+  <%= @orcamento.pis %>
+</p>
+
+<p>
+  <strong>CSSL:</strong>
+  <%= @orcamento.cssl %>
+</p>
+
+<p>
+  <strong>COFINS:</strong>
+  <%= @orcamento.cofins %>
+</p>
+
+<p>
+  <strong>Desconto:</strong>
+  <%= @orcamento.desconto %>%
+</p>
+
+<p>
+  <strong>Pagamento:</strong>
+  <%= @orcamento.pagamento %>
+</p>
+
+<div style="color:red">
+  <p>
+    <strong>Total à Pagar:</strong>
+    <%= @orcamento.total_pagar %>
+  </p>
+</div>
+
+<br /><br /><br />
+<center><%= link_to "Gerar PDF", orcamento_path(@orcamento, :format => 'pdf'), :class => 'btn' %></center>
+<br /><br /><br />
+
+<%= link_to 'Editar', edit_orcamento_path(@orcamento), :class => 'btn btn-info' %>
+<%= link_to 'Voltar', orcamentos_path, :class => 'btn btn-info' %>
+
+<footer>
+      <div class="footerNugap">
+        <br><br>
+        <center>
+          <img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
+          <i>Nugap - Todos os direitos reservados</i>
+        </center>
+      </div>
+    </footer>

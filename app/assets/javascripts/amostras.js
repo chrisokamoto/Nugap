@@ -69,7 +69,7 @@ var rowBuilder = function() {
     // Public property that describes the "Remove" link.
     var link = $('<a>', {
         href: '#',
-        onclick: 'remove_fields(this); return false;',
+        onclick: 'remove_fields(this);subAll(); return false;',
         title: 'Excluir'
     }).append("Excluir");
 

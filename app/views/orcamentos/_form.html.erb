@@ -1,0 +1,248 @@
+<%= form_for(@orcamento) do |f| %>
+  <% if @orcamento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@orcamento.errors.count, "erro") %>:</h2>
+
+      <ul>
+      <% @orcamento.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Identificador*" %>
+    <%= f.text_field :numero, :id => "num_orcamento" %>
+  </div>
+  <div class="field">
+    <%= f.label :data %><br>
+    <%= f.text_field :data %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Pessoa Solicitante" %><br>
+    <%= f.text_field :pessoa_solicitante %>
+  </div>
+  <div class="field">
+    <%= f.label "Empresa Solicitante" %><br>
+    <%= f.text_field :empresa_solicitante, :id => "empresa", :style=>"width:300px;" %>
+  </div>
+  <div class="field">
+    <%= f.label :telefone %><br>
+    <%= f.text_field :telefone, :id => "telefone" %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label "Observações" %>
+    <%= f.text_area :observacao %>
+  </div>
+    
+
+  <fieldset>
+        
+    <%= render('servicosOrcamentos_table', :f => f) %>
+    <br><br>
+
+        <center><%= link_to_add_fields_servico("Adicionar Serviços", f, :servico_orcamentos, :class => "btn", :title => "Adicionar Serviços") %></center>
+        <p></p>
+  </fieldset> 
+
+  <div class="field">
+    <%= f.label :quantidade %><br>
+    <%= f.text_field :quantidade %>
+  </div>
+  <div class="field">
+    <%= f.label :prazo %><br>
+    <%= f.text_field :prazo %>
+  </div>
+  <div class="field">
+    <%= f.label "Desconto (%)" %><br>
+    <%= f.number_field :desconto, :class => "desconto", :min => 0, :max =>100, :style=>"width:80px;" %>
+  </div>  
+
+  <div class="field">
+    <%= f.label "IR" %><br>
+    <%= f.text_field :ir, :id => "ir", :readonly => 'true', :style=>"width:80px;" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "PIS" %><br>
+    <%= f.text_field :pis, :id => "pis", :readonly => 'true', :style=>"width:80px;" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "CSSL" %><br>
+    <%= f.text_field :cssl, :id => "cssl", :readonly => 'true', :style=>"width:80px;" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "COFINS" %><br>
+    <%= f.text_field :cofins, :id => "cofins", :readonly => 'true', :style=>"width:80px;" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Total à Pagar", :style=>"color: red;" %><br>
+    <%= f.text_field :total_pagar, :id => "total", :class => "total", :readonly => 'true', :style=>"width:80px;"  %>
+    
+  </div> 
+
+  <%= f.hidden_field :valor_bruto, :id => "total_bruto" %>
+
+  <div class="field">
+    <%= f.label "Forma de Pagamento" %><br>   
+    <%= f.select(:pagamento, {'Boleto Bancário' => "Boleto Bancário", 'Depósito' => 'Depósito'}) %>
+    
+  </div>
+  
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select(:status, {'Aceito' => "Aceito", 'Não Aceito' => 'Não Aceito'}) %>
+  </div>  
+
+
+
+  
+
+  <div class="actions">
+    <%= f.submit "Salvar", :class => 'btn btn-info', :id => "submit" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+
+if($("INPUT#num_orcamento").val() != "")
+    document.getElementById("submit").disabled = false;
+  else 
+    document.getElementById("submit").disabled = true;
+
+$("#num_orcamento").on("change",function() {            
+  
+  if($("INPUT#num_orcamento").val() != "")
+    document.getElementById("submit").disabled = false;
+  else 
+    document.getElementById("submit").disabled = true;
+       
+
+  return false;
+});
+
+
+
+function addAll() {
+  var sum = 0.0, total;
+  var inputs, index;  
+
+  inputs = document.getElementsByTagName('input');
+  
+  for (index = 0; index < inputs.length; ++index) {    
+    if(inputs[index].name.indexOf("[valor_total]") != -1){      
+      
+      var tr = $(inputs[index]).parents('tr');
+      if ($(tr).attr("style") == 'display: none;'){
+      
+        cont = 0;        
+      }
+      else{
+        
+        sum += +(inputs[index].value);
+      }
+      
+    }
+  }
+
+  $('#total').val(sum);
+  $('#total_bruto').val(sum);
+
+   var total_pagar = $('INPUT#total').val();      
+      if(total_pagar == "")    
+        total_pagar = "0"  
+
+      var desconto = $('INPUT#orcamento_desconto').val();      
+      if(desconto == "")    
+        desconto = "0"  
+     
+      $.get('/orcamentos/get_valor_desconto/' + total_pagar + '/' + desconto, function(data){
+           $('#total').html(data).change();
+        })
+  
+      return sum;
+}
+jQuery(function($) {  
+
+$(".desconto").on("input",function() {            
+      addAll();
+
+       var bruto = $('INPUT#total_bruto').val();      
+      if(bruto == "")    
+        bruto = "0"  
+
+      var desconto = $('INPUT#orcamento_desconto').val();      
+      if(desconto == "")    
+        desconto = "0"  
+     
+      $.get('/orcamentos/get_valor_desconto/' + bruto + '/' + desconto, function(data){
+           $('#total').html(data).change();
+        })
+
+
+      return false;
+    });
+
+  $(".total").change(function() {
+
+
+       var bruto = $('INPUT#total_bruto').val();      
+      if(bruto == "")    
+        bruto = "0"  
+
+      var total_pagar = $('INPUT#total').val();      
+      if(total_pagar == "")    
+        total_pagar = "0"
+     
+      $.get('/orcamentos/get_valor_impostos/' + bruto + '/' + total_pagar , function(data){
+           $('#telefone').html(data);
+        })
+
+      return false;
+    });
+
+  $("#empresa").change(function() {
+
+
+       var empresa = $('INPUT#empresa').val();       
+     
+      $.get('/orcamentos/get_telefone_empresa/' + empresa , function(data){
+           $('.total').html(data);
+        })
+
+      return false;
+    });
+
+  
+
+
+});
+
+var empresa = <%= Empresa.all.map{|m| {nome:m.nome, label:" #{m.nome}", value:m.nome}}.to_json.html_safe %>;
+
+$(document).ready(function(){
+  
+
+  $("#empresa").autocomplete({
+    source: empresa,
+    autoFocus: true,
+    minLength:1,
+
+    select: function(event, ui){
+      $("#empresa").val(ui.item.nome);      
+    },
+
+    
+  });
+});
+
+</script>

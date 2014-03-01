@@ -14,5 +14,19 @@ module ApplicationHelper
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", options)
   end
 
+  def link_to_remove_fields_servico(name, f, options = {})
+    f.hidden_field(:_destroy) + link_to_function(name, "remove_fields_servico(this)", options)
+  end
+ 
+  def link_to_add_fields_servico(name, f, association, options = {})
+    new_object = f.object.class.reflect_on_association(association).klass.new
+    fields = f.fields_for(association, new_object, :child_index => "new_#{ association }", :onsubmit => "return $(this.)validate();") do |builder|
+      render(association.to_s.singularize + "_fields", :f => builder)
+    end
+ 
+    
+    link_to_function(name, "add_fields_servico(this, \"#{association}\", \"#{escape_javascript(fields)}\")", options)
+  end
+
   
 end

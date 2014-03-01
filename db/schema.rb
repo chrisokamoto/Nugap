@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130210710) do
+ActiveRecord::Schema.define(version: 20140215214250) do
 
   create_table "amostras", force: true do |t|
     t.string   "data_fabricacao"
@@ -97,6 +97,29 @@ ActiveRecord::Schema.define(version: 20140130210710) do
     t.datetime "updated_at"
   end
 
+  create_table "orcamentos", force: true do |t|
+    t.string   "numero"
+    t.string   "data"
+    t.string   "pagamento"
+    t.string   "pessoa_solicitante"
+    t.string   "empresa_solicitante"
+    t.string   "telefone"
+    t.string   "email"
+    t.string   "observacao"
+    t.decimal  "total_pagar",         precision: 8, scale: 2
+    t.decimal  "ir",                  precision: 8, scale: 2
+    t.string   "quantidade"
+    t.string   "prazo"
+    t.string   "status"
+    t.integer  "desconto"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "valor_bruto",         precision: 8, scale: 2
+    t.decimal  "pis",                 precision: 8, scale: 2
+    t.decimal  "cssl",                precision: 8, scale: 2
+    t.decimal  "cofins",              precision: 8, scale: 2
+  end
+
   create_table "parametro_resultados", force: true do |t|
     t.string   "parametro"
     t.string   "resultado"
@@ -122,8 +145,7 @@ ActiveRecord::Schema.define(version: 20140130210710) do
   create_table "preco_servicos", force: true do |t|
     t.string   "analise"
     t.string   "parametro"
-    t.string   "produto"
-    t.string   "legislacao"
+    t.string   "produto"    
     t.decimal  "preco",      precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -141,6 +163,19 @@ ActiveRecord::Schema.define(version: 20140130210710) do
     t.string   "amostra_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "servico_orcamentos", force: true do |t|
+    t.string   "produto"
+    t.string   "analise"
+    t.string   "parametro"
+    t.integer  "qtd_amostra"
+    t.decimal  "valor_unitario", precision: 8, scale: 2
+    t.integer  "orcamento_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "valor_total",    precision: 8, scale: 2
+    t.decimal  "valor_bruto",    precision: 8, scale: 2
   end
 
   create_table "statuses", force: true do |t|

@@ -1,0 +1,23 @@
+<table id="servico-orcamentos-display-table" class="table table-hover table-striped">
+  <thead>
+      <th>Produto</th>
+      <th>Tipo Análise</th>
+      <th>Parâmetro</th>
+      <th>N° de Amostras</th> 
+      <th>Valor Unitário</th> 
+      <th>Valor Total</th> 
+  </thead>
+  <tbody>
+      <% @orcamento.servico_orcamentos.each do |servico_orcamento| %>      
+          <tr class="fields" >            
+            <td><%= servico_orcamento.produto %></td>            
+            <td><%= servico_orcamento.analise %></td>
+            <td><%= servico_orcamento.parametro %></td>
+            <td><%= servico_orcamento.qtd_amostra %></td>            
+            <td><%= servico_orcamento.valor_unitario %></td>     
+           <td><%= servico_orcamento.valor_total %></td>  
+            
+          </tr>
+      <% end %>
+  </tbody>
+</table>

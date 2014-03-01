@@ -12,12 +12,15 @@
 //
 
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui
 //= require autonumeric
 //= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
 //= require_tree .
+//= require turbolinks
 
 function remove_fields(link) {
     $(link).prev("input[type=hidden]").val("1");
@@ -31,29 +34,62 @@ function add_fields(link, association, content) {
     $('#new-parametro-resultado-fields').modal('show');
 }
 
+function remove_fields_servico(link) {
+    $(link).prev("input[type=hidden]").val("1");
+    $(link).closest(".fields").hide();
+}
+ 
+function add_fields_servico(link, association, content) {	
+    var new_id = new Date().getTime();    
+    var regex = new RegExp("new_" + association, "g");    
+    $(link).parent().after(content.replace(regex, new_id));    
+    $('#new-servico-orcamento-fields').modal('show');
+}
+
 jQuery(function($) {	
-	$("#preco_servico_produto").change(function() {				
-		var produto_id = $('select#preco_servico_produto :selected').val();  
-	  var analise_id = $('select#preco_servico_analise :selected').val();  	  
-	    $.get('/preco_servicos/update_parametro/' + produto_id + '/' + analise_id, function(data){	    		    	
-	       $("#parametro-select").html(data);
-	    })
-	  return false;
-	});
+	$("#produto_preco_selection").change(function() {          
+      var produto = $('SELECT#produto_preco_selection :selected').val();            
+      if(produto == null)    
+        produto = ""
 
-	$("#preco_servico_analise").change(function() {
-	  var produto_id = $('select#preco_servico_produto :selected').val();  
-	  var analise_id = $('select#preco_servico_analise :selected').val();  	  
-	    $.get('/preco_servicos/update_parametro/' + produto_id + '/' + analise_id, function(data){	    		    	
-	       $("#parametro-select").html(data);
-	    })
-	  return false;
-	});
+      var analise = $('SELECT#analise_preco_selection :selected').val();      
+      if(analise == null)    
+        analise = ""
+     
+        $.get('/preco_servicos/get_analises/' + produto , function(data){               
+           $("#analise_preco_selection").html(data);
+        })
+        
+        if (analise != ""){
+          $.get('/preco_servicos/get_parametros_preco/' + produto + '/' + analise, function(data){               
+             $("#parametro_preco_selection").html(data);
+          })
+        }
 
-	//https://github.com/plentz/jquery-maskmoney
-//	$('#preco').maskMoney();
+      return false;
+    });
+
+  $("#analise_preco_selection").change(function() {    
+      var produto = $('SELECT#produto_preco_selection :selected').val();      
+      if(produto == null)    
+        produto = ""
+
+      var analise = $('SELECT#analise_preco_selection :selected').val();      
+      if(analise == null)    
+        analise = ""
+     
+        $.get('/preco_servicos/get_parametros_preco/' + produto + '/' + analise, function(data){             
+           $("#parametro_preco_selection").html(data);
+        })
+      return false;
+    });
+
+
+
 
 })
+
+
 
 
 

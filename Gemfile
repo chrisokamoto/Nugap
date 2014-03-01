@@ -25,6 +25,7 @@ gem "mysql2"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -44,7 +45,7 @@ gem 'twitter-bootstrap-rails'
 
 #  gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', :github => 'rweng/jquery-datatables-rails'
-gem 'jquery-rails'
+gem "jquery-rails", "< 3.0.0"
 gem 'autonumeric-rails'
 
 #gem 'compass-rails', github: 'milgner/compass-rails', branch: 'rails4'

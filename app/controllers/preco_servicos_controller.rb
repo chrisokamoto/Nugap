@@ -1,7 +1,7 @@
 class PrecoServicosController < ApplicationController
   before_action :set_preco_servico, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao, :valida_permissao_adm
-  helper_method :formata_preco
+  helper_method :formata_preco, :get_parametros_preco
 
   # GET /preco_servicos
   # GET /preco_servicos.json
@@ -17,10 +17,13 @@ class PrecoServicosController < ApplicationController
   # GET /preco_servicos/new
   def new
     @preco_servico = PrecoServico.new
+
+    get_parametros_preco
   end
 
   # GET /preco_servicos/1/edit
   def edit
+    get_parametros_preco
   end
 
   def formata_preco
@@ -66,24 +69,32 @@ class PrecoServicosController < ApplicationController
       format.html { redirect_to preco_servicos_url }
       format.json { head :no_content }
     end
-  end
+  end  
 
-  def update_parametro
-    @precos = PrecoServico.where(:analise => params[:analise], :produto => params[:produto])
+  def get_parametros_preco
 
-    @sub_parametros = []
-    existentes = [""]
-    
+    if(request.original_url.include? "preco_servicos")
 
-    @precos.each do |preco|
-      existentes.push( preco.parametro )
-    
-    end
+      if (!(params[:produto].nil?) && !(params[:analise].nil?))
+        @precos = PrecoServico.where(:analise => params[:analise], :produto => params[:produto])
 
-    @sub_parametros = Parametro.where("nome NOT IN (?)", existentes)
+        @parametros_preco = []
+        existentes = [""]
+        
 
-    respond_to do |format|
-      format.html
+        @precos.each do |preco|
+          existentes.push( preco.parametro )
+        
+        end
+
+        @parametros_preco = Parametro.where("nome NOT IN (?)", existentes)
+
+      else
+
+        @parametros_preco = []        
+
+      end
+
     end
 
   end
@@ -96,6 +107,6 @@ class PrecoServicosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def preco_servico_params
-      params.require(:preco_servico).permit(:analise, :parametro, :produto, :legislacao, :preco)
+      params.require(:preco_servico).permit(:analise, :parametro, :produto, :preco)
     end
 end

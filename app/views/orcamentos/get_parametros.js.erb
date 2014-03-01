@@ -1,0 +1,7 @@
+<% if(request.original_url.include? "orcamentos") %>
+	$('.parametro_seletor').empty();
+	$('.parametro_seletor').append( $('<option></option>'));
+	<% @parametros.each do |parametro| %>
+	  $('.parametro_seletor').append($('<option value="<%= parametro.nome %>"><%= parametro.nome %></option>'));
+	<% end %>
+<% end %>

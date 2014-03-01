@@ -11,21 +11,22 @@ class AmostrasController < ApplicationController
   # GET /amostras/1
   # GET /amostras/1.json
   def show
-	@amostra = Amostra.find(params[:id])
-	
-	respond_to do |format|
-	format.html # show.html.erb
-	format.xml  { render :xml => @amostra }
-	format.pdf { render :layout => false } # Add this line
-	prawnto :filename => "laudo #{@amostra.certificado} #{@amostra.produto} #{@amostra.marca}", :prawn => {  
-      		#:background => "public/image/logo2.png",          
-      		:left_margin => 0,  
-     		:right_margin => 0,  
-     		:top_margin => 30,  
-     		:bottom_margin => 30,  
-     		:page_size => 'A4' 
-	}
-	end
+  	@amostra = Amostra.find(params[:id])
+  	
+  	respond_to do |format|
+    	format.html # show.html.erb
+    	format.xml  { render :xml => @amostra }
+    	format.pdf { render :layout => false } # Add this line
+    	prawnto :filename => "laudo #{@amostra.certificado} #{@amostra.produto} #{@amostra.marca}.pdf", 
+      :prawn => {  
+          		#:background => "public/image/logo2.png",          
+          		:left_margin => 0,  
+         		:right_margin => 0,  
+         		:top_margin => 30,  
+         		:bottom_margin => 30,  
+         		:page_size => 'A4' 
+    	}
+  	end
 
   end
 
@@ -193,16 +194,6 @@ class AmostrasController < ApplicationController
         @amostra.assinatura_numero_conselho = assinatura.numero_conselho
 
       end
-      
-
-      if @amostra.save
-
-        format.html { redirect_to @amostra, notice: 'Amostra criada com sucesso!' }
-        format.json { render action: 'show', status: :created, location: @amostra }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @amostra.errors, status: :unprocessable_entity }
-      end
 
       if(!@amostra.parametro_resultados.nil?)        
          @amostra.parametro_resultados.each do |parametro_resultado|
@@ -218,6 +209,18 @@ class AmostrasController < ApplicationController
         end
       end
 
+      
+
+      if @amostra.save
+
+        format.html { redirect_to @amostra, notice: 'Amostra criada com sucesso!' }
+        format.json { render action: 'show', status: :created, location: @amostra }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @amostra.errors, status: :unprocessable_entity }
+      end
+
+      
     end
   end
 

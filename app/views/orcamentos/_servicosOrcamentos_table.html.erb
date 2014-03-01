@@ -1,0 +1,77 @@
+<table id="servicosOrcamentos-table" class="table table-hover table-striped">
+  <thead>
+    <% if !:servico_orcamentos.nil? %>
+      <th>Produto</th>
+      <th>Tipo Análise</th>
+      <th>Parâmetro</th>
+      <th>N° de Amostras</th> 
+      <th>Valor Unitário (R$)</th>
+      <th>Total (R$)</th> 
+      <th></th>
+    <%end%>
+  </thead>
+  <tbody>
+    <%= f.fields_for(:servico_orcamentos) do |servico_orcamentos_form| %>
+      <tr class="fields" >
+        <td><%= servico_orcamentos_form.collection_select(:produto, PrecoServico.group('produto'), :produto, :produto, {}, {:disabled => "disabled"}) %>    </td>
+        <td><%= servico_orcamentos_form.collection_select( :analise, TipoAnalise.order('tipo'), :tipo, :tipo, {}, {:disabled => "disabled"}) %> </td>
+        <td><%= servico_orcamentos_form.collection_select( :parametro, Parametro.order('nome'), :nome, :nome, {}, {:disabled => "disabled"}) %> </td>
+        <td><center><%= servico_orcamentos_form.text_field(:qtd_amostra, :style=>"width:80px;", :disabled => "disabled")  %></center></td> 
+        <td><center><%= servico_orcamentos_form.text_field(:valor_unitario, :style=>"width:80px;", :disabled => 'disabled')  %></center></td> 
+        <td><center><%= servico_orcamentos_form.text_field(:valor_total, :style=>"width:80px;", :disabled => 'disabled')  %></center></td> 
+        
+        
+        <td> <%= link_to_remove_fields_servico("Excluir", servico_orcamentos_form, :title => "Excluir", :class => "botaoExcluir") %> </td>
+
+        
+      
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+
+
+function subAll() {
+  var sum = 0.0;
+  var cont=0;
+  var inputs, index;
+
+  inputs = document.getElementsByTagName('input');
+  
+  for (index = 0; index < inputs.length; ++index) {
+    if(inputs[index].name.indexOf("[valor_total]") != -1){      
+      var tr = $(inputs[index]).parents('tr');
+      if ($(tr).attr("style") == 'display: none;')
+        cont++;
+      else{        
+        sum += +(inputs[index].value);
+      }
+    }
+  }
+  
+  $('#total').val(sum);
+  $('#total_bruto').val(sum);
+  
+   var total_pagar = $('INPUT#total').val();      
+      if(total_pagar == "")    
+        total_pagar = "0"  
+
+      var desconto = $('INPUT#orcamento_desconto').val();      
+      if(desconto == "")    
+        desconto = "0"  
+     
+      $.get('/orcamentos/get_valor_desconto/' + total_pagar + '/' + desconto, function(data){
+           $('#total').html(data).change();
+        })
+  
+}
+
+$(".botaoExcluir").on("click", function() {
+  subAll();
+});
+
+
+
+</script>

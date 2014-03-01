@@ -1,0 +1,5 @@
+<% if(request.original_url.include? "orcamentos") %>
+	$('#orcamento_servico_orcamentos_attributes_<%= @id_number %>_valor_unitario').val("<%= @preco_unitario %>");	
+	
+<% end %>
+

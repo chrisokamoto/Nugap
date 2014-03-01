@@ -1,0 +1,8 @@
+<% if(request.original_url.include? "orcamentos") %>
+	$('#ir').val("<%= @ir %>");
+	$('#pis').val("<%= @pis %>");
+	$('#cssl').val("<%= @cssl %>");
+	$('#cofins').val("<%= @cofins %>");
+	$('#total').val("<%= @preco_total %>");
+<% end %>
+

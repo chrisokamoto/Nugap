@@ -1,6 +1,8 @@
 NugapSystem::Application.routes.draw do 
   
 
+  resources :orcamentos
+
   resources :preco_servicos
 
   resources :statuses
@@ -44,8 +46,18 @@ NugapSystem::Application.routes.draw do
   match '/logout' => 'login#logout', :via => [:get]  
 
   #post ':preco_servicos/:update_parametro/:produto/:analise', :controller=>'preco_servicos', :action => 'update_parametro'
-  get ':preco_servicos/:update_parametro/:produto/:analise', :controller=>'preco_servicos', :action => 'update_parametro'
-  post ':preco_servicos/:update_parametro/:produto/:analise', :controller=>'preco_servicos', :action => 'update_parametro'
+
+  get '/preco_servicos/:get_parametros_preco/:produto/:analise', :controller=>'preco_servicos', :action => 'get_parametros_preco'
+
+  get '/orcamentos/get_analises/:produto', :controller=>'orcamentos', :action => 'get_analises'
+  get '/orcamentos/get_parametros/:produto/:analise', :controller=>'orcamentos', :action => 'get_parametros'
+  get '/orcamentos/get_valor_unitario/:produto/:analise/:parametro/:id_number', :controller=>'orcamentos', :action => 'get_valor_unitario'
+  get '/orcamentos/get_valor_total/:valor_unitario/:id_number/:qtd_amostra', :controller=>'orcamentos', :action => 'get_valor_total', :valor_unitario => /[^\/]*/
+  get '/orcamentos/get_valor_total/:valor_unitario/:id_number', :controller=>'orcamentos', :action => 'get_valor_total', :valor_unitario => /[^\/]*/
+  get '/orcamentos/get_valor_desconto/:bruto/:desconto', :controller=>'orcamentos', :action => 'get_valor_desconto', :bruto => /[^\/]*/, :total_pagar => /[^\/]*/
+  get '/orcamentos/get_valor_impostos/:bruto/:total_pagar', :controller=>'orcamentos', :action => 'get_valor_impostos', :bruto => /[^\/]*/, :total_pagar => /[^\/]*/
+  get '/orcamentos/get_telefone_empresa/:empresa', :controller=>'orcamentos', :action => 'get_telefone_empresa'
+
 
   root :to => 'application#index'
   #root :to => 'welcome#index'

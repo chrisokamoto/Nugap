@@ -1,3 +1,7 @@
+<script>
+  document.getElementById("botaoSalvarPreco").disabled = true; 
+</script>
+
 <%= form_for(@preco_servico) do |f| %>
   <% if @preco_servico.errors.any? %>
     <div id="error_explanation">
@@ -14,26 +18,26 @@
   <div class="field">
     <%= f.label :produto %>
     <%= collection_select(:preco_servico, :produto, Produto.order('tipo'), :tipo, :tipo, options ={:prompt =>
-""}) %>
+"", :value => nil}, {:id => "produto_preco_selection"}) %>
   </div>
   <div class="field" id="analise_collection_select", :remote >
     <%= f.label "Análise" %>
-    <%= collection_select(:preco_servico, :analise, TipoAnalise.order('tipo'), :tipo, :tipo, options ={:prompt =>""}) %>
-  </div>
-  <div id="parametro-select", :remote >    
+    <%= collection_select(:preco_servico, :analise, TipoAnalise.order('tipo'), :tipo, :tipo, options ={:prompt =>""}, {:id => "analise_preco_selection"}) %>
   </div>  
+  <div class="field" id="analise_collection_select", :remote >
+    <%= f.label "Parâmetro" %>
+    <%= collection_select(:preco_servico, :parametro, @parametros_preco, :nome, :nome,{}, {:id => "parametro_preco_selection"}) %>
+  </div>  
+  
   <div class="field" >
     <%= f.label "Preço" %>
     <!--<%= f.text_field :preco, data: {autonumeric: {dGroup: '9', aDec: ',', aSep: '.'}} %>-->
     <%= f.text_field :preco, :id => "preco" %>    
 
   </div>
-  <div class="field">
-    <%= f.label "Legislação" %>
-    <%= f.text_field :legislacao %>
-  </div>
+
   <div class="actions">
-    <%= f.submit "Salvar", :class => 'btn btn-info' %>
+    <%= f.submit "Salvar", :class => 'btn btn-info', :id => "botaoSalvarPreco" %>
   </div>
 <% end %>
 

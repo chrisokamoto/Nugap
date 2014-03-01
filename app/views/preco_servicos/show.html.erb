@@ -21,10 +21,6 @@
   R$ <%= number_to_currency(@preco_servico.preco, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %>
 </p>
 
-<p>
-  <strong>Legislação:</strong>
-  <%= @preco_servico.legislacao %>
-</p>
 
 
 <%= link_to 'Editar', edit_preco_servico_path(@preco_servico), :class => 'btn btn-info' %>

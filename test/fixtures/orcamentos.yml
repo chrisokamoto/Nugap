@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  numero: MyString
+  data: 2014-01-31
+  pagamento: MyString
+  pessoa_solicitante: MyString
+  empresa_solicitante: MyString
+  telefone: MyString
+  email: MyString
+  observacao: MyString
+  total_pagar: 9.99
+  ir: 9.99
+  quantidade: 1
+  prazo: 1
+  status: MyString
+  desconto: 1
+
+two:
+  numero: MyString
+  data: 2014-01-31
+  pagamento: MyString
+  pessoa_solicitante: MyString
+  empresa_solicitante: MyString
+  telefone: MyString
+  email: MyString
+  observacao: MyString
+  total_pagar: 9.99
+  ir: 9.99
+  quantidade: 1
+  prazo: 1
+  status: MyString
+  desconto: 1
