@@ -15,10 +15,18 @@ Prawn::Document.new() do |pdf|
 
 	move_down 155
 	if ("#{@orcamento.status}" == "Aceito")
-		text_box  "PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero} - Data: #{@orcamento.data}", :style => :bold, :size => 14, :align => :center, :at => [0, 685]	
+		if !("#{@orcamento.data}" == "")
+			text_box  "PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero} - Data: #{@orcamento.data}", :style => :bold, :size => 14, :align => :center, :at => [0, 685]	
+		elsif ("#{@orcamento.data}" == "")
+			text_box  "PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero}", :style => :bold, :size => 14, :align => :center, :at => [0, 685]	
+		end		
 	elsif ("#{@orcamento.status}" == "Não Aceito")
-		text_box  "PROPOSTA DE PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero} - Data: #{@orcamento.data}", :style => :bold, :size => 14, :align => :center, :at => [0, 685]	
-	end
+		if !("#{@orcamento.data}" == "")
+			text_box  "PROPOSTA DE PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero} - Data: #{@orcamento.data}", :style => :bold, :size => 14, :align => :center, :at => [0, 685]	
+		elsif ("#{@orcamento.data}" == "")
+			text_box  "PROPOSTA DE PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero}", :style => :bold, :size => 14, :align => :center, :at => [0, 685]	
+		end
+	end	
 
 	pdf.font_size 10
 	font "Times-Roman"
@@ -58,7 +66,7 @@ Prawn::Document.new() do |pdf|
 			dados_empresa += "CNPJ: #{empresa.CNPJ} "
 		end		
 		if entrou == 1
-			text  dados_empresa, :size => 10, :indent_paragraphs => 30, :inline_format => true	
+			text  dados_empresa, :size => 10, :indent_paragraphs => 30, :inline_format => true
 		end				
 	end
 	if !("#{@orcamento.pessoa_solicitante}" == "")
@@ -68,7 +76,7 @@ Prawn::Document.new() do |pdf|
 		text  "Telefone: #{@orcamento.telefone}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
 	end
 	if !("#{@orcamento.email}" == "")
-		text  "Email: #{@orcamento.email}", :size => 10, :indent_paragraphs => 30, :inline_format => true		
+		text  "Email: #{@orcamento.email}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 	move_down 25	
 
