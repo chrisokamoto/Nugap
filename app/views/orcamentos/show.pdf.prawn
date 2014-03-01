@@ -33,33 +33,33 @@ Prawn::Document.new() do |pdf|
 
 	# DADOS DO ORCAMENTO	
 	if !("#{@orcamento.empresa_solicitante}" == "")
-		text  "Solicitante: #{@orcamento.empresa_solicitante}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
+		text  "<b>Solicitante: </b>#{@orcamento.empresa_solicitante}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
 	end
 
 	empresa = Empresa.find_by_nome(@orcamento.empresa_solicitante)
-	dados_empresa = "Dados da empresa: "
+	dados_empresa = "<b>Dados da empresa:</b> \n"
 	entrou = 0
 
 	if !(empresa.nil?)
 		if !(empresa.rua.nil? || empresa.rua == "")
 			entrou = 1
-			dados_empresa += "#{empresa.rua} - "
+			dados_empresa += "Endereço: #{empresa.rua} \n "
 		end		
 		if !(empresa.bairro.nil? || empresa.bairro == "")
 			entrou = 1
-			dados_empresa += "#{empresa.bairro} - "
+			dados_empresa += "Bairro: #{empresa.bairro} \n "
 		end
 		if !(empresa.cidade.nil? || empresa.cidade == "")
 			entrou = 1
-			dados_empresa += "#{empresa.cidade} - "
+			dados_empresa += "Cidade: #{empresa.cidade} - "
 		end
 		if !(empresa.UF.nil? || empresa.UF == "")
 			entrou = 1
-			dados_empresa += "#{empresa.UF} - "
+			dados_empresa += "#{empresa.UF} \n "
 		end
 		if !(empresa.CEP.nil? || empresa.CEP == "")
 			entrou = 1
-			dados_empresa += "CEP: #{empresa.CEP} - "
+			dados_empresa += "CEP: #{empresa.CEP} \n "
 		end
 		if !(empresa.CNPJ.nil? || empresa.CNPJ == "")
 			entrou = 1
@@ -70,13 +70,13 @@ Prawn::Document.new() do |pdf|
 		end				
 	end
 	if !("#{@orcamento.pessoa_solicitante}" == "")
-		text  "A/C: #{@orcamento.pessoa_solicitante}", :size => 10, :indent_paragraphs => 30, :inline_format => true		
+		text  "<b>A/C:</b> #{@orcamento.pessoa_solicitante}", :size => 10, :indent_paragraphs => 30, :inline_format => true		
 	end
 	if !("#{@orcamento.telefone}" == "")
-		text  "Telefone: #{@orcamento.telefone}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
+		text  "<b>Telefone:</b> #{@orcamento.telefone}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
 	end
 	if !("#{@orcamento.email}" == "")
-		text  "Email: #{@orcamento.email}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>Email:</b> #{@orcamento.email}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 	move_down 25	
 
@@ -175,10 +175,12 @@ Prawn::Document.new() do |pdf|
 
 						table  [ ["<b>Método: #{metodoNovo}</b>"] ], :cell_style => { :inline_format => true, :align => :left, :border_width => 0.5 }, :column_widths => [540], :position => :center
 
+						data = [ ["<b>Parâmetro</b>","<b>N° de Amostras</b>","<b>Valor Unitário</b>","<b>Valor Total</b>"] ]
+							table(data, :column_widths => [135,135,135,135], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5, :align => :center})
 						for parametro in @servico
 							total += parametro.valor_total
-							data = [ ["Parâmetro: #{parametro.parametro}","N° de Amostras: #{parametro.qtd_amostra}","Valor Unitário: #{parametro.valor_unitario}","Valor Total: #{parametro.valor_total}"] ]
-							table(data, :column_widths => [135,135,135,135], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5})
+							data = [ ["#{parametro.parametro}","#{parametro.qtd_amostra}","#{parametro.valor_unitario}","#{parametro.valor_total}"] ]
+							table(data, :column_widths => [135,135,135,135], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5, :align => :center})
 						end
 					end
 				end
@@ -190,10 +192,10 @@ Prawn::Document.new() do |pdf|
 	end
 	
 	if !("#{@orcamento.observacao}" == "")
-		text  "Observação: #{@orcamento.observacao}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>Observação:</b> #{@orcamento.observacao}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 	if !("#{@orcamento.quantidade}" == "")
-		text  "Quantidade: #{@orcamento.quantidade}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>Quantidade:</b> #{@orcamento.quantidade}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 
 	move_down 25
@@ -204,16 +206,16 @@ Prawn::Document.new() do |pdf|
 	end
 
 	if !("#{@orcamento.ir}" == "0.0")
-		text  "Imposto de Renda: #{@orcamento.ir}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>Imposto de Renda:</b> #{@orcamento.ir}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 	if !("#{@orcamento.pis}" == "0.0")
-		text  "PIS: #{@orcamento.pis}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>PIS:</b> #{@orcamento.pis}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 	if !("#{@orcamento.cssl}" == "0.0")
-		text  "CSSL: #{@orcamento.cssl}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>CSSL:</b> #{@orcamento.cssl}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 	if !("#{@orcamento.cofins}" == "0.0")
-		text  "COFINS: #{@orcamento.cofins}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>COFINS:</b> #{@orcamento.cofins}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 
 	move_down 25
@@ -222,13 +224,13 @@ Prawn::Document.new() do |pdf|
 	if !(("#{@orcamento.desconto}" == "0") || (@orcamento.desconto.nil? ))
 		valor_desconto =  (@orcamento.valor_bruto * @orcamento.desconto / 100.0).round(2)
 
-		text  "Desconto #{@orcamento.desconto}%: #{valor_desconto}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
+		text  "<b>Desconto #{@orcamento.desconto}%:</b> #{valor_desconto}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
 	end
 	if !("#{@orcamento.prazo}" == "")
-		text  "Prazo de Entrega: #{@orcamento.prazo}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>Prazo de Entrega:</b> #{@orcamento.prazo}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
-	text  "Forma de Pagamento: #{@orcamento.pagamento}", :size => 10, :indent_paragraphs => 30, :inline_format => true
-	#text  "Total Orçamento sem Impostos: #{@orcamento.valor_bruto}", :size => 10, indent_paragraphs => 30, :inline_format => true
+	text  "<b>Forma de Pagamento:</b> #{@orcamento.pagamento}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+	#text  "<b>Total Orçamento sem Impostos:</b> #{@orcamento.valor_bruto}", :size => 10, indent_paragraphs => 30, :inline_format => true
 
 	if ("#{@orcamento.pagamento}" == "Depósito")
 		text "Banco Itaú - Agência 5197 - C/C 04848-0 - Favorecido - Núcleo Global de Análise e Pesquisa", :size => 10, :indent_paragraphs => 30, :inline_format => true
@@ -237,7 +239,7 @@ Prawn::Document.new() do |pdf|
 	move_down 25
 	
 
-	text  "TOTAL À PAGAR: R$ #{@orcamento.total_pagar}", :size => 10, :indent_paragraphs => 30, :inline_format => true, :color => "ff0000"
+	text  "<b>TOTAL À PAGAR:</b> R$ #{@orcamento.total_pagar}", :size => 10, :indent_paragraphs => 30, :inline_format => true, :color => "ff0000"
 
 
 	# NÚMERO DA PÁGINA
