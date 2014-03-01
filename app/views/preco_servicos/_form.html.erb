@@ -1,7 +1,3 @@
-<script type="text/javascript">
-  document.getElementById("botaoSalvarPreco").disabled = true; 
-</script>
-
 <%= form_for(@preco_servico) do |f| %>
   <% if @preco_servico.errors.any? %>
     <div id="error_explanation">
@@ -41,4 +37,6 @@
   </div>
 <% end %>
 
-
+<script type="text/javascript">
+  document.getElementById("botaoSalvarPreco").disabled = true; 
+</script>
