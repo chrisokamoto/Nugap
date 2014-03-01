@@ -204,7 +204,7 @@ $(".desconto").on("input",function() {
         total_pagar = "0"
      
       $.get('/orcamentos/get_valor_impostos/' + bruto + '/' + total_pagar , function(data){
-           $('#telefone').html(data);
+           $('.total').html(data);
         })
 
       return false;
@@ -215,8 +215,8 @@ $(".desconto").on("input",function() {
 
        var empresa = $('INPUT#empresa').val();       
      
-      $.get('/orcamentos/get_telefone_empresa/' + empresa , function(data){
-           $('.total').html(data);
+      $.get('/orcamentos/get_telefone_empresa/' + empresa , function(data){           
+           $('#telefone').html(data);
         })
 
       return false;
