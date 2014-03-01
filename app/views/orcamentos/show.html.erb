@@ -64,22 +64,22 @@
 
 <p>
   <strong>IR:</strong>
-  <%= @orcamento.ir %>
+  <%= number_to_currency(@orcamento.ir, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %>
 </p>
 
 <p>
   <strong>PIS:</strong>
-  <%= @orcamento.pis %>
+  <%= number_to_currency(@orcamento.pis, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %>
 </p>
 
 <p>
   <strong>CSSL:</strong>
-  <%= @orcamento.cssl %>
+  <%= number_to_currency(@orcamento.cssl, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %>
 </p>
 
 <p>
   <strong>COFINS:</strong>
-  <%= @orcamento.cofins %>
+  <%= number_to_currency(@orcamento.cofins, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %>
 </p>
 
 <p>
@@ -95,7 +95,7 @@
 <div style="color:red">
   <p>
     <strong>Total à Pagar:</strong>
-    <%= @orcamento.total_pagar %>
+    R$ <%= number_to_currency(@orcamento.total_pagar, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %>
   </p>
 </div>
 

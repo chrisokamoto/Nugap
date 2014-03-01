@@ -23,7 +23,7 @@
         <td><center><%= orcamento.numero %></center></td>
         <td><center><%= orcamento.pessoa_solicitante %></center></td>
         <td><center><%= orcamento.empresa_solicitante %></center></td>
-        <td><center><%= orcamento.total_pagar %></center></td>
+        <td><center><%= number_to_currency(orcamento.total_pagar, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %></center></td>        
         <td><center><%= orcamento.status %></center></td>        
         <td><center><%= link_to 'Detalhes', orcamento, :class => 'btn btn-small' %></center> </td>        
         <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_orcamento_path(orcamento), :class => 'btn btn-small' %></center></td>

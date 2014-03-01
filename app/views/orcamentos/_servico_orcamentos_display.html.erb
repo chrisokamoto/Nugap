@@ -14,8 +14,8 @@
             <td><%= servico_orcamento.analise %></td>
             <td><%= servico_orcamento.parametro %></td>
             <td><%= servico_orcamento.qtd_amostra %></td>            
-            <td><%= servico_orcamento.valor_unitario %></td>     
-           <td><%= servico_orcamento.valor_total %></td>  
+            <td><%= number_to_currency(servico_orcamento.valor_unitario, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %></td>  
+            <td><%= number_to_currency(servico_orcamento.valor_total, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %></td>
             
           </tr>
       <% end %>
