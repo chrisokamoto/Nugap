@@ -46,48 +46,7 @@ function add_fields_servico(link, association, content) {
     $('#new-servico-orcamento-fields').modal('show');
 }
 
-jQuery(function($) {	
-	$("#produto_preco_selection").change(function() {          
-      var produto = $('SELECT#produto_preco_selection :selected').val();            
-      if(produto == null)    
-        produto = ""
 
-      var analise = $('SELECT#analise_preco_selection :selected').val();      
-      if(analise == null)    
-        analise = ""
-     
-        $.get('/preco_servicos/get_analises/' + produto , function(data){               
-           $("#analise_preco_selection").html(data);
-        })
-        
-        if (analise != ""){
-          $.get('/preco_servicos/get_parametros_preco/' + produto + '/' + analise, function(data){               
-             $("#parametro_preco_selection").html(data);
-          })
-        }
-
-      return false;
-    });
-
-  $("#analise_preco_selection").change(function() {    
-      var produto = $('SELECT#produto_preco_selection :selected').val();      
-      if(produto == null)    
-        produto = ""
-
-      var analise = $('SELECT#analise_preco_selection :selected').val();      
-      if(analise == null)    
-        analise = ""
-     
-        $.get('/preco_servicos/get_parametros_preco/' + produto + '/' + analise, function(data){             
-           $("#parametro_preco_selection").html(data);
-        })
-      return false;
-    });
-
-
-
-
-})
 
 
 
