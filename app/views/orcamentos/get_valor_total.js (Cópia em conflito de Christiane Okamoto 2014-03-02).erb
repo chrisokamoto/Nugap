@@ -2,16 +2,18 @@
 	document.getElementById("addButtonServico").disabled = false; 
 	$('#orcamento_servico_orcamentos_attributes_<%= @id_number %>_valor_total').val("<%= @preco_total %>");	
 	addAll();
-	
+	<% if @tem_quantidade == 0 %>
+		$('.quantidade').val("0");
+	<%end%>
 <% end %>
 
 function limpa(){
-	<% if @tem_quantidade == 0 %>
+	
 		$('.quantidade').val("");
-	<%end%>
+	
 }
 
-function zera(){	
+function zera(){
 	<% if @tem_quantidade == 0 %>
 		$('.quantidade').val("0");
 	<%end%>
