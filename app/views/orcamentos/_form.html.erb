@@ -203,7 +203,7 @@ $(".desconto").on("input",function() {
       if(total_pagar == "")    
         total_pagar = "0"
      
-      $.get('/orcamentos/get_valor_impostos/' + bruto + '/' + total_pagar , function(data){
+      $.get('/orcamentos/get_valor_impostos/' + total_pagar , function(data){
            $('.total').html(data);
         })
 

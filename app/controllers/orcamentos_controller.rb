@@ -147,16 +147,16 @@ class OrcamentosController < ApplicationController
 
     if !params[:total_pagar].nil? 
 
-      if params[:bruto].to_f >= 666.67
+      if params[:total_pagar].to_f >= 666.67
    
-        @ir = params[:bruto].to_f * 1.5 / 100.0
+        @ir = params[:total_pagar].to_f * 1.5 / 100.0
         @preco_total = params[:total_pagar].to_f
         @preco_total  = @preco_total  - @ir
 
-        if params[:bruto].to_f >= 5000
-          @pis = params[:bruto].to_f * 0.65 / 100.0
-          @cssl = params[:bruto].to_f * 1 / 100.0
-          @cofins = params[:bruto].to_f * 3 / 100.0
+        if params[:total_pagar].to_f >= 5000
+          @pis = params[:total_pagar].to_f * 0.65 / 100.0
+          @cssl = params[:total_pagar].to_f * 1 / 100.0
+          @cofins = params[:total_pagar].to_f * 3 / 100.0
 
           @preco_total = params[:total_pagar].to_f
           @preco_total  = @preco_total  - @ir - @pis - @cssl - @cofins
