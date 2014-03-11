@@ -18,7 +18,7 @@ class OrcamentosController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @amostra }
       format.pdf { render :layout => false } # Add this line
-      prawnto :filename => "orcamento_#{@orcamento.numero}_#{@orcamento.id}.pdf", 
+      prawnto :filename => "orcamento_#{@orcamento.numero}.pdf", 
       :prawn => {  
             #:background => "public/image/logo2.png",          
             :left_margin => 0,  
