@@ -51,7 +51,7 @@ NugapSystem::Application.routes.draw do
 
   get '/orcamentos/get_analises/:produto', :controller=>'orcamentos', :action => 'get_analises'
   get '/orcamentos/get_parametros/:produto/:analise', :controller=>'orcamentos', :action => 'get_parametros'
-  get '/orcamentos/get_valor_unitario/:produto/:analise/:parametro/:id_number', :controller=>'orcamentos', :action => 'get_valor_unitario'
+  get '/orcamentos/get_valor_unitario/:produto/:analise/:parametro/:id_number', :controller=>'orcamentos', :action => 'get_valor_unitario', :parametro => /.+(\/.+)*/
   get '/orcamentos/get_valor_total/:valor_unitario/:id_number/:qtd_amostra', :controller=>'orcamentos', :action => 'get_valor_total', :valor_unitario => /[^\/]*/
   get '/orcamentos/get_valor_total/:valor_unitario/:id_number', :controller=>'orcamentos', :action => 'get_valor_total', :valor_unitario => /[^\/]*/
   get '/orcamentos/get_valor_desconto/:bruto/:desconto', :controller=>'orcamentos', :action => 'get_valor_desconto', :bruto => /[^\/]*/, :total_pagar => /[^\/]*/
