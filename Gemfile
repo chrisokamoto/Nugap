@@ -68,6 +68,7 @@ gem 'rails_12factor', group: :production
  gem 'newrelic_rpm'
 
  #dalli for caching
+ gem 'memcachier'
  gem 'dalli'
 
 # Use unicorn as the app server
