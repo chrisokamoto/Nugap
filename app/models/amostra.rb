@@ -1,4 +1,7 @@
 class Amostra < ActiveRecord::Base
+
+	after_save    :expire_amostra_all_cache
+	after_destroy :expire_amostra_all_cache
 	
 	has_many :parametro_resultados
 
@@ -13,5 +16,13 @@ class Amostra < ActiveRecord::Base
 	validates :assinatura, :presence => { :message => " precisa ser preenchida." }
 	validates :solicitante, :presence => { :message => " precisa ser preenchido." }
 	validates :fabricante, :presence => { :message => " precisa ser preenchida." }	
+
+	def self.all_cached
+  		Rails.cache.fetch('Amostra.all') { all }
+	end
+
+	def expire_amostra_all_cache
+  		Rails.cache.delete('Amostra.all')
+	end
 
 end
