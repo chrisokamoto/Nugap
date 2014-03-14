@@ -2,6 +2,8 @@ class AmostrasController < ApplicationController
   before_action :set_amostra, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao  
 
+  caches_action :index
+
   # GET /amostras
   # GET /amostras.json
   def index
@@ -86,6 +88,7 @@ class AmostrasController < ApplicationController
   end
 
   def save
+    expire_action :action => :index
     
     respond_to do |format|
     
@@ -227,6 +230,7 @@ class AmostrasController < ApplicationController
   # PATCH/PUT /amostras/1
   # PATCH/PUT /amostras/1.json
   def update
+    expire_action :action => :index
     respond_to do |format|
 
       if !params[:amostra][:fabricante].nil?
@@ -316,6 +320,7 @@ class AmostrasController < ApplicationController
   # DELETE /amostras/1
   # DELETE /amostras/1.json
   def destroy    
+    expire_action :action => :index
 
     if(!@amostra.parametro_resultados.nil?)
       @amostra.parametro_resultados.each do |parametro_resultado|
