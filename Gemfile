@@ -64,6 +64,9 @@ gem 'rails_12factor', group: :production
 
  gem "bcrypt-ruby", :require => "bcrypt"
 
+ #newRelic
+ gem 'newrelic_rpm'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
