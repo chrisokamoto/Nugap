@@ -194,7 +194,7 @@ Prawn::Document.new() do |pdf|
 	end
 
 	if !("#{@orcamento.ir}" == "0.0")
-		text  "<b>Imposto de Renda:</b> #{@orcamento.ir}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>IR:</b> #{@orcamento.ir}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 	if !("#{@orcamento.pis}" == "0.0")
 		text  "<b>PIS:</b> #{@orcamento.pis}", :size => 10, :indent_paragraphs => 30, :inline_format => true
@@ -220,14 +220,14 @@ Prawn::Document.new() do |pdf|
 	text  "<b>Forma de Pagamento:</b> #{@orcamento.pagamento}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	#text  "<b>Total Orçamento sem Impostos:</b> #{@orcamento.valor_bruto}", :size => 10, indent_paragraphs => 30, :inline_format => true
 
-	if ("#{@orcamento.pagamento}" == "Depósito")
+	if ("#{@orcamento.pagamento}" == "Depósito" || "#{@orcamento.pagamento}" == "Depósito/Transferência")
 		text "Banco Itaú - Agência 5197 - C/C 04848-0 - Favorecido - Núcleo Global de Análise e Pesquisa - CNPJ: 01.889.995/0001-56", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 
 	move_down 25
 	
 
-	text  "<b>TOTAL À PAGAR:</b> R$ #{@orcamento.total_pagar}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+	text  "<b>TOTAL A PAGAR:</b> R$ #{@orcamento.total_pagar}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 
 
 	# NÚMERO DA PÁGINA

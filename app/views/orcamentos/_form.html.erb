@@ -85,7 +85,7 @@
   </div>
 
   <div class="field">
-    <%= f.label "Total à Pagar", :style=>"color: red;" %><br>
+    <%= f.label "Total a Pagar", :style=>"color: red;" %><br>
     <%= f.text_field :total_pagar, :id => "total", :class => "total", :readonly => 'true', :style=>"width:80px;"  %>
     
   </div> 
@@ -94,7 +94,7 @@
 
   <div class="field">
     <%= f.label "Forma de Pagamento" %><br>   
-    <%= f.select(:pagamento, {'Boleto Bancário' => "Boleto Bancário", 'Depósito' => 'Depósito'}) %>
+    <%= f.select(:pagamento, {'Boleto Bancário' => "Boleto Bancário", 'Depósito/Transferência' => 'Depósito/Transferência'}) %>
     
   </div>
   
