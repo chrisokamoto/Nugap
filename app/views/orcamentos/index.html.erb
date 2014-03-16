@@ -14,7 +14,9 @@
 
       g.column :name => 'Empresa Solicitante', html: {style: 'text-align: center'}, :attribute => 'empresa_solicitante' 
 
-      g.column :name => 'Total a Pagar (R$)', html: {style: 'text-align: center'}, :attribute => 'total_pagar' 
+      g.column :name => 'Total a Pagar (R$)', html: {style: 'text-align: center'} do |orcamento|
+          number_to_currency(orcamento.total_pagar, :precision => 2, :unit => '', :separator => ',', :delimiter => '.')
+      end 
 
       g.column :name => 'Status', html: {style: 'text-align: center'}, :attribute => 'status' 
 
