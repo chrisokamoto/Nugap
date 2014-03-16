@@ -71,6 +71,9 @@ gem 'rails_12factor', group: :production
  gem 'memcachier'
  gem 'dalli'
 
+ #filter on datatables
+ gem "wice_grid", '3.4.0'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

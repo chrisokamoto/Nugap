@@ -1,11 +1,13 @@
 class AmostrasController < ApplicationController
   before_action :set_amostra, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao  
+  before_action :set_amostra, only: [:index, :new, :create, :edit, :update]
+  before_action :set_amostras, only: [:index, :new, :create, :edit, :update]
 
   # GET /amostras
   # GET /amostras.json
   def index
-    @amostras = Amostra.all_cached
+    @amostra = Amostra.all_cached
   end
 
   # GET /amostras/1
@@ -330,11 +332,20 @@ class AmostrasController < ApplicationController
     end
   end
 
+  def get_filtro
+    @amostras = set_paginacao(Amostra.where(:certificado => params[:filtro]).order('certificado ASC'))
+  end
+
+  def set_amostras
+    @amostras = set_paginacao(Amostra.all.order('certificado ASC'))
+  end
+
+   def set_amostra
+    @amostra = Amostra.find_by_id( params[:id] )
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_amostra
-      @amostra = Amostra.find(params[:id])
-    end
 
     def set_parametro_resultado
       @parametro_resultado = ParametroResultado.find_by_amostra_id(@amostra.id)

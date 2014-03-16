@@ -1,7 +1,25 @@
+<script type="text/javascript">
+
+  jQuery(function($) {  
+    $("#filtro").on("change",function() {  
+      var filtro = $('INPUT#filtro').val();               
+      
+      $.get('/amostras/get_filtro/' + filtro , function(data){             
+               $("#tabelaAmostra").html(data);
+            })
+           
+
+      return false;
+    });
+  });
+
+
+</script>
+
 <br /><br /><br /><br />
 <legend>Amostras cadastradas</legend>
 
-<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="95%">
+<table cellpadding="0" cellspacing="0" border="1" class="table table-striped table-bordered table-hover" id="tabelaAmostra" style="width:95%; margin-left:3%;">
   <thead>
     <tr>
       <th width="10%" style="word-wrap:break-word;"><center>Amostra</center></th>
@@ -9,7 +27,7 @@
       <th width="20%" style="word-wrap:break-word;"><center>Produto</center></th>
       <th width="20%" style="word-wrap:break-word;"><center>Marca</center></th>
       <th width="10%" style="word-wrap:break-word;"><center>Status</center></th>
-      <th width="10%" style="word-wrap:break-word;"><center></center></th>
+      <th width="15%" style="word-wrap:break-word;"><center></center></th>
       <th width="5%" style="word-wrap:break-word;"><center></center></th>
       <th width="5%" style="word-wrap:break-word;"><center></center></th>
       <% if user_is_administrador? %>
@@ -18,8 +36,12 @@
     </tr>
   </thead>
 
+  <input type="text" id="filtro" placeholder="Filtro" style="margin-left: 80%;">
+  <br />
+
   <tbody>
-    <% @amostras.each do |amostra| %>
+    <% @amostras.each_with_index do |amostra, i| %>
+      <% @amostra = amostra %>
       <tr>
         <td style="word-wrap:break-word;"><center><%= amostra.certificado %></center></td>      
         <td style="word-wrap:break-word;"><center><%= amostra.solicitante %></center></td>      
@@ -45,6 +67,8 @@
 
 <br>
 
+<%= render partial: 'layouts/paginacao' %>
+
 <%= link_to 'Nova Amostra', new_amostra_path, :class => 'btn btn-info' %>
 
 
@@ -57,3 +81,4 @@
         </center>
       </div>
     </footer>
+

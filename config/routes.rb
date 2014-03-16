@@ -58,6 +58,8 @@ NugapSystem::Application.routes.draw do
   get '/orcamentos/get_valor_impostos/:total_pagar', :controller=>'orcamentos', :action => 'get_valor_impostos', :total_pagar => /[^\/]*/
   get '/orcamentos/get_telefone_empresa/:empresa', :controller=>'orcamentos', :action => 'get_telefone_empresa'
 
+  get '/amostras/get_filtro/:filtro', :controller=>'amostras', :action => 'get_filtro'
+
 
   root :to => 'application#index'
   #root :to => 'welcome#index'

@@ -3621,11 +3621,13 @@ input[type="submit"].btn.btn-mini {
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-left-width: 0;
+  color: black;
 }
 .pagination ul > li > a:hover,
 .pagination ul > .active > a,
 .pagination ul > .active > span {
   background-color: #f5f5f5;
+  
 }
 .pagination ul > .active > a,
 .pagination ul > .active > span {

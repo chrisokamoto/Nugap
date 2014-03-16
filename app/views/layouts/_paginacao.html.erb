@@ -1,0 +1,28 @@
+<center>
+
+  
+    <div class="pagination" >
+      <ul >
+        <% if @paginacao_left_page >= 0 %>
+        <li><a href="<%=request.path%>?page=<%=@paginacao_left_page+1%>">&laquo;</a></li>
+        <% else %>
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <% end %>
+
+        <% @mypages.each do |page| %>
+
+          <li<%if page[1]%> class="active"<%end%>><a href="<%=request.path%>?page=<%=page[0]+1%>"><%= page[0]+1 %></a></li>
+
+        <% end %>
+
+
+        <% if @paginacao_right_page >= 0 %>
+        <li><a href="<%=request.path%>?page=<%=@paginacao_right_page+1%>">&raquo;</a></li>
+        <% else %>
+        <li class="disabled"><a href="#">&raquo;</a></li>
+        <% end %>
+      </ul>
+   
+ 
+</div>
+</center>
