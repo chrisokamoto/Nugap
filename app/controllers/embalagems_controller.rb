@@ -6,6 +6,11 @@ class EmbalagemsController < ApplicationController
   # GET /embalagems.json
   def index
     @embalagems = Embalagem.all
+    @embalagens_grid = initialize_grid(Embalagem, 
+      :order => 'created_at',
+      :order_direction => 'desc',
+      :per_page => 10
+    )
   end
 
   # GET /embalagems/1

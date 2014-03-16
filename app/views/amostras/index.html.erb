@@ -1,21 +1,3 @@
-<script type="text/javascript">
-
-  jQuery(function($) {  
-    $("#filtro").on("change",function() {  
-      var filtro = $('INPUT#filtro').val();               
-      
-      $.get('/amostras/get_filtro/' + filtro , function(data){             
-               $("#tabelaAmostra").html(data);
-            })
-           
-
-      return false;
-    });
-  });
-
-
-</script>
-
 <br /><br /><br /><br />
 <legend>Amostras cadastradas</legend>
 

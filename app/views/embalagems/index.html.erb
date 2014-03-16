@@ -1,31 +1,43 @@
 <br /><br /><br /><br />
 <legend>Embalagens cadastradas</legend>
 
-<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="70%">
-  <thead>
-    <tr>
-      <th width="80%" style="word-wrap:break-word;"><center>Tipo</center></th>
-      <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <!--th width="5%" style="word-wrap:break-word;"><center></center></th-->
-      <% if user_is_administrador? %>
-        <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <% end %>
-    </tr>
-  </thead>
+<div style="width:45%; margin-left:30%;">
 
-  <tbody>
-    <% @embalagems.each do |embalagem| %>
-      <tr>
-        <td width="80%" style="word-wrap:break-word;"><center><%= embalagem.tipo %></center></td>
-        <!--td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', embalagem %></center></td-->
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_embalagem_path(embalagem), :class => 'btn btn-small' %></center></td>
-        <% if user_is_administrador? %>
-          <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', embalagem, method: :delete, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a embalagem #{embalagem.tipo}?" } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if !user_is_administrador? %>
+  
+    <%= grid(@embalagens_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'     
+
+      g.column do |embalagem|
+        link_to('Editar', edit_embalagem_path(embalagem), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+    end -%>
+
+<%end%>
+
+<% if user_is_administrador? %>
+
+<%= grid(@embalagens_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'     
+
+      g.column do |embalagem|
+        link_to('Editar', edit_embalagem_path(embalagem), html: {style: 'text-align: center; '}, :class => 'btn btn-small')
+      end
+
+      g.column do |embalagem|
+        link_to 'Excluir', embalagem, method: :delete, html: {style: 'text-align: center;'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a embalagem #{embalagem.tipo}?" } 
+      end
+
+    end -%>
+
+<%end%>
+
+</div>
 
 <br>
 

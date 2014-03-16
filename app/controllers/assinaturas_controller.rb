@@ -6,6 +6,11 @@ class AssinaturasController < ApplicationController
   # GET /assinaturas.json
   def index
     @assinaturas = Assinatura.all
+    @assinaturas_grid = initialize_grid(Assinatura, 
+      :order => 'created_at',
+      :order_direction => 'desc',
+      :per_page => 10
+    )
   end
 
   # GET /assinaturas/1
