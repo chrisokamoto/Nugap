@@ -1,38 +1,63 @@
 <br /><br /><br /><br />
 <legend>Empresas cadastradas</legend>
 
-<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="95%">
-  <thead>
-    <tr>
-      <th width="40%" style="word-wrap:break-word;"><center>Nome</center></th>
-      <th width="20%" style="word-wrap:break-word;"><center>Cidade</center></th>
-      <th width="15%" style="word-wrap:break-word;"><center>CNPJ</center></th>
-      <th width="15%" style="word-wrap:break-word;"><center>Telefone</center></th>
-      <th width="5%" style="word-wrap:break-word;"></th>
-      <th width="5%" style="word-wrap:break-word;"></th>
-      <% if user_is_administrador? %>
-        <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <% end %>
-    </tr>
-  </thead>
+<div style="width:95%; margin-left:3%;">
 
-  <tbody>
-    <% @empresas.each do |empresa| %>
-      <tr>
-        <td><center><%= empresa.nome %></center> </td>
-        <td><center><%= empresa.cidade %></center> </td>
-        <td><center><%= empresa.CNPJ %></center> </td>
-        <td><center><%= empresa.telefone %></center> </td>
-        <td><center><%= link_to 'Detalhes', empresa, :class => 'btn btn-small' %></center> </td>
-        <td><center><%= link_to 'Editar', edit_empresa_path(empresa), :class => 'btn btn-small' %></center> </td>
-        <% if user_is_administrador? %>
-          <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', empresa, method: :delete, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a empresa #{empresa.nome}?" } %></td>
-        <% end %>
-        
-     </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if !user_is_administrador? %>
+  
+    <%= grid(@empresas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
+
+      g.column :name => 'Cidade', html: {style: 'text-align: center'}, :attribute => 'cidade' 
+
+      g.column :name => 'CNPJ', html: {style: 'text-align: center'}, :attribute => 'CNPJ' 
+
+      g.column :name => 'Telefone', html: {style: 'text-align: center'}, :attribute => 'telefone' 
+
+      g.column do |empresa|
+        link_to('Detalhes', empresa, html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |empresa|
+        link_to('Editar', edit_empresa_path(empresa), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+    end -%>
+
+<%end%>
+
+<% if user_is_administrador? %>
+
+<%= grid(@empresas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
+
+      g.column :name => 'Cidade', html: {style: 'text-align: center'}, :attribute => 'cidade' 
+
+      g.column :name => 'CNPJ', html: {style: 'text-align: center'}, :attribute => 'CNPJ' 
+
+      g.column :name => 'Telefone', html: {style: 'text-align: center'}, :attribute => 'telefone' 
+
+      g.column do |empresa|
+        link_to('Detalhes', empresa, html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |empresa|
+        link_to('Editar', edit_empresa_path(empresa), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |empresa|
+        link_to 'Excluir', empresa, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a empresa #{empresa.nome}?" } 
+      end
+
+    end -%>
+
+<%end%>
+
+</div>
 
 <br>
 

@@ -1,39 +1,69 @@
 <br /><br /><br /><br />
 <legend>Orçamentos cadastrados</legend>
 
-<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="95%">
-  <thead>
-    <tr>
-      <th width="20%" style="word-wrap:break-word;"><center>Identificador</center></th>
-      <th width="20%" style="word-wrap:break-word;"><center>Pessoa Solicitante</center></th>
-      <th width="20%" style="word-wrap:break-word;"><center>Empresa Solicitante</center></th>
-      <th width="20%" style="word-wrap:break-word;"><center>Total à Pagar (R$)</center></th>      
-      <th width="20%" style="word-wrap:break-word;"><center>Status</center></th>      
-      <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <% if user_is_administrador? %>
-        <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <% end %>
-    </tr>
-  </thead>
+<div style="width:95%; margin-left:3%;">
 
-  <tbody>
-    <% @orcamentos.each do |orcamento| %>
-      <tr>
-        <td><center><%= orcamento.numero %></center></td>
-        <td><center><%= orcamento.pessoa_solicitante %></center></td>
-        <td><center><%= orcamento.empresa_solicitante %></center></td>
-        <td><center><%= number_to_currency(orcamento.total_pagar, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %></center></td>        
-        <td><center><%= orcamento.status %></center></td>        
-        <td><center><%= link_to 'Detalhes', orcamento, :class => 'btn btn-small' %></center> </td>        
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_orcamento_path(orcamento), :class => 'btn btn-small' %></center></td>
-        <% if user_is_administrador? %>
-          <td style="word-wrap:break-word;"><%= link_to 'Excluir', orcamento, method: :delete, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o orcamento #{orcamento.numero}?" } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if !user_is_administrador? %>
+  
+    <%= grid(@orcamentos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Identificador', html: {style: 'text-align: center'}, :attribute => 'numero'
+
+      g.column :name => 'Pessoa Solicitante', html: {style: 'text-align: center'}, :attribute => 'pessoa_solicitante' 
+
+      g.column :name => 'Empresa Solicitante', html: {style: 'text-align: center'}, :attribute => 'empresa_solicitante' 
+
+      g.column :name => 'Total a Pagar (R$)', html: {style: 'text-align: center'}, :attribute => 'total_pagar' 
+
+      g.column :name => 'Status', html: {style: 'text-align: center'}, :attribute => 'status' 
+
+      g.column do |orcamento|
+        link_to('Detalhes', orcamento, html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |orcamento|
+        link_to('Editar', edit_orcamento_path(orcamento), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+    end -%>
+
+<%end%>
+
+<% if user_is_administrador? %>
+
+<%= grid(@orcamentos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Identificador', html: {style: 'text-align: center'}, :attribute => 'numero'
+
+      g.column :name => 'Pessoa Solicitante', html: {style: 'text-align: center'}, :attribute => 'pessoa_solicitante' 
+
+      g.column :name => 'Empresa Solicitante', html: {style: 'text-align: center'}, :attribute => 'empresa_solicitante' 
+
+      g.column :name => 'Total a Pagar (R$)', html: {style: 'text-align: center'} do |orcamento|
+          number_to_currency(orcamento.total_pagar, :precision => 2, :unit => '', :separator => ',', :delimiter => '.')
+      end 
+
+      g.column :name => 'Status', html: {style: 'text-align: center'}, :attribute => 'status'
+
+      g.column do |orcamento|
+        link_to('Detalhes', orcamento, html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |orcamento|
+        link_to('Editar', edit_orcamento_path(orcamento), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |orcamento|
+        link_to 'Excluir', orcamento, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o orcamento #{orcamento.numero}?" } 
+      end
+
+    end -%>
+
+<%end%>
+
+</div>
 
 <br>
 

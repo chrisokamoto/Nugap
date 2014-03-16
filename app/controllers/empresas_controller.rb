@@ -4,6 +4,11 @@ class EmpresasController < ApplicationController
 
   def index
     @empresas = Empresa.all
+    @empresas_grid = initialize_grid(Empresa, 
+      :order => 'created_at',
+      :order_direction => 'desc',
+      :per_page => 10
+    )
   end
 
 

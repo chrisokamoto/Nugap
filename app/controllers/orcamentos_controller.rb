@@ -6,6 +6,11 @@ class OrcamentosController < ApplicationController
   # GET /orcamentos.json
   def index
     @orcamentos = Orcamento.all
+    @orcamentos_grid = initialize_grid(Orcamento, 
+      :order => 'created_at',
+      :order_direction => 'desc',
+      :per_page => 10
+    )
   end
 
   # GET /orcamentos/1
@@ -252,7 +257,9 @@ class OrcamentosController < ApplicationController
             atualizou_parametro = 1;
 
             parametro = Parametro.find_by_nome(servico_orcamento.parametro)
-            servico_orcamento.metodo = parametro.metodo            
+            if !parametro.nil?
+              servico_orcamento.metodo = parametro.metodo            
+            end
 
 
           end
