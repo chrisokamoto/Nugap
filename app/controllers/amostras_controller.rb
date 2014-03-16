@@ -8,6 +8,7 @@ class AmostrasController < ApplicationController
   # GET /amostras.json
   def index
     @amostra = Amostra.all_cached
+    @amostras_grid = initialize_grid(Amostra, :per_page => 10)
   end
 
   # GET /amostras/1

@@ -19,8 +19,10 @@
 //= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
-//= require_tree .
 //= require turbolinks
+//= require wice_grid
+//= require_tree .
+
 
 function remove_fields(link) {
     $(link).prev("input[type=hidden]").val("1");
