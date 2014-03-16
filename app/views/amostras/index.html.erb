@@ -21,6 +21,45 @@
 
 <div style="width:95%; margin-left:3%;">
 
+<% if !user_is_administrador? %>
+  
+    <%= grid(@amostras_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Amostra', html: {style: 'text-align: center'}, :attribute => 'certificado'
+
+      g.column :name => 'Solicitante', html: {style: 'text-align: center'}, :attribute => 'solicitante' 
+
+      g.column :name => 'Produto', html: {style: 'text-align: center'}, :attribute => 'produto' 
+
+      g.column :name => 'Marca', html: {style: 'text-align: center'}, :attribute => 'marca' 
+
+      g.column :name => 'Status' do |amostra|
+        if amostra.status == "Aberto"
+          [amostra.status, {style: 'text-align: center; color:green'}]        
+        else amostra.status == "Fechado"
+          [amostra.status, {style: 'text-align: center; color:red'}]        
+        end
+      end
+
+      g.column do |amostra|
+        link_to('Copiar Dados', copy_amostra_path(amostra), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |amostra|
+        link_to('Detalhes', amostra, html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |amostra|
+        link_to('Editar', edit_amostra_path(amostra), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+    end -%>
+
+<%end%>
+
+<% if user_is_administrador? %>
+
 <%= grid(@amostras_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
   
 
@@ -32,10 +71,16 @@
 
   g.column :name => 'Marca', html: {style: 'text-align: center'}, :attribute => 'marca' 
 
-  g.column :name => 'Status', html: {style: 'text-align: center'}, :attribute => 'status'
+  g.column :name => 'Status' do |amostra|
+    if amostra.status == "Aberto"
+      [amostra.status, {style: 'text-align: center; color:green'}]        
+    else amostra.status == "Fechado"
+      [amostra.status, {style: 'text-align: center; color:red'}]        
+    end
+  end
 
   g.column do |amostra|
-    link_to('Copiar Dados', copy_amostra_path(amostra), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+    link_to('Copiar Dados', copy_amostra_path(amostra), html: {style: 'text-align: center;'}, :class => 'btn btn-small')
   end
 
   g.column do |amostra|
@@ -50,6 +95,8 @@
     link_to 'Excluir', amostra, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a amostra #{amostra.certificado}?" } 
   end
 end -%>
+
+<%end%>
 
 </div>
 
