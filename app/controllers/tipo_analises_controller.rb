@@ -6,6 +6,11 @@ class TipoAnalisesController < ApplicationController
   # GET /tipo_analises.json
   def index
     @tipo_analises = TipoAnalise.all
+    @analises_grid = initialize_grid(TipoAnalise, 
+      :order => 'created_at',
+      :order_direction => 'desc',
+      :per_page => 10
+    )
   end
 
   # GET /tipo_analises/1

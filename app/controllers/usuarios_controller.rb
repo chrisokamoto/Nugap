@@ -17,6 +17,11 @@ class UsuariosController < ApplicationController
   # GET /usuarios.json
   def index
     @usuarios = Usuario.all
+    @usuarios_grid = initialize_grid(Usuario, 
+      :order => 'created_at',
+      :order_direction => 'desc',
+      :per_page => 10
+    )
   end
 
   # GET /usuarios/1

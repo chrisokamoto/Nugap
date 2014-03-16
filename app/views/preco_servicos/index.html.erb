@@ -1,33 +1,59 @@
 <br /><br /><br /><br />
 <legend>Preços cadastrados</legend>
 
-<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="95%">
-  <thead>
-    <tr>
-      <th width="15%" style="word-wrap:break-word;"><center>Produto</center></th>
-      <th width="40%" style="word-wrap:break-word;"><center>Análise</center></th>
-      <th width="20%" style="word-wrap:break-word;"><center>Parâmetro</center></th>
-      <th width="15%" style="word-wrap:break-word;"><center>Preço (R$)</center></th>
-      <th width="5%" style="word-wrap:break-word;"></th>
-      <th width="5%" style="word-wrap:break-word;"></th>
-      <th width="5%" style="word-wrap:break-word;"></th>
-    </tr>
-  </thead>
+<div style="width:75%; margin-left:15%;">
 
-  <tbody>
-    <% @preco_servicos.each do |preco_servico| %>
-      <tr>
-        <td><center><%= preco_servico.produto %></center></td>
-        <td><center><%= preco_servico.analise %></center></td>
-        <td><center><%= preco_servico.parametro %></center></td>
-        <td><center><%= number_to_currency(preco_servico.preco, :precision => 2, :unit => '', :separator => ',', :delimiter => '.') %></center></td>
-         <td><center><%= link_to 'Detalhes', preco_servico, :class => 'btn btn-small' %></center> </td>
-        <td><center><%= link_to 'Editar', edit_preco_servico_path(preco_servico), :class => 'btn btn-small' %></center> </td>
-        <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', preco_servico, method: :delete, :class => 'btn btn-small', data: { confirm: "Tem certeza?" } %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if !user_is_administrador? %>
+  
+    <%= grid(@precos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Produto', html: {style: 'text-align: center'}, :attribute => 'produto'
+
+      g.column :name => 'Análise', html: {style: 'text-align: center'}, :attribute => 'analise' 
+
+      g.column :name => 'Parâmetro', html: {style: 'text-align: center'}, :attribute => 'parametro' 
+
+      g.column :name => 'Preço (R$)', html: {style: 'text-align: center'} do |preco_servico|
+         number_to_currency(preco_servico.preco, :precision => 2, :unit => '', :separator => ',', :delimiter => '.')
+      end
+
+      g.column do |preco_servico|
+        link_to('Editar', edit_preco_servico_path(preco_servico), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+    end -%>
+
+<%end%>
+
+<% if user_is_administrador? %>
+
+<%= grid(@precos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Produto', html: {style: 'text-align: center'}, :attribute => 'produto'
+
+      g.column :name => 'Análise', html: {style: 'text-align: center'}, :attribute => 'analise' 
+
+      g.column :name => 'Parâmetro', html: {style: 'text-align: center'}, :attribute => 'parametro' 
+
+      g.column :name => 'Preço (R$)', html: {style: 'text-align: center'} do |preco_servico|
+         number_to_currency(preco_servico.preco, :precision => 2, :unit => '', :separator => ',', :delimiter => '.')
+      end
+
+      g.column do |preco_servico|
+        link_to('Editar', edit_preco_servico_path(preco_servico), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end    
+
+      g.column do |preco_servico|
+        link_to 'Excluir', preco_servico, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Tem certeza que deseja excluir?" } 
+      end
+
+    end -%>
+
+<%end%>
+
+</div>
 
 <br>
 

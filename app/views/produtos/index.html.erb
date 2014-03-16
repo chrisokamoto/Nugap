@@ -1,31 +1,45 @@
 <br /><br /><br /><br />
 <legend>Produtos cadastrados</legend>
 
-<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="70%">
-  <thead>
-    <tr>
-      <th width="95%" style="word-wrap:break-word;"><center>Tipo</center></th>
-      <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <!--th width="5%" style="word-wrap:break-word;"><center></center></th-->
-      <% if user_is_administrador? %>
-        <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <% end %>
-    </tr>
-  </thead>
+<div style="width:55%; margin-left:20%;">
 
-  <tbody>
-    <% @produtos.each do |produto| %>
-      <tr>
-        <td width="95%" style="word-wrap:break-word;"><center><%= produto.tipo %></center></td>
-        <!--td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', produto %></center></td-->
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_produto_path(produto), :class => 'btn btn-small' %></center></td>
-        <% if user_is_administrador? %>
-          <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', produto, method: :delete, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o produto #{produto.tipo}?" } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if !user_is_administrador? %>
+  
+    <%= grid(@produtos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'
+     
+
+      g.column do |produto|
+        link_to('Editar', edit_produto_path(produto), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+    end -%>
+
+<%end%>
+
+<% if user_is_administrador? %>
+
+<%= grid(@produtos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'
+     
+
+      g.column do |produto|
+        link_to('Editar', edit_produto_path(produto), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |produto|
+        link_to 'Excluir', produto, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o produto #{produto.tipo}?" } 
+      end
+
+    end -%>
+
+<%end%>
+
+</div>
 
 <br>
 

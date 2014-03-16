@@ -6,6 +6,11 @@ class ParametrosController < ApplicationController
   # GET /parametros.json
   def index
     @parametros = Parametro.all
+    @parametros_grid = initialize_grid(Parametro, 
+      :order => 'created_at',
+      :order_direction => 'desc',
+      :per_page => 10
+    )
   end
 
   # GET /parametros/1

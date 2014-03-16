@@ -1,37 +1,55 @@
 <br /><br /><br /><br />
 <legend>Parâmetros cadastrados</legend>
 
-<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="95%">
-  <thead>
-    <tr>
-      <th width="20%" style="word-wrap:break-word;"><center>Nome</center></th>
-      <th width="28%" style="word-wrap:break-word;"><center>Referência</center></th>
-      <th width="28%" style="word-wrap:break-word;"><center>Método</center></th>
-      <th width="15%" style="word-wrap:break-word;"><center>Valor de Referência</center></th>    
-      <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <!--th width="5%" style="word-wrap:break-word;"><center></center></th-->
-      <% if user_is_administrador? %>
-        <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <% end %>
-    </tr>
-  </thead>
+<div style="width:95%; margin-left:3%;">
 
-  <tbody>
-    <% @parametros.each do |parametro| %>
-      <tr>
-        <td><center><%= parametro.nome %></center></td>
-        <td><center><%= parametro.referencia %></center></td>
-        <td><center><%= parametro.metodo %></center></td>
-        <td><center><%= parametro.valor_referencia %></center></td>        
-        <!--td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', parametro %></center></td-->
-        <td><center><%= link_to 'Editar', edit_parametro_path(parametro), :class => 'btn btn-small' %></center></td>
-        <% if user_is_administrador? %>
-          <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', parametro, method: :delete, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o parâmetro #{parametro.nome}?" } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if !user_is_administrador? %>
+  
+    <%= grid(@parametros_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
+
+      g.column :name => 'Referência', html: {style: 'text-align: center'}, :attribute => 'referencia' 
+
+      g.column :name => 'Método', html: {style: 'text-align: center'}, :attribute => 'metodo' 
+
+      g.column :name => 'Valor de Referência', html: {style: 'text-align: center'}, :attribute => 'valor_referencia' 
+
+      g.column do |parametro|
+        link_to('Editar', edit_parametro_path(parametro), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+    end -%>
+
+<%end%>
+
+<% if user_is_administrador? %>
+
+<%= grid(@parametros_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
+
+      g.column :name => 'Referência', html: {style: 'text-align: center'}, :attribute => 'referencia' 
+
+      g.column :name => 'Método', html: {style: 'text-align: center'}, :attribute => 'metodo' 
+
+      g.column :name => 'Valor de Referência', html: {style: 'text-align: center'}, :attribute => 'valor_referencia' 
+
+      g.column do |parametro|
+        link_to('Editar', edit_parametro_path(parametro), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |parametro|
+        link_to 'Excluir', parametro, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o parametro #{parametro.nome}?" } 
+      end
+
+    end -%>
+
+<%end%>
+
+</div>
 
 <br>
 

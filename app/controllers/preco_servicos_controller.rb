@@ -7,6 +7,11 @@ class PrecoServicosController < ApplicationController
   # GET /preco_servicos.json
   def index
     @preco_servicos = PrecoServico.all
+    @precos_grid = initialize_grid(PrecoServico, 
+      :order => 'created_at',
+      :order_direction => 'desc',
+      :per_page => 10
+    )
   end
 
   # GET /preco_servicos/1

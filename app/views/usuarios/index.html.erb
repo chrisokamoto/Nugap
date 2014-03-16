@@ -1,33 +1,50 @@
 <br /><br /><br /><br />
 <legend>Usuários cadastrados</legend>
-<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="80%">
-  <thead>
-    <tr>
-      <th width="25%" style="word-wrap:break-word;"><center>Nome</center></th>
-      <th width="25%" style="word-wrap:break-word;"><center>Sobrenome</center></th>
-      <th width="20%" style="word-wrap:break-word;"><center>Login</center></th>
-      <th width="15%" style="word-wrap:break-word;"><center>Permissão</center></th>
-      <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <th width="5%" style="word-wrap:break-word;"><center></center></th>      
-      <th width="5%" style="word-wrap:break-word;"><center></center></th>
-    </tr>
-  </thead>
-  <tbody>   
-    <% @usuarios.each do |usuario| %>
-      <% if usuario.id != 1 %>
-      <tr>
-        <td width="25%" style="word-wrap:break-word;"><center><%= usuario.nome %></center></td>
-        <td width="25%" style="word-wrap:break-word;"><center><%= usuario.sobrenome %></center></td>
-        <td width="20%" style="word-wrap:break-word;"><center><%= usuario.login %></center></td>
-        <td width="15%" style="word-wrap:break-word;"><center><%= usuario.permissao %></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', usuario, :class => 'btn btn-small'%></center></td>
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_usuario_path(usuario), :class => 'btn btn-small' %></center></td>
-        <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', usuario, method: :delete, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o usuário #{usuario.nome}?" } %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+<div style="width:75%; margin-left:10%;">
+
+<% if !user_is_administrador? %>
+  
+    <%= grid(@usuarios_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
+      g.column :name => 'Sobrenome', html: {style: 'text-align: center'}, :attribute => 'sobrenome'
+      g.column :name => 'Login', html: {style: 'text-align: center'}, :attribute => 'login'
+      g.column :name => 'Permissão', html: {style: 'text-align: center'}, :attribute => 'permissao'
+     
+
+      g.column do |usuario|
+        link_to('Editar', edit_usuario_path(usuario), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+    end -%>
+
+<%end%>
+
+<% if user_is_administrador? %>
+
+<%= grid(@usuarios_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
+      g.column :name => 'Sobrenome', html: {style: 'text-align: center'}, :attribute => 'sobrenome'
+      g.column :name => 'Login', html: {style: 'text-align: center'}, :attribute => 'login'
+      g.column :name => 'Permissão', html: {style: 'text-align: center'}, :attribute => 'permissao'
+     
+
+      g.column do |usuario|
+        link_to('Editar', edit_usuario_path(usuario), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |usuario|
+        link_to 'Excluir', usuario, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o usuário #{usuario.nome}?" } 
+      end
+
+    end -%>
+
+<%end%>
+
+</div>
 
 <br>
 

@@ -1,31 +1,45 @@
 <br /><br /><br /><br />
 <legend>Tipos de análise cadastrados</legend>
 
-<table cellpadding="0" cellspacing="0" border="1" class="table-striped table-bordered" id="tabela" width="70%">
-  <thead>
-    <tr>
-      <th width="80%" style="word-wrap:break-word;"><center>Tipo</center></th>
-      <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <!--th width="5%" style="word-wrap:break-word;"><center></center></th-->
-      <% if user_is_administrador? %>
-        <th width="5%" style="word-wrap:break-word;"><center></center></th>
-      <% end %>
-    </tr>
-  </thead>
+<div style="width:35%; margin-left:30%;">
 
-  <tbody>
-    <% @tipo_analises.each do |tipo_analise| %>
-      <tr>
-        <td width="80%" style="word-wrap:break-word;"><center><%= tipo_analise.tipo %></center></td>
-        <!--td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Detalhes', tipo_analise %></center></td-->
-        <td width="5%" style="word-wrap:break-word;"><center><%= link_to 'Editar', edit_tipo_analise_path(tipo_analise), :class => 'btn btn-small' %></center></td>
-        <% if user_is_administrador? %>
-          <td style="word-wrap:break-word;"><center><%= link_to 'Excluir', tipo_analise, method: :delete, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a análise #{tipo_analise.tipo}?" } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if !user_is_administrador? %>
+  
+    <%= grid(@analises_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'
+     
+
+      g.column do |tipo_analise|
+        link_to('Editar', edit_tipo_analise_path(tipo_analise), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+    end -%>
+
+<%end%>
+
+<% if user_is_administrador? %>
+
+<%= grid(@analises_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+  
+
+      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'
+     
+
+      g.column do |tipo_analise|
+        link_to('Editar', edit_tipo_analise_path(tipo_analise), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      end
+
+      g.column do |tipo_analise|
+        link_to 'Excluir', tipo_analise, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a análise #{tipo_analise.tipo}?" } 
+      end
+
+    end -%>
+
+<%end%>
+
+</div>
 
 <br>
 
