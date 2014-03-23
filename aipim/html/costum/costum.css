@@ -1,0 +1,37 @@
+body{
+	padding-left: 20%;
+	padding-right: 20%;
+	padding-top: 10px;
+}
+
+.tag-given{
+	color:green;
+	font-weight:bold;
+}
+
+.tag-then{
+	color:red;
+	font-weight:bold;
+}
+
+.tag-when{
+	color:purple;
+	font-weight:bold;
+}
+
+.tag-and{
+	color:yellow;
+	font-weight:bold;
+}
+
+.tag-quotes{
+	font-weight:bold;
+}
+
+.scenario-screenshot img{
+	width:100%;
+}
+
+.features-link{
+	text-indent: 25px;
+}

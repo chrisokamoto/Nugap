@@ -1,0 +1,83 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href="costum/costum.css" rel="stylesheet">
+		<script src="jquery-1.9.1.js"></script>
+		<script src="costum/costum.js"></script>
+	</head>
+<body>
+	<div class="panel panel-default scenario-index-panel">
+		<div class="panel-body scenario-index-body">
+			<ul class="list-unstyled">
+
+				<li><a href="login.feature.html">1. Realizar login</a></li>
+
+					<li>
+						<ul class="list-unstyled features-link">
+
+							<li><a href="#">1.1. Login com usuário em branco</a></li>
+
+							<li><a href="#">1.2. Login com senha em branco</a></li>
+
+						</ul>
+					</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="panel panel-default scenario-panel">
+		<div class="panel-heading scenario-name">
+    		<h3 class="panel-title">1.1. Login com usuário em branco<span class="pull-right"><a href="#">[índice]</a></span></h3>
+  		</div>
+  		<div class="panel-body scenario-body">
+			<ul class="list-unstyled">
+
+				<li><font class="tag-given">Dado </font>que eu estou na página para realizar o login</li>
+
+				<li><font class="tag-when">Quando </font>clico no botão "<font class="tag-quotes">Entrar</font>"</li>
+
+				<li><font class="tag-then">Então </font>devo estar novamente na página para realizar o login</li>
+
+				<li><font class="tag-and">E </font>devo ver "<font class="tag-quotes">Preencha o usuário.</font>"</li>
+
+		    </ul>
+		</div>
+
+  		<div class="panel-footer scenario-screenshot">
+  			<a href="../screenshots/login.feature/1395349158.png"><img src="../screenshots/login.feature/1395349158.png" /></a>
+  		</div>
+
+	</div>
+
+	<div class="panel panel-default scenario-panel">
+		<div class="panel-heading scenario-name">
+    		<h3 class="panel-title">1.2. Login com senha em branco<span class="pull-right"><a href="#">[índice]</a></span></h3>
+  		</div>
+  		<div class="panel-body scenario-body">
+			<ul class="list-unstyled">
+
+				<li><font class="tag-given">Dado </font>que eu estou na página para realizar o login</li>
+
+				<li><font class="tag-when">Quando </font>preencho o campo "<font class="tag-quotes">login</font>" com "<font class="tag-quotes">Administrador</font>"</li>
+
+				<li><font class="tag-and">E </font>clico no botão "<font class="tag-quotes">Entrar</font>"</li>
+
+				<li><font class="tag-then">Então </font>devo estar na página "<font class="tag-quotes">login</font>"</li>
+
+				<li><font class="tag-and">E </font>devo ver a mensagem de erro: "<font class="tag-quotes">Preencha a senha.</font>"</li>
+
+		    </ul>
+		</div>
+
+  		<div class="panel-footer scenario-screenshot">
+  			<a href="../screenshots/login.feature/1395349164.png"><img src="../screenshots/login.feature/1395349164.png" /></a>
+  		</div>
+
+	</div>
+	
+</body>
+</html>

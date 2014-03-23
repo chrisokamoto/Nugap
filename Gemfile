@@ -74,6 +74,17 @@ gem 'rails_12factor', group: :production
  #filter on datatables
  gem "wice_grid", '3.4.0'
 
+ #aipim
+ #gem "aipim-rails", "~> 0.0.182"
+
+ #group :development, :test do
+#	gem 'rspec-rails', '~> 2.14.0'
+#	gem 'simplecov', require: false
+#	gem 'cucumber-rails', :require => false
+#	gem 'database_cleaner', '~> 1.0.1'
+#	gem 'selenium-webdriver'
+#end
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

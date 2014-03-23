@@ -178,10 +178,16 @@ Prawn::Document.new() do |pdf|
 	end
 
 	move_down 10
-	
-	if !("#{@orcamento.observacao}" == "")
-		text  "<b>Observação:</b> #{@orcamento.observacao}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+
+	y_position = cursor - 10
+	bounding_box([30, y_position], :width => 530) do
+	transparent(0.0) { stroke_bounds }
+	if !("#{@orcamento.observacao}" == "")		
+				text "<b>Observação:</b> #{@orcamento.observacao}", :size => 10, :inline_format => true, :align => :justify
 	end
+	end
+	
+	
 	if !("#{@orcamento.quantidade}" == "")
 		text  "<b>Quantidade:</b> #{@orcamento.quantidade}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
@@ -232,9 +238,7 @@ Prawn::Document.new() do |pdf|
 
 	# NÚMERO DA PÁGINA
 	number_pages "Página <page> / <total>", { :start_count_at => 0, :page_filter => :all, :at => [400, pdf.bounds.bottom], :align => :center, :size => 9 }
+	number_pages "www.nugap.com.br - Fone: (31) 3313-1616 - e-mail: nugap@nugap.com.br", { :at => [30, pdf.bounds.bottom], :align => :left, :size => 9 }
 
-	repeat :all do	
-		text_box  "www.nugap.com.br - Fone: (31) 3313-1616 - e-mail: nugap@nugap.com.br", :size => 10, :align => :left, :at => [30, 9]			
-	end
 end
 
