@@ -91,7 +91,10 @@ gem 'rails_12factor', group: :production
  #end
 
 # Use unicorn as the app server
-gem 'unicorn'
+group :production do 
+  gem 'unicorn'
+  gem 'unicorn-worker-killer'
+end
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
