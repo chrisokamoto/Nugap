@@ -76,8 +76,6 @@ gem 'rails_12factor', group: :production
  #filter on datatables
  gem "wice_grid", '3.4.0'
 
- gem 'rails_12factor', group: :production
-
 
 
  #aipim
@@ -93,7 +91,7 @@ gem 'rails_12factor', group: :production
  #end
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development

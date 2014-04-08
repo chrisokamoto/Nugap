@@ -5,6 +5,8 @@ require 'heroku-api'
 require 'open-uri'
 require 'pony'
 require 'keen'
+
+web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
  
 STDOUT.sync = true
 app_name = ENV['MONITOR_APP_NAME']
