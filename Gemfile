@@ -74,6 +74,10 @@ gem 'rails_12factor', group: :production
  #filter on datatables
  gem "wice_grid", '3.4.0'
 
+ gem 'rails_12factor', group: :production
+
+ ruby "2.0.0p353"
+
  #aipim
  #gem "aipim-rails", "~> 0.0.182"
 
@@ -83,7 +87,8 @@ gem 'rails_12factor', group: :production
 #	gem 'cucumber-rails', :require => false
 #	gem 'database_cleaner', '~> 1.0.1'
 #	gem 'selenium-webdriver'
-#end
+#	gem "aipim-rails", "~> 0.0.182"
+ #end
 
 # Use unicorn as the app server
 # gem 'unicorn'
