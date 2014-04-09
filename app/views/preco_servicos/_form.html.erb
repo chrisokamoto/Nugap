@@ -50,7 +50,7 @@
       if(analise == null)    
         analise = ""
      
-        $.get('/preco_servicos/get_analises/' + produto , function(data){               
+        $.get('/preco_servicos/get_parametros_preco/' + produto , function(data){               
            $("#analise_preco_selection").html(data);
         })
         

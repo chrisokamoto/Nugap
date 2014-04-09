@@ -324,11 +324,11 @@ class AmostrasController < ApplicationController
   # DELETE /amostras/1.json
   def destroy    
 
-    if(!@amostra.parametro_resultados.nil?)
-      @amostra.parametro_resultados.each do |parametro_resultado|
-        parametro_resultado.destroy
-      end
-    end
+    #if(!@amostra.parametro_resultados.nil?)
+     # @amostra.parametro_resultados.each do |parametro_resultado|
+      #  parametro_resultado.destroy
+      #end
+    #end
     
     @amostra.destroy
     respond_to do |format|

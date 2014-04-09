@@ -93,7 +93,7 @@ gem 'rails_12factor', group: :production
 # Use unicorn as the app server
 group :production do 
   gem 'unicorn'
-  gem 'unicorn-worker-killer'
+  gem 'unicorn-worker-killer'  
 end
 
 # Use Capistrano for deployment
