@@ -86,18 +86,24 @@ Prawn::Document.new() do |pdf|
 		for produto in produtos
 			if (servico.produto == produto && servico.produto != "")
 				contemProduto = 1	
-				for analise in analises
-					if(servico.analise == analise && servico.analise != "")
-						contemAnalise = 1
-						for metodo in metodos
-							if(servico.metodo == metodo && servico.metodo != "")
-							contemMetodo = 1
-						end
-				end
-					end
-				end
+				
 			end
 		end
+
+		for analise in analises
+					if(servico.analise == analise && servico.analise != "")
+						contemAnalise = 1
+						
+					end
+				end
+
+		for metodo in metodos
+							if(servico.metodo == metodo && servico.metodo != "")
+								contemMetodo = 1
+							end
+						end
+
+
 		if contemProduto == 0
 			produtos.insert(countProduto, servico.produto)				
 			countProduto = countProduto + 1				
@@ -113,14 +119,27 @@ Prawn::Document.new() do |pdf|
 
 	end
 
+	for produto in produtos
+		puts "produto:!!!!!!!!!!!!!!!!!!!1 " + produto	
+	end
+
+	for analise in analises
+		puts "analise:!!!!!!!!!!!!!!!!!!!1 " + analise	
+	end
+
 	# PARA CADA PRODUTO, PERCORRE OS RESULTADOS IMPRIMINDO APENAS AQUELE PRODUTO
-	for produto in produtos		
+	for produto in produtos			
 		total = 0.0
-		for analise in analises
+		for analise in analises			
 			entrouMetodo = 0
 			for metodo in metodos				
 				if !produto.nil? && !analise.nil?
-					@servico = ServicoOrcamento.where(:produto => produto, :analise => analise, :metodo => metodo,  :orcamento_id => @orcamento.id)				
+					@servico = ServicoOrcamento.where(:produto => produto, :analise => analise, :metodo => metodo, :orcamento_id => @orcamento.id)		
+
+
+					@servico.each do |servico|					
+						puts servico.produto
+					end
 					if @servico.exists? 
 						move_down 7
 						produtoNovo = produto.dup
