@@ -1,7 +1,6 @@
 class AmostrasController < ApplicationController
   before_action :set_amostra, only: [:show, :edit, :update, :destroy]
-  before_action :valida_sessao  
-  before_action :set_amostra, only: [:index, :new, :create, :edit, :update]
+  before_action :valida_sessao    
   before_action :set_amostras, only: [:index, :new, :create, :edit, :update]
 
   # GET /amostras
@@ -324,11 +323,11 @@ class AmostrasController < ApplicationController
   # DELETE /amostras/1.json
   def destroy    
 
-    #if(!@amostra.parametro_resultados.nil?)
-     # @amostra.parametro_resultados.each do |parametro_resultado|
-      #  parametro_resultado.destroy
-      #end
-    #end
+    if(!@amostra.parametro_resultados.nil?)
+      @amostra.parametro_resultados.each do |parametro_resultado|
+        parametro_resultado.destroy
+      end
+    end
     
     @amostra.destroy
     respond_to do |format|
