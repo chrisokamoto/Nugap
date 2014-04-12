@@ -209,14 +209,24 @@ Prawn::Document.new() do |pdf|
 	
 	if !("#{@orcamento.quantidade}" == "")
 		text  "<b>Quantidade:</b> #{@orcamento.quantidade}", :size => 10, :indent_paragraphs => 30, :inline_format => true
-	end
+	end	
 
-	
 
-	if (cursor < 180)
+	if (cursor < 80)
 		start_new_page
 		move_down 20
 	end
+
+	if !("#{@orcamento.prazo}" == "")
+		text  "<b>Prazo de Entrega dos Resultados:</b> #{@orcamento.prazo}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+	end
+
+	if !(("#{@orcamento.desconto}" == "0") || (@orcamento.desconto.nil? ))
+		valor_desconto =  (@orcamento.valor_bruto * @orcamento.desconto / 100.0).round(2)
+
+		text  "<b>Desconto #{@orcamento.desconto}%:</b> #{valor_desconto}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
+	end
+
 
 	if !("#{@orcamento.ir}" == "0.0")
 		text  "<b>IR:</b> #{@orcamento.ir}", :size => 10, :indent_paragraphs => 30, :inline_format => true
@@ -224,33 +234,22 @@ Prawn::Document.new() do |pdf|
 	if !("#{@orcamento.pis}" == "0.0")
 		text  "<b>PIS:</b> #{@orcamento.pis}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
-	if !("#{@orcamento.cssl}" == "0.0")
-		text  "<b>CSSL:</b> #{@orcamento.cssl}", :size => 10, :indent_paragraphs => 30, :inline_format => true
-	end
 	if !("#{@orcamento.cofins}" == "0.0")
 		text  "<b>COFINS:</b> #{@orcamento.cofins}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
+	if !("#{@orcamento.cssl}" == "0.0")
+		text  "<b>CSSL:</b> #{@orcamento.cssl}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+	end	
 
-	
-	
-	
-	if !(("#{@orcamento.desconto}" == "0") || (@orcamento.desconto.nil? ))
-		valor_desconto =  (@orcamento.valor_bruto * @orcamento.desconto / 100.0).round(2)
-
-		text  "<b>Desconto #{@orcamento.desconto}%:</b> #{valor_desconto}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
-	end
-	if !("#{@orcamento.prazo}" == "")
-		text  "<b>Prazo de Entrega:</b> #{@orcamento.prazo}", :size => 10, :indent_paragraphs => 30, :inline_format => true
-	end
 	text  "<b>Forma de Pagamento:</b> #{@orcamento.pagamento}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+
+	
 	#text  "<b>Total Orçamento sem Impostos:</b> #{@orcamento.valor_bruto}", :size => 10, indent_paragraphs => 30, :inline_format => true
 
 	if ("#{@orcamento.pagamento}" == "Depósito" || "#{@orcamento.pagamento}" == "Depósito/Transferência")
 		text "Banco Itaú - Agência 5197 - C/C 04848-0 - Favorecido - Núcleo Global de Análise e Pesquisa - CNPJ: 01.889.995/0001-56", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 
-	move_down 25
-	
 
 	text  "<b>TOTAL A PAGAR:</b> R$ #{@orcamento.total_pagar}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 
