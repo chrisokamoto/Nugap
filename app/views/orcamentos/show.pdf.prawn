@@ -198,6 +198,11 @@ Prawn::Document.new() do |pdf|
 
 	move_down 10
 
+	if (cursor - 10 < 0)
+		start_new_page
+		move_down 20
+	end
+
 	y_position = cursor - 10
 	bounding_box([30, y_position], :width => 530) do
 	transparent(0.0) { stroke_bounds }
