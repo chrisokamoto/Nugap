@@ -2,14 +2,14 @@ Prawn::Document.new() do |pdf|
 	font "Times-Roman"
 
 	image "public/image/logo.png", :position => :left, :height => 100, :width => 90, :at => [30, 800]
-	text_box  "NÚCLEO GLOBAL DE ANÁLISE E PESQUISA\n\n", :style => :bold, :size => 14, :align => :center, :at => [70, 780]
+	text_box  "NÚCLEO GLOBAL DE ANÁLISE E PESQUISA\n\n", :style => :bold, :size => 14, :align => :center, :at => [70, 760]	
 
-	text_box "Av. Amazonas, 4080, Sala 203-Prado-Belo Horizonte/MG-CEP: 30.411-250-Telefax (31) 3313.1616\n"+
-	"Laboratório credenciado pelo MAPA para análises de microscopia do café e seus derivados\n"+
-	"Portaria Nº 217 de 14 de julho de 2009\n", 
+	text_box "Av. Amazonas, 4080, Sala 203-Prado-Belo Horizonte/MG-CEP: 30.411-250-Telefax (31) 3313.1616\n",
+	#"Laboratório credenciado pelo MAPA para análises de microscopia do café e seus derivados\n"+
+	#"Portaria Nº 217 de 14 de julho de 2009\n", 
 	:align => :center,
 	:size => 10,
-	:at => [70, 755],
+	:at => [70, 735],
 	:height => 100,
 	:width => 550
 
