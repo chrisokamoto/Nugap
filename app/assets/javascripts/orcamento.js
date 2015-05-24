@@ -209,7 +209,10 @@ $("#addButtonServico").on("click", function() {
       
   $.get('/orcamentos/saveVirtualServicoOrcamento/' + produto + '/' + analise + '/' + parametro + '/' + valor_unitario + '/' + qtd_amostra + '/' + valor_total + '/' + id_orcamento + '/' + id_servico_orcamento, function(){
   	addAll(true);
-  	location.reload();
+    setTimeout(
+    function() {
+      location.reload();
+    }, 1000);  	
   })
 
 });
@@ -275,7 +278,10 @@ function edit_servico_orcamento(servico_orcamento_id){
 }
 
 function delete_servico_orcamento(servico_orcamento_id){  
-  $.get('/orcamentos/delete_servico/' + servico_orcamento_id , function(data){    
+  setTimeout(
+    function() {
+      $.get('/orcamentos/delete_servico/' + servico_orcamento_id , function(data){    
     
-  })
+      })
+    }, 1000);   
 }
