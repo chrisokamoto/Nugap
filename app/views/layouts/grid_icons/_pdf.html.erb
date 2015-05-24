@@ -1,0 +1,10 @@
+<%=content_tag(:p,
+	(content_tag(:a,
+		content_tag(:i, nil, class: "fa fa-file-pdf-o fa-2x"),
+		href: hyperlink,
+		id: id,
+		title:'Gerar PDF',
+		target: "_blank",
+		class: "text-danger icon_pdf expose")
+	),
+	class: "text-center") %>

@@ -1,21 +1,46 @@
-<%= form_for(@embalagem) do |f| %>
-  <% if @embalagem.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@embalagem.errors.count, "erro") %>:</h2>
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-3">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs1" aria-hidden="true"></span>
+            <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'create')%>
+              <%= "Cadastrar Embalagem" %>
+            <%else%>
+              <%= "Editar Embalagem" %>
+            <%end%>
+        </div>
+      </div>
+      <div class="widget-body">
 
-      <ul>
-      <% @embalagem.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'create' || controller.action_name == 'edit')%>
+
+            <%= form_for(@embalagem,  html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+              <%= render partial: 'layouts/forms/error', locals: {modelo: @embalagem} %>           
+              <div class="form-group">
+                <%= f.label :tipo, class: 'col-lg-2 control-label' %>
+                <div class="col-lg-9">
+                  <%= f.text_field :tipo, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-9">
+                  <div class="col-lg-6">
+                    <%= f.submit "Salvar", class: 'btn btn-success btn-block' %>
+                  </div>
+                  <div class="col-lg-6">
+                    <%= link_to embalagems_path do %>
+                      <button type="button" class="btn btn-secondary btn-block"> <%= "Limpar" %> </button>
+                    <%end%>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
+          <% end %>
+
+        </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :tipo %>
-    <%= f.text_field :tipo %>
   </div>
-  <div class="actions">
-    <%= f.submit "Salvar", :class => 'btn btn-info' %>
-  </div>
-<% end %>
+</div>

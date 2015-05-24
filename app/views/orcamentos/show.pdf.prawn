@@ -13,6 +13,8 @@ Prawn::Document.new() do |pdf|
 	:height => 100,
 	:width => 550
 
+	total_orcamento = 0
+
 	move_down 105
 	if ("#{@orcamento.status}" == "Aceito")
 		if !("#{@orcamento.data}" == "")
@@ -119,14 +121,6 @@ Prawn::Document.new() do |pdf|
 
 	end
 
-	for produto in produtos
-		puts "produto:!!!!!!!!!!!!!!!!!!!1 " + produto	
-	end
-
-	for analise in analises
-		puts "analise:!!!!!!!!!!!!!!!!!!!1 " + analise	
-	end
-
 	# PARA CADA PRODUTO, PERCORRE OS RESULTADOS IMPRIMINDO APENAS AQUELE PRODUTO
 	for produto in produtos			
 		total = 0.0
@@ -193,6 +187,7 @@ Prawn::Document.new() do |pdf|
 		end
 		data = [ ["Total do Serviço: #{total.round(2)}"] ]
 						table(data, :column_widths => [540], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5, :size => 10})
+		total_orcamento += total
 		move_down 5
 	end
 
@@ -227,7 +222,7 @@ Prawn::Document.new() do |pdf|
 	end
 
 	if !(("#{@orcamento.desconto}" == "0") || (@orcamento.desconto.nil? ))
-		valor_desconto =  (@orcamento.valor_bruto * @orcamento.desconto / 100.0).round(2)
+		valor_desconto =  (total_orcamento * @orcamento.desconto / 100.0).round(2)
 
 		text  "<b>Desconto #{@orcamento.desconto}%:</b> #{valor_desconto}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
 	end

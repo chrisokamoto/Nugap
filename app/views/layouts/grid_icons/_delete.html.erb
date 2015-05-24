@@ -1,0 +1,10 @@
+<%=content_tag(:p,
+    (content_tag(:a,
+      content_tag(:i, nil, class: "fa fa-trash-o fa-2x"),
+      href: hyperlink,
+      id: id,
+      title: "Apagar",
+      data: { method: "delete", confirm: message },
+      class: "delete-row text-muted icon_delete expose")
+    ),
+  class: "text-center") %>

@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     redirect_to login_path
   end
 
+  def limpa_sessao_preco
+    session[:preco_params] = nil   
+  end
+
   def index
   	if valida_id_sessao
       redirect_to home_path

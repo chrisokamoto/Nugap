@@ -28,5 +28,9 @@ module ApplicationHelper
     link_to_function(name, "add_fields_servico(this, \"#{association}\", \"#{escape_javascript(fields)}\")", options)
   end
 
+  def showGridOneSidePages?
+    ['index'].include?(controller.action_name)
+  end
+
   
 end

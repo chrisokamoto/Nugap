@@ -1,124 +1,221 @@
+<!-- Row start -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="widget">
+        <%= render partial: 'layouts/forms/error', locals: {modelo: @amostra} %>
 
-<%= form_for(@amostra) do |f| %>
-  <% if @amostra.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@amostra.errors.count, "erro") %>:</h2>
+        <div class="widget-body expose" style="display:none" id="the_wizard">
+          <%= form_for(@amostra, html: {class: 'form-horizontal', role: 'form', id: 'orcamento_form'})  do |f| %>    
 
-      <ul>
-      <% @amostra.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+            <!-- wizard start-->
+
+            <%if @is_new_or_create %>
+                <%= render partial:'layouts/wizard/wizard_header', locals: {steps:amostra_wizard_steps_new}%>
+              <%else%>
+                <%= render partial:'layouts/wizard/wizard_header', locals: {steps:amostra_wizard_steps}%>
+              <%end%>           
+
+            <!-- painel wizard start--> 
+
+            <!-- painel wizard start-->
+            <div>
+                  <div class="form-group" style="padding-left: 40px;">
+                    <div class="col-lg-12">
+                      <%= f.label :certificado, :class=>"col-lg-2 control-label" %>
+                      <div class="col-lg-2">
+                        <%= f.text_field :certificado, :class=>"form-control" %>
+                      </div>                      
+                                                        
+                      <%= f.label "Descrição do pedido", :class=>"col-lg-1 control-label" %>                
+                      <div class="col-lg-2">
+                        <%= f.text_area :descricao_pedido, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group" style="padding-left: 10px;">
+                    <div class="col-lg-9">
+                      <%= f.label :solicitante, :class=>"col-lg-3 control-label" %>                                  
+                      <div class="col-lg-3">                        
+                        <%= collection_select(:amostra, :solicitante, Empresa.order('nome'), :nome, :nome, options ={:prompt =>"", :value => nil}, :class=>"form-control") %>
+                      </div>  
+                    
+                      <%= f.label :produto, :class=>"col-lg-1 control-label" %>                                  
+                      <div class="col-lg-2">
+                        <%= collection_select(:amostra, :produto, Produto.order('tipo'), :tipo, :tipo, options ={:prompt =>"", :value => nil}, :class=>"form-control") %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label :embalagem, :class=>"col-lg-4 control-label" %>                                  
+                      <div class="col-lg-8">
+                        <%= collection_select(:amostra, :embalagem, Embalagem.order('tipo'), :tipo, :tipo, options ={:prompt =>"", :value => nil}, :class=>"form-control") %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Data de fabricação", :class=>"col-lg-4 control-label" %>                                  
+                      <div class="col-lg-3">
+                        <%= f.text_field :data_fabricacao, :class=>"form-control" %>
+                      </div>  
+                    
+                      <%= f.label "Data de validade", :class=>"col-lg-2 control-label" %>                                  
+                      <div class="col-lg-3">
+                        <%= f.text_field :data_validade, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label :lote, :class=>"col-lg-4 control-label" %>                                  
+                      <div class="col-lg-3">
+                        <%= f.text_field :lote, :class=>"form-control" %>
+                      </div>  
+                    
+                      <%= f.label "Conteúdo", :class=>"col-lg-2 control-label" %>                                  
+                      <div class="col-lg-3">
+                        <%= f.text_field :conteudo, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Descrição", :class=>"col-lg-4 control-label" %>                                  
+                      <div class="col-lg-8">
+                        <%= f.text_area :descricao, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-offset-10 col-lg-2">                      
+                        <input type="button" class="btn btn-info btn-block" value="Próximo" onClick="wizard_next()"/>
+                      <% if not @is_new_or_create %>
+                        <%= f.submit "Salvar", :class => 'btn btn-success btn-block', :id => "submit" %>
+                      <% end %>
+                    </div>
+                  </div>    
+
+                </div>
+            <!-- end -->  
+
+            <!-- painel wizard start-->
+            <div>                                     
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label :marca, :class=>"col-lg-4 control-label" %>                                  
+                      <div class="col-lg-8">
+                        <%= f.text_field :marca, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label :fabricante_id, :class=>"col-lg-4 control-label" %>                                  
+                      <div class="col-lg-8">
+                        <%= collection_select(:amostra, :fabricante, Empresa.order('nome'), :nome, :nome, options ={:prompt =>"", :value => nil}, :class=>"form-control") %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Características organolépticas", :class=>"col-lg-4 control-label" %>                                  
+                      <div class="col-lg-8">
+                        <%= f.text_area :caracteristicas, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-8" style="padding-left: 120px;">
+                      <%= f.label "Data de entrada no laboratório", :class=>"col-lg-2 control-label" %>                                  
+                      <div class="col-lg-4" style="padding-top: 15px;">
+                        <%= f.date_select :data_entrada, :order => [:day, :month, :year] %>
+                      </div>  
+                    
+                      <%= f.label "Data de entrega do certificado", :class=>"col-lg-2 control-label" %>                                  
+                      <div class="col-lg-4" style="padding-top: 15px;">
+                        <%= f.date_select :data_saida, :order => [:day, :month, :year] %>
+                      </div>  
+                    </div> 
+                  </div>  
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Observações", :class=>"col-lg-4 control-label" %>                                  
+                      <div class="col-lg-8">
+                        <%= f.text_area :observacoes, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div>                 
+
+                <div class="form-group">
+                    <div class="col-lg-9">
+                      <%= f.label "Responsável técnico", :class=>"col-lg-3 control-label" %>                                  
+                      <div class="col-lg-3">
+                        <%= collection_select(:amostra, :assinatura, Assinatura.order('nome'), :nome, :nome, options ={:prompt =>"", :value => nil}, :class=>"form-control") %>
+                      </div>  
+                    
+                      <%= f.label "Status", :class=>"col-lg-1 control-label" %>                                  
+                      <div class="col-lg-2">
+                        <%= collection_select(:amostra, :status, Status.all, :tipo, :tipo, options ={:prompt =>"", :value => nil}, :class=>"form-control") %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-2">
+                      <input type="button" class="btn btn-info btn-block" value="Voltar" onClick="wizard_previous()"/>
+                    </div>
+                    <div class="col-lg-offset-10 col-lg-2">   
+                      <% if !user_is_estagiario? %>                   
+                        <input type="button" class="btn btn-info btn-block" value="Próximo" onClick="wizard_next()"/>  
+                        <% end %>                    
+                        <%= f.submit "Salvar", :class => 'btn btn-success btn-block', :id => "submit" %>                      
+                    </div>
+                  </div> 
+                </div>
+
+            <!-- end -->  
+
+            <!-- painel wizard start-->
+            <% if !user_is_estagiario? %>
+              <div> 
+                <%= f.hidden_field(:id, :value => @amostra.id, :id=>"id_amostra" ) %>
+                <%= render partial: 'layouts/panel/two_sides_amostra' %>
+                <div class="form-group">
+                      <div class="col-lg-2">
+                        <input type="button" class="btn btn-info btn-block" value="Voltar" onClick="wizard_previous()"/>
+                      </div>
+                      <div class="col-lg-offset-8 col-lg-2">                      
+                          <input type="button" class="btn btn-info btn-block" value="Próximo" onClick="wizard_next()"/>
+                        <%= f.submit "Salvar", :class => 'btn btn-success btn-block', :id => "submit" %>
+                      </div>
+                </div>
+            <% end %>
+
+
+            </div>
+            <!-- end -->
+              
+            <%= render 'layouts/wizard/wizard_tail'%>
+          <!-- wizard end -->
+
+          <% end %>
+
+          </div>
+      </div>
     </div>
-  <% end %>
-
-
-  <div class="field">
-    <%= f.label :certificado %>
-    <%= f.text_field :certificado %>
   </div>
+              
 
-  <div class="field">
-    <%= f.label "Descrição do pedido" %>
-    <%= f.text_area :descricao_pedido %>
-  </div>
-
-  <div class="field">
-    <%= f.label :solicitante %>
-    <%= collection_select(:amostra, :solicitante, Empresa.order('nome'), :nome, :nome) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :produto %>
-    <%= collection_select(:amostra, :produto, Produto.order('tipo'), :tipo, :tipo) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :embalagem %>
-    <%= collection_select(:amostra, :embalagem, Embalagem.order('tipo'), :tipo, :tipo) %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Data de fabricação" %>
-    <%= f.text_field  :data_fabricacao %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Data de validade" %>
-    <%= f.text_field  :data_validade %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :lote %>
-    <%= f.text_field :lote %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Conteúdo" %>
-    <%= f.text_field :conteudo %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Descrição" %>
-    <%= f.text_area :descricao %>
-  </div>
-
-  <div class="field">
-    <%= f.label :marca %>
-    <%= f.text_field :marca %>
-  </div>
-
-  <div class="field">
-    <%= f.label :fabricante_id %>
-    <%= collection_select(:amostra, :fabricante, Empresa.order('nome'), :nome, :nome) %>      
-  </div>
-
-  <div class="field">
-    <%= f.label "Características organolépticas" %>
-    <%= f.text_area :caracteristicas %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Data de entrada no laboratório" %>
-    <%= f.date_select :data_entrada, :order => [:day, :month, :year] %>
-  </div>
-  <div class="field">
-    <%= f.label "Data de entrega do certificado" %>
-    <%= f.date_select :data_saida, :order => [:day, :month, :year] %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Observações" %>
-    <%= f.text_area :observacoes %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Responsável técnico" %>
-    <%= collection_select(:amostra, :assinatura, Assinatura.order('nome'), :nome, :nome) %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Status" %>
-    <%= collection_select(:amostra, :status, Status.all, :tipo, :tipo) %>
-  </div>
-
-
-<br><br>
-<% if !user_is_estagiario? %>
-  <fieldset>
-        
-    <%= render('parametrosResultados_table', :f => f) %>
-  	<br><br>
-        <center><%= link_to_add_fields("Adicionar Resultados", f, :parametro_resultados, :class => "btn", :title => "Adicionar Resultados") %></center>
-        <p></p>
-  </fieldset> 
-<% end %>
-
-<br><br>
-<div class="actions">
-    <%= f.submit "Salvar", :class => 'btn btn-info' %>
-</div>
-
-
-
-<% end %>
+              

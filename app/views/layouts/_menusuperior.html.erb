@@ -1,0 +1,65 @@
+<div id="optional-dropdown">	
+	<ul  id="tour_menu_superior" style="padding-left:50px;">
+	<li>
+	    <%= link_to amostras_path do %>
+		    <span><%= "Amostras" %></span>
+		<%end%>
+	    <ul>	            		            	
+		    <li>
+		        <%= link_to tipo_analises_path do %>
+		            <span><%= "Análises" %></span>
+				<%end%>
+			</li>
+			<li>
+				<%= link_to assinaturas_path do %>
+		            <span><%= "Assinaturas" %></span>
+				<%end%>
+			</li>
+			<li>
+				<%= link_to embalagems_path do %>
+		            <span><%= "Embalagens" %></span>
+				<%end%>
+			</li>
+			<li>
+				<%= link_to empresas_path do %>
+		            <span><%= "Empresas" %></span>
+				<%end%>
+			</li>
+			<li>
+				<%= link_to parametros_path do %>
+		            <span><%= "Parâmetros" %></span>
+				<%end%>
+			</li>
+			<li>
+				<%= link_to produtos_path do %>
+		            <span><%= "Produtos" %></span>
+				<%end%>
+		    </li>
+		            
+		</ul>
+	</li>
+
+	<li>
+	    <%= link_to orcamentos_path do %>
+		    <span><%= "Orçamentos" %></span>
+		<%end%>
+	    <ul>	            		            	
+		    <li>
+		    	<% if user_is_administrador? %>
+			        <%= link_to preco_servicos_path do %>
+			            <span><%= "Preço Serviços" %></span>
+					<%end%>
+				<% end %>
+			</li>		            
+		</ul>
+	</li>
+
+	<% if user_is_administrador? %>
+		<li>
+		    <%= link_to usuarios_path do %>
+			    <span><%= "Cadastro de Usuários" %></span>
+			<%end%>	    
+		</li>
+	<% end %>
+	</ul>
+</div>

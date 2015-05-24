@@ -1,0 +1,31 @@
+<!-- Mini navigation start -->
+<div id="mini-nav">
+	<ul>
+		<li>
+			<% usuario = Usuario.find(session[:id]) %>
+			<a href="#" id="menu_logout">
+				<span class="text-label"><%= usuario.login.upcase %> <i class="fa fa-lock fa-fw"></i>
+			</a>
+			<ul class="user-summary">
+				<li>
+					<div class="summary">						
+						<div class="basic-details">
+							<h5 class="no-margin"><%= usuario.nome.upcase %></h5>			
+						</div>
+						<div class="clearfix"></div>
+
+						
+					</div>
+					
+				</li>
+				<li>
+					<button class="btn btn-xs btn-danger pull-right" onclick="location.href='<%= logout_path%>'">
+						<%=t('botoes.sair')%>
+					</button>
+					<span class="clearfix"></span>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<!-- Mini navigation end -->

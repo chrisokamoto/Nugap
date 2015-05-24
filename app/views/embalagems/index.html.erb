@@ -1,47 +1,6 @@
-<br /><br /><br /><br />
-<legend>Embalagens cadastradas</legend>
+<%= render partial: 'layouts/panel/two_sides_geral' %>
 
-<div style="width:45%; margin-left:30%;">
 
-<% if !user_is_administrador? %>
-  
-    <%= grid(@embalagens_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'     
-
-      g.column do |embalagem|
-        link_to('Editar', edit_embalagem_path(embalagem), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-    end -%>
-
-<%end%>
-
-<% if user_is_administrador? %>
-
-<%= grid(@embalagens_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'     
-
-      g.column do |embalagem|
-        link_to('Editar', edit_embalagem_path(embalagem), html: {style: 'text-align: center; '}, :class => 'btn btn-small')
-      end
-
-      g.column do |embalagem|
-        link_to 'Excluir', embalagem, method: :delete, html: {style: 'text-align: center;'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a embalagem #{embalagem.tipo}?" } 
-      end
-
-    end -%>
-
-<%end%>
-
-</div>
-
-<br>
-
-<%= link_to 'Nova Embalagem', new_embalagem_path, :class => 'btn btn-info' %>
 
 
 <footer>

@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-2">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs2" aria-hidden="true">
+            <%= "Produtos cadastrados" %>
+        </div>
+      </div>
+
+      <div class="widget-body">
+
+        <% if !user_is_administrador? %>
+          
+            <%= grid(@produtos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo' do |produto|
+                link_to "#{produto.tipo}",produto, id:"mostrar-#{produto.tipo}"
+              end
+             
+
+              g.column name: 'Editar' do |produto|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_produto_path(produto), id:"editar-#{produto.id}" }
+              end
+
+            end -%>
+
+        <%end%>
+
+        <% if user_is_administrador? %>
+
+        <%= grid(@produtos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo' do |produto|
+                link_to "#{produto.tipo}",produto, id:"mostrar-#{produto.tipo}"
+              end
+
+              g.column name: 'Editar' do |produto|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_produto_path(produto), id:"editar-#{produto.id}" }
+              end
+
+              g.column name: 'Excluir' do |produto|
+                render partial: 'layouts/grid_icons/delete', locals: {hyperlink:produto_path(produto), id:"deletar-#{produto.id}", message: 'Tem certeza que deseja excluir?'  }
+              end
+             
+
+            end -%>
+
+        <%end%>
+
+        </div>
+
+      </div>
+  </div>
+
+</div>

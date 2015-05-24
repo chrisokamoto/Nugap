@@ -1,4 +1,4 @@
-<% if(request.original_url.include? "preco_servicos") %>	
+<% if(request.original_url.include? "preco_servicos") %>		
 	$('#parametro_preco_selection').empty();
 		<% if ((!@parametros_preco.nil?) && (@parametros_preco.size == 0)) %>
 			$('#parametro_preco_selection').append( $('<option>Parâmetros já precificados.</option>'));

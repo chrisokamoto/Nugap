@@ -1,41 +1,117 @@
-<%= form_for(@preco_servico) do |f| %>
-  <% if @preco_servico.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@preco_servico.errors.count, "erro") %>:</h2>
 
-      <ul>
-      <% @preco_servico.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs1" aria-hidden="true"></span>
+            <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'create')%>
+              <%= "Cadastrar Preço" %>
+            <%else%>
+              <%= "Editar Preço" %>
+            <%end%>
+        </div>
+      </div>
+      <div class="widget-body">
+        <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'create') %>
+
+        <%= form_for(@preco_servico,  html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+          <%= render partial: 'layouts/forms/error', locals: {modelo: @preco_servico} %>
+          <%= f.hidden_field(:id, :value => nil ) %>
+
+          <div class="form-group">
+            <%= f.label :produto, class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= collection_select(:preco_servico, :produto, Produto.order('tipo'), :tipo, :tipo, options ={:prompt =>
+                "", :value => nil}, {:id => "produto_preco_selection", class: 'form-control'}) %>
+            </div>
+          </div>
+          <div class="form-group" id="analise_collection_select", :remote >
+            <%= f.label "Análise", class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= collection_select(:preco_servico, :analise, TipoAnalise.order('tipo'), :tipo, :tipo, options ={:prompt =>""}, {:id => "analise_preco_selection", class: 'form-control'}) %>
+            </div>
+          </div>  
+          <div class="form-group" id="analise_collection_select", :remote >
+            <%= f.label "Parâmetro", class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= collection_select(:preco_servico, :parametro, Parametro.order('nome'), :nome, :nome,options ={:prompt =>""}, {:id => "parametro_preco_selection", class: 'form-control'}) %>
+            </div>
+          </div>  
+          
+          <div class="form-group" >
+            <%= f.label "Preço", class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= f.text_field :preco, :id => "preco", class: 'form-control' %>    
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <div class="col-lg-offset-3 col-lg-9">
+              <div class="col-lg-6">
+                <%= f.submit "Salvar", class: 'btn btn-success btn-block', :id => "botaoSalvarPreco" %>
+              </div>
+              <div class="col-lg-6">
+                <%= link_to preco_servicos_path do %>
+                  <button type="button" class="btn btn-secondary btn-block" id="limpa_sessao_button"> <%= "Limpar" %> </button>
+                <%end%>
+              </div>
+            </div>
+          </div>
+        <% end %>      
+      <%else%>
+        <%= form_for(@preco_servico, html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+          <%= render partial: 'layouts/forms/error', locals: {modelo: @preco_servico} %>
+
+
+          <div class="form-group">
+            <%= f.label :produto, class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= collection_select(:preco_servico, :produto, Produto.order('tipo'), :tipo, :tipo, {}, {:disabled => 'disabled', :id => "produto_preco_selection", class: 'form-control'}) %>
+            </div>
+          </div>
+          <div class="form-group" id="analise_collection_select", :remote >
+            <%= f.label "Análise", class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= collection_select(:preco_servico, :analise, TipoAnalise.order('tipo'), :tipo, :tipo, {}, {:disabled => 'disabled', :id => "analise_preco_selection", class: 'form-control'}) %>
+            </div>
+          </div>  
+          <div class="form-group" id="analise_collection_select", :remote >
+            <%= f.label "Parâmetro", class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= collection_select(:preco_servico, :parametro, Parametro.order('nome'), :nome, :nome, {}, {:disabled => 'disabled', :id => "parametro_preco_selection", class: 'form-control'}) %>
+            </div>
+          </div>  
+          
+          <div class="form-group" >
+            <%= f.label "Preço", class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= f.text_field :preco, :id => "preco", class: 'form-control' %>    
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <div class="col-lg-offset-3 col-lg-9">
+              <div class="col-lg-6">
+                <%= f.submit "Salvar", class: 'btn btn-success btn-block', :id => "botaoSalvarPreco" %>
+              </div>
+              <div class="col-lg-6">                
+                <%= link_to preco_servicos_path do %>
+                  <button type="button" class="btn btn-secondary btn-block" id="limpa_sessao_button"> <%= "Limpar" %> </button>
+                <%end%>              
+              </div>
+            </div>
+          </div>
+          <% end %>
       <% end %>
-      </ul>
+
+        </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :produto %>
-    <%= collection_select(:preco_servico, :produto, Produto.order('tipo'), :tipo, :tipo, options ={:prompt =>
-"", :value => nil}, {:id => "produto_preco_selection"}) %>
   </div>
-  <div class="field" id="analise_collection_select", :remote >
-    <%= f.label "Análise" %>
-    <%= collection_select(:preco_servico, :analise, TipoAnalise.order('tipo'), :tipo, :tipo, options ={:prompt =>""}, {:id => "analise_preco_selection"}) %>
-  </div>  
-  <div class="field" id="analise_collection_select", :remote >
-    <%= f.label "Parâmetro" %>
-    <%= collection_select(:preco_servico, :parametro, @parametros_preco, :nome, :nome,{}, {:id => "parametro_preco_selection"}) %>
-  </div>  
-  
-  <div class="field" >
-    <%= f.label "Preço" %>
-    <!--<%= f.text_field :preco, data: {autonumeric: {dGroup: '9', aDec: ',', aSep: '.'}} %>-->
-    <%= f.text_field :preco, :id => "preco" %>    
+</div>
 
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Salvar", :class => 'btn btn-info', :id => "botaoSalvarPreco" %>
-  </div>
-<% end %>
 
 <script type="text/javascript">
   document.getElementById("botaoSalvarPreco").disabled = true; 
@@ -71,6 +147,10 @@
       var analise = $('SELECT#analise_preco_selection :selected').val();      
       if(analise == null)    
         analise = ""
+
+        var n = analise.search("%");
+        if(n != -1)
+          var analise = [analise.slice(0, n+1), "25", analise.slice(n+1)].join('');
      
         $.get('/preco_servicos/get_parametros_preco/' + produto + '/' + analise, function(data){             
            $("#parametro_preco_selection").html(data);
@@ -78,7 +158,13 @@
       return false;
     });
 
-
+    $("#limpa_sessao_button").on("click", function() {          
+     
+        $.get('/preco_servicos/limpa_preco_servicos', function(){             
+           
+        })
+      
+    });
 
 
 })

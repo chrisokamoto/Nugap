@@ -1,0 +1,17 @@
+<%= render partial: 'layouts/panel/top' %>
+
+	<div class="row" style="margin-top:30px">
+		<% if showGridOneSidePages?%>
+			<div class="col-lg-12">
+				<%= render partial: 'grid' %>
+			</div>
+		<% else %>
+			<div class="col-lg-12">
+				<%= render partial: 'form' %>
+			</div>
+		<% end %>
+	</div>
+
+
+	</div>
+</div>

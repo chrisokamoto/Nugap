@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs2" aria-hidden="true">
+            <%= "Parâmetros cadastrados" %>
+        </div>
+      </div>
+
+      <div class="widget-body">
+
+        <% if !user_is_administrador? %>
+          
+            <%= grid(@parametros_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome' do |parametro|
+                link_to "#{parametro.nome}",parametro, id:"mostrar-#{parametro.nome}"
+              end
+
+              g.column :name => 'Referência', html: {style: 'text-align: center'}, :attribute => 'referencia' do |parametro|
+                link_to "#{parametro.referencia}",parametro, id:"mostrar-#{parametro.referencia}"
+              end
+
+              g.column :name => 'Método', html: {style: 'text-align: center'}, :attribute => 'metodo' do |parametro|
+                link_to "#{parametro.metodo}",parametro, id:"mostrar-#{parametro.metodo}"
+              end
+
+              g.column :name => 'Valor de Referência', html: {style: 'text-align: center'}, :attribute => 'valor_referencia' do |parametro|
+                link_to "#{parametro.valor_referencia}",parametro, id:"mostrar-#{parametro.valor_referencia}"
+              end
+
+              g.column name: 'Editar' do |parametro|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_parametro_path(parametro), id:"editar-#{parametro.id}" }
+              end
+
+            end -%>
+
+        <%end%>
+
+        <% if user_is_administrador? %>
+
+        <%= grid(@parametros_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome' do |parametro|
+                link_to "#{parametro.nome}",parametro, id:"mostrar-#{parametro.nome}"
+              end
+
+              g.column :name => 'Referência', html: {style: 'text-align: center'}, :attribute => 'referencia' do |parametro|
+                link_to "#{parametro.referencia}",parametro, id:"mostrar-#{parametro.referencia}"
+              end
+
+              g.column :name => 'Método', html: {style: 'text-align: center'}, :attribute => 'metodo' do |parametro|
+                link_to "#{parametro.metodo}",parametro, id:"mostrar-#{parametro.metodo}"
+              end
+
+              g.column :name => 'Valor de Referência', html: {style: 'text-align: center'}, :attribute => 'valor_referencia' do |parametro|
+                link_to "#{parametro.valor_referencia}",parametro, id:"mostrar-#{parametro.valor_referencia}"
+              end
+
+              g.column name: 'Editar' do |parametro|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_parametro_path(parametro), id:"editar-#{parametro.id}" }
+              end
+
+              g.column name: 'Excluir' do |parametro|
+                render partial: 'layouts/grid_icons/delete', locals: {hyperlink:parametro_path(parametro), id:"deletar-#{parametro.id}", message: 'Tem certeza que deseja excluir?'  }
+              end
+
+            end -%>
+
+        <%end%>
+
+        </div>
+
+      </div>
+  </div>
+
+</div>

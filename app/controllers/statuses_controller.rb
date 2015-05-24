@@ -1,6 +1,7 @@
 class StatusesController < ApplicationController
   before_action :set_status, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao_nao_permitida
+  before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
 
   # GET /statuses
   # GET /statuses.json

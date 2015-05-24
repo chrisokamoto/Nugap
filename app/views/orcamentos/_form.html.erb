@@ -1,248 +1,210 @@
-<%= form_for(@orcamento) do |f| %>
-  <% if @orcamento.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@orcamento.errors.count, "erro") %>:</h2>
+<!-- Row start -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="widget">
+        <%= render partial: 'layouts/forms/error', locals: {modelo: @orcamento} %>
 
-      <ul>
-      <% @orcamento.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <div class="widget-body expose" style="display:none" id="the_wizard">
+          
+          <%= form_for(@orcamento, html: {class: 'form-horizontal', role: 'form', id: 'orcamento_form'})  do |f| %>
+
+          <!-- wizard start-->
+
+            <%if @is_new_or_create %>
+                <%= render partial:'layouts/wizard/wizard_header', locals: {steps:orcamento_wizard_steps_new}%>
+              <%else%>
+                <%= render partial:'layouts/wizard/wizard_header', locals: {steps:orcamento_wizard_steps}%>
+              <%end%>           
+
+            <!-- painel wizard start-->
+            <div>
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Identificador*", :class=>"col-lg-4 control-label" %>
+                      <div class="col-lg-4">
+                        <%= f.text_field :numero, :id => "num_orcamento", :class=>"form-control" %>
+                      </div>                      
+                                                        
+                      <%= f.label :data, :class=>"col-lg-1 control-label" %>                
+                      <div class="col-lg-3">
+                        <%= f.text_field :data, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Pessoa Solicitante", :class=>"col-lg-4 control-label" %>                                  
+                      <div class="col-lg-8">
+                        <%= f.text_field :pessoa_solicitante, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Empresa Solicitante", :class=>"col-lg-4 control-label" %>                         
+                      <div class="col-lg-8">
+                        <%= f.text_field :empresa_solicitante, :id => "empresa", :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label :telefone, :class=>"col-lg-4 control-label" %>                                 
+                      <div class="col-lg-8">
+                        <%= f.text_field :telefone, :id => "telefone", :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label :email, :class=>"col-lg-4 control-label" %>                                 
+                      <div class="col-lg-8">
+                        <%= f.text_field :email, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Observações", :class=>"col-lg-4 control-label" %>                                
+                      <div class="col-lg-8">
+                        <%= f.text_area :observacao, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div> 
+                  <div class="form-group">
+                    <div class="col-lg-offset-10 col-lg-2">
+                      <% if not @is_new_or_create %>
+                        <input type="button" class="btn btn-info btn-block" value="Próximo" onClick="wizard_next()"/>
+                      <% end %>
+                        <%= f.submit "Salvar", :class => 'btn btn-success btn-block', :id => "submit" %>
+                    </div>
+                  </div>
+            </div>
+            <!-- end -->  
+
+            <!-- painel wizard start-->
+            <div> 
+              <%= f.hidden_field(:id, :value => @orcamento.id, :id=>"id_orcamento" ) %>
+              <%= render partial: 'layouts/panel/two_sides' %>
+              <div class="form-group">
+                    <div class="col-lg-2">
+                      <input type="button" class="btn btn-info btn-block" value="Voltar" onClick="wizard_previous()"/>
+                    </div>
+                    <div class="col-lg-offset-8 col-lg-2">                      
+                        <input type="button" class="btn btn-info btn-block" value="Próximo" onClick="wizard_next()"/>
+                      <%= f.submit "Salvar", :class => 'btn btn-success btn-block', :id => "submit" %>
+                    </div>
+              </div>
+
+
+            </div>
+            <!-- end -->
+
+            <!-- painel wizard start-->
+            <div>
+              <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label :quantidade, :class=>"col-lg-4 control-label" %>                                 
+                      <div class="col-lg-2">
+                        <%= f.text_field :quantidade, :class=>"form-control" %>
+                      </div>  
+
+                      <%= f.label :prazo, :class=>"col-lg-1 control-label" %>                                 
+                      <div class="col-lg-4">
+                        <%= f.text_field :prazo, :class=>"form-control" %>
+                      </div>  
+                    </div> 
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Desconto (%)", :class=>"col-lg-4 control-label" %>                                 
+                      <div class="col-lg-2">
+                        <%= f.number_field :desconto, :class=>"form-control", :min => 0, :max =>100 %>
+                      </div>  
+                    </div> 
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "IR", :class=>"col-lg-4 control-label" %>                                 
+                      <div class="col-lg-2">
+                        <%= f.text_field :ir, :class=>"form-control", :readonly => 'true' %>
+                      </div>  
+
+                      <%= f.label "PIS", :class=>"col-lg-1 control-label" %>                                 
+                      <div class="col-lg-2">
+                        <%= f.text_field :pis, :class=>"form-control", :readonly => 'true' %>
+                      </div>  
+                    </div> 
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "CSSL", :class=>"col-lg-4 control-label" %>                                 
+                      <div class="col-lg-2">
+                        <%= f.text_field :cssl, :class=>"form-control", :readonly => 'true' %>
+                      </div>  
+
+                      <%= f.label "COFINS", :class=>"col-lg-1 control-label" %>                                 
+                      <div class="col-lg-2">
+                        <%= f.text_field :cofins, :class=>"form-control", :readonly => 'true' %>
+                      </div>  
+                    </div> 
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Total a Pagar", :class=>"col-lg-4 control-label", :style=>"color: red;" %>                                 
+                      <div class="col-lg-2">
+                        <%= f.text_field :total_pagar, :class=>"form-control", :readonly => 'true' %>
+                      </div>  
+                    </div> 
+                  </div>
+
+                  <%= f.hidden_field :valor_bruto, :id => "total_bruto" %>                  
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label "Forma de Pagamento", :class=>"col-lg-4 control-label" %>                                 
+                      <div class="col-lg-4">
+                        <%= f.select(:pagamento, {'Boleto Bancário' => "Boleto Bancário", 'Depósito/Transferência' => 'Depósito/Transferência'}, {}, {class: 'form-control'}) %>                                              
+                      </div>  
+                    </div> 
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-7">
+                      <%= f.label :status, :class=>"col-lg-4 control-label" %>                                 
+                      <div class="col-lg-4">
+                        <%= f.select(:status, {'Aceito' => "Aceito", 'Não Aceito' => 'Não Aceito'}, {}, {class: 'form-control'}) %>                                             
+                      </div>  
+                    </div> 
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-2">
+                      <input type="button" class="btn btn-info btn-block" value="Voltar" onClick="wizard_previous()"/>
+                    </div>
+                    <div class="col-lg-offset-8 col-lg-2">                      
+                      <%= f.submit "Salvar", :class => 'btn btn-success btn-block', :id => "submit" %>
+                    </div>
+              </div>
+
+              </div>
+            <!-- end -->
+              
+            <%= render 'layouts/wizard/wizard_tail'%>
+          <!-- wizard end -->
+
+          <% end %>
+
+          </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label "Identificador*" %>
-    <%= f.text_field :numero, :id => "num_orcamento" %>
   </div>
-  <div class="field">
-    <%= f.label :data %><br>
-    <%= f.text_field :data %>
-  </div>
-  
-  <div class="field">
-    <%= f.label "Pessoa Solicitante" %><br>
-    <%= f.text_field :pessoa_solicitante %>
-  </div>
-  <div class="field">
-    <%= f.label "Empresa Solicitante" %><br>
-    <%= f.text_field :empresa_solicitante, :id => "empresa", :style=>"width:300px;" %>
-  </div>
-  <div class="field">
-    <%= f.label :telefone %><br>
-    <%= f.text_field :telefone, :id => "telefone" %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label "Observações" %>
-    <%= f.text_area :observacao %>
-  </div>
-    
-
-  <fieldset>
-        
-    <%= render('servicosOrcamentos_table', :f => f) %>
-    <br><br>
-
-        <center><%= link_to_add_fields_servico("Adicionar Serviços", f, :servico_orcamentos, :class => "btn", :title => "Adicionar Serviços") %></center>
-        <p></p>
-  </fieldset> 
-
-  <div class="field">
-    <%= f.label :quantidade %><br>
-    <%= f.text_field :quantidade %>
-  </div>
-  <div class="field">
-    <%= f.label :prazo %><br>
-    <%= f.text_field :prazo %>
-  </div>
-  <div class="field">
-    <%= f.label "Desconto (%)" %><br>
-    <%= f.number_field :desconto, :class => "desconto", :min => 0, :max =>100, :style=>"width:80px;" %>
-  </div>  
-
-  <div class="field">
-    <%= f.label "IR" %><br>
-    <%= f.text_field :ir, :id => "ir", :readonly => 'true', :style=>"width:80px;" %>
-  </div>
-
-  <div class="field">
-    <%= f.label "PIS" %><br>
-    <%= f.text_field :pis, :id => "pis", :readonly => 'true', :style=>"width:80px;" %>
-  </div>
-
-  <div class="field">
-    <%= f.label "CSSL" %><br>
-    <%= f.text_field :cssl, :id => "cssl", :readonly => 'true', :style=>"width:80px;" %>
-  </div>
-
-  <div class="field">
-    <%= f.label "COFINS" %><br>
-    <%= f.text_field :cofins, :id => "cofins", :readonly => 'true', :style=>"width:80px;" %>
-  </div>
-
-  <div class="field">
-    <%= f.label "Total a Pagar", :style=>"color: red;" %><br>
-    <%= f.text_field :total_pagar, :id => "total", :class => "total", :readonly => 'true', :style=>"width:80px;"  %>
-    
-  </div> 
-
-  <%= f.hidden_field :valor_bruto, :id => "total_bruto" %>
-
-  <div class="field">
-    <%= f.label "Forma de Pagamento" %><br>   
-    <%= f.select(:pagamento, {'Boleto Bancário' => "Boleto Bancário", 'Depósito/Transferência' => 'Depósito/Transferência'}) %>
-    
-  </div>
-  
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.select(:status, {'Aceito' => "Aceito", 'Não Aceito' => 'Não Aceito'}) %>
-  </div>  
-
-
-
-  
-
-  <div class="actions">
-    <%= f.submit "Salvar", :class => 'btn btn-info', :id => "submit" %>
-  </div>
-<% end %>
-
-<script type="text/javascript">
-
-if($("INPUT#num_orcamento").val() != "")
-    document.getElementById("submit").disabled = false;
-  else 
-    document.getElementById("submit").disabled = true;
-
-$("#num_orcamento").on("change",function() {            
-  
-  if($("INPUT#num_orcamento").val() != "")
-    document.getElementById("submit").disabled = false;
-  else 
-    document.getElementById("submit").disabled = true;
-       
-
-  return false;
-});
-
-
-
-function addAll() {
-  var sum = 0.0, total;
-  var inputs, index;  
-
-  inputs = document.getElementsByTagName('input');
-  
-  for (index = 0; index < inputs.length; ++index) {    
-    if(inputs[index].name.indexOf("[valor_total]") != -1){      
-      
-      var tr = $(inputs[index]).parents('tr');
-      if ($(tr).attr("style") == 'display: none;'){
-      
-        cont = 0;        
-      }
-      else{
-        
-        sum += +(inputs[index].value);
-      }
-      
-    }
-  }
-
-  $('#total').val(sum);
-  $('#total_bruto').val(sum);
-
-   var total_pagar = $('INPUT#total').val();      
-      if(total_pagar == "")    
-        total_pagar = "0"  
-
-      var desconto = $('INPUT#orcamento_desconto').val();      
-      if(desconto == "")    
-        desconto = "0"  
-     
-      $.get('/orcamentos/get_valor_desconto/' + total_pagar + '/' + desconto, function(data){
-           $('#total').html(data).change();
-        })
-  
-      return sum;
-}
-jQuery(function($) {  
-
-$(".desconto").on("input",function() {            
-      addAll();
-
-       var bruto = $('INPUT#total_bruto').val();      
-      if(bruto == "")    
-        bruto = "0"  
-
-      var desconto = $('INPUT#orcamento_desconto').val();      
-      if(desconto == "")    
-        desconto = "0"  
-     
-      $.get('/orcamentos/get_valor_desconto/' + bruto + '/' + desconto, function(data){
-           $('#total').html(data).change();
-        })
-
-
-      return false;
-    });
-
-  $(".total").change(function() {
-
-
-       var bruto = $('INPUT#total_bruto').val();      
-      if(bruto == "")    
-        bruto = "0"  
-
-      var total_pagar = $('INPUT#total').val();      
-      if(total_pagar == "")    
-        total_pagar = "0"
-     
-      $.get('/orcamentos/get_valor_impostos/' + total_pagar , function(data){
-           $('.total').html(data);
-        })
-
-      return false;
-    });
-
-  $("#empresa").change(function() {
-
-
-       var empresa = $('INPUT#empresa').val();       
-     
-      $.get('/orcamentos/get_telefone_empresa/' + empresa , function(data){           
-           $('#telefone').html(data);
-        })
-
-      return false;
-    });
-
-  
-
-
-});
-
-var empresa = <%= Empresa.all.map{|m| {nome:m.nome, label:" #{m.nome}", value:m.nome}}.to_json.html_safe %>;
-
-$(document).ready(function(){
-  
-
-  $("#empresa").autocomplete({
-    source: empresa,
-    autoFocus: true,
-    minLength:1,
-
-    select: function(event, ui){
-      $("#empresa").val(ui.item.nome);      
-    },
-
-    
-  });
-});
-
-</script>

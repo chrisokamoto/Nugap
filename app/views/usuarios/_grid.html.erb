@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs2" aria-hidden="true">
+            <%= "Usuários cadastrados" %>
+        </div>
+      </div>
+
+      <div class="widget-body">
+
+        <% if !user_is_administrador? %>
+          
+            <%= grid(@usuarios_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome' do |usuario|
+                link_to "#{usuario.nome}",usuario, id:"mostrar-#{usuario.nome}"
+              end
+
+              g.column :name => 'Sobrenome', html: {style: 'text-align: center'}, :attribute => 'sobrenome' do |usuario|
+                link_to "#{usuario.sobrenome}",usuario, id:"mostrar-#{usuario.sobrenome}"
+              end
+
+              g.column :name => 'Login', html: {style: 'text-align: center'}, :attribute => 'login' do |usuario|
+                link_to "#{usuario.login}",usuario, id:"mostrar-#{usuario.login}"
+              end
+
+              g.column :name => 'Permissão', html: {style: 'text-align: center'}, :attribute => 'permissao' do |usuario|
+                link_to "#{usuario.permissao}",usuario, id:"mostrar-#{usuario.permissao}"
+              end
+             
+
+              g.column name: 'Editar' do |usuario|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_usuario_path(usuario), id:"editar-#{usuario.id}" }
+              end
+
+            end -%>
+
+        <%end%>
+
+        <% if user_is_administrador? %>
+
+        <%= grid(@usuarios_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome' do |usuario|
+                link_to "#{usuario.nome}",usuario, id:"mostrar-#{usuario.nome}"
+              end
+
+              g.column :name => 'Sobrenome', html: {style: 'text-align: center'}, :attribute => 'sobrenome' do |usuario|
+                link_to "#{usuario.sobrenome}",usuario, id:"mostrar-#{usuario.sobrenome}"
+              end
+
+              g.column :name => 'Login', html: {style: 'text-align: center'}, :attribute => 'login' do |usuario|
+                link_to "#{usuario.login}",usuario, id:"mostrar-#{usuario.login}"
+              end
+
+              g.column :name => 'Permissão', html: {style: 'text-align: center'}, :attribute => 'permissao' do |usuario|
+                link_to "#{usuario.permissao}",usuario, id:"mostrar-#{usuario.permissao}"
+              end
+
+              g.column name: 'Editar' do |usuario|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_usuario_path(usuario), id:"editar-#{usuario.id}" }
+              end
+
+              g.column name: 'Excluir' do |usuario|
+                render partial: 'layouts/grid_icons/delete', locals: {hyperlink:usuario_path(usuario), id:"deletar-#{usuario.id}", message: 'Tem certeza que deseja excluir?'  }
+              end
+
+            end %>
+
+        <%end%>
+
+        </div>
+
+      </div>
+  </div>
+
+</div>

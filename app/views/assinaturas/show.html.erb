@@ -1,33 +1,44 @@
-<br /><br /><br /><br />
-<p id="notice"><%= notice %></p>
+ <!-- Row start -->
+ <div class="row">
+ 	<div class="col-lg-6">
+ 		<div class="widget">
+ 			<div class="widget-header">
+ 				<div class="title">
+ 					<span class="text-error">Assinatura</span>
+ 				</div>
+ 			</div>
+ 			<div class="widget-body">
+ 				<table class="table table-striped table-hover">
+ 					<tbody>
+ 						<tr>
+ 							<td>
+ 								<strong>Nome:</strong>
+ 							</td>
+ 							<td>
+ 								<%= @assinatura.nome %>
+ 							</td>
+ 						</tr> 
+ 						<tr>
+ 							<td>
+ 								<strong>Conselho:</strong>
+ 							</td>
+ 							<td>
+ 								<%= @assinatura.tipo_conselho %>
+ 							</td>
+ 						</tr> 	
+ 						<tr>
+ 							<td>
+ 								<strong>Número:</strong>
+ 							</td>
+ 							<td>
+ 								<%= @assinatura.numero_conselho %>
+ 							</td>
+ 						</tr> 	
+ 					</tbody>
+ 				</table>
+ 			</div>
+ 		</div>
+ 	</div> 	
 
-<p>
-  <strong>Nome:</strong>
-  <%= @assinatura.nome %>
-</p>
-
-<p>
-  <strong>Conselho:</strong>
-  <%= @assinatura.tipo_conselho %>
-</p>
-
-<p>
-  <strong>Número:</strong>
-  <%= @assinatura.numero_conselho %>
-</p>
-
-
-<%= link_to 'Editar', edit_assinatura_path(@assinatura), :class => 'btn btn-info' %>
-<%= link_to 'Voltar', assinaturas_path, :class => 'btn btn-info' %>
-
-
-
-<footer>
-      <div class="footerNugap">
-        <br><br>
-        <center>
-          <img src="../../assets/images/logo.png" alt="Nugap" width="50" height="50">
-          <i>Nugap - Todos os direitos reservados</i>
-        </center>
-      </div>
-    </footer>
+</div>
+<%= link_to t('botoes.voltar'), "javascript:history.go(-1)", class: 'btn btn-info'%>

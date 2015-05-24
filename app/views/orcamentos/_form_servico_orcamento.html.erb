@@ -1,0 +1,76 @@
+<!-- Row start -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs1" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="widget-body">
+      <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'edit')%>
+        <%= form_for(@servico_orcamento, url: orcamentos_path, html: {class: 'form-horizontal', role: 'form'}) do |f| %>     
+
+          <%= f.hidden_field :id %>                
+
+          <div class="form-group">
+            <%= f.label 'Produto', class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= f.collection_select(:produto, PrecoServico.group('produto'), :produto, :produto, options ={:prompt =>
+                "", :value => nil}, :class=>"form-control") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label 'Análise', class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= f.collection_select( :analise, TipoAnalise.order('tipo'), :tipo, :tipo, options ={:prompt =>
+                "", :value => nil}, :class=>"form-control") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label 'Parâmetro', class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= f.collection_select( :parametro, Parametro.order('nome'), :nome, :nome, options ={:prompt =>
+                "", :value => nil}, :class=>"form-control") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label 'Quantidade', class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= f.text_field(:qtd_amostra, :style=>"width:80px;", :class=>"form-control", :onfocus => "limpa()", :onblur => "zera()") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label 'Valor Unitário', class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= f.text_field(:valor_unitario, :style=>"width:80px;", :class=>"form-control", :readonly => true) %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label 'Valor Total', class: 'col-lg-3 control-label' %>
+            <div class="col-lg-9">
+              <%= f.text_field(:valor_total, :style=>"width:80px;", :class=>"form-control", :readonly => true) %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-offset-3 col-lg-9">
+              <div class="col-lg-6">
+                <button id="addButtonServico" type="button" class="btn btn-success btn-block" data-dismiss="modal" aria-hidden="true" >Salvar</button>                
+              </div>
+              <div class="col-lg-6">
+                <%= link_to edit_orcamento_path(@orcamento) do %>
+                  <button type="button" class="btn btn-secondary btn-block"> <%= "Limpar" %> </button>
+                <%end%>
+              </div>
+              <div class="col-lg-6">
+                
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>      
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Row end -->

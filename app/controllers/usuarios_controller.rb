@@ -1,6 +1,8 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao, :valida_permissao_adm
+  before_action :set_grid, only: [:index, :create, :edit, :update] 
+  before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new] 
 
   before_filter :valida_permissao_chrisfernando, only: [:show, :edit, :update, :destroy]
 
@@ -17,6 +19,7 @@ class UsuariosController < ApplicationController
   # GET /usuarios.json
   def index
     @usuarios = Usuario.all
+    @usuario = Usuario.new
     @usuarios_grid = initialize_grid(Usuario, 
       :order => 'created_at',
       :order_direction => 'desc',
@@ -46,8 +49,8 @@ class UsuariosController < ApplicationController
 
     respond_to do |format|
       if @usuario.save
-        format.html { redirect_to @usuario, notice: 'Usuário criado com sucesso!' }
-        format.json { render action: 'show', status: :created, location: @usuario }
+        format.html { redirect_to usuarios_path, notice: 'Usuário criado com sucesso!' }
+        format.json { render action: 'index', status: :created, location: @usuario }
       else
         format.html { render action: 'new' }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
@@ -59,11 +62,12 @@ class UsuariosController < ApplicationController
   # PATCH/PUT /usuarios/1.json
   def update
     respond_to do |format|
-      if @usuario.update(usuario_params)
-        format.html { redirect_to @usuario, notice: 'Usuário atualizado com sucesso!' }
+      puts usuario_params
+      if @usuario.update(usuario_params)        
+        format.html { redirect_to usuarios_path, notice: 'Usuário atualizado com sucesso!' }
         format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
+      else        
+        format.html { render action: 'index' }
         format.json { render json: @usuario.errors, status: :unprocessable_entity }
       end
     end
@@ -80,6 +84,13 @@ class UsuariosController < ApplicationController
   end
 
   private
+    def set_grid
+      @usuarios_grid = initialize_grid(Usuario,
+        :order => 'created_at',
+        :order_direction => 'desc',
+        :per_page => 10
+      )
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_usuario
       @usuario = Usuario.find(params[:id])

@@ -1,0 +1,9 @@
+<% if(request.original_url.include? "orcamentos") %>
+	$('#servico_orcamento_id').val("<%= @servico.id %>");
+	$('#servico_orcamento_produto').val("<%= @servico.produto %>");
+	$('#servico_orcamento_analise').val("<%= @servico.analise %>");
+	$('#servico_orcamento_parametro').val("<%= @servico.parametro %>");
+	$('#servico_orcamento_qtd_amostra').val("<%= @servico.qtd_amostra %>");
+	$('#servico_orcamento_valor_unitario').val("<%= @servico.valor_unitario %>");
+	$('#servico_orcamento_valor_total').val("<%= @servico.valor_total %>");
+<% end %>

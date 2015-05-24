@@ -1,57 +1,5 @@
-<br /><br /><br /><br />
-<legend>Assinaturas cadastradas</legend>
+<%= render partial: 'layouts/panel/two_sides_geral' %>
 
-<div style="width:55%; margin-left:20%;">
-
-<% if !user_is_administrador? %>
-  
-    <%= grid(@assinaturas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
-
-      g.column :name => 'Conselho', html: {style: 'text-align: center'}, :attribute => 'tipo_conselho' 
-
-      g.column :name => 'Número', html: {style: 'text-align: center'}, :attribute => 'numero_conselho' 
-
-      g.column do |assinatura|
-        link_to('Editar', edit_assinatura_path(assinatura), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-    end -%>
-
-<%end%>
-
-<% if user_is_administrador? %>
-
-<%= grid(@assinaturas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
-
-      g.column :name => 'Conselho', html: {style: 'text-align: center'}, :attribute => 'tipo_conselho' 
-
-      g.column :name => 'Número', html: {style: 'text-align: center'}, :attribute => 'numero_conselho' 
-
-      g.column do |assinatura|
-        link_to('Editar', edit_assinatura_path(assinatura), html: {style: 'text-align: center'}, :class => 'btn btn-small')    
-      end
-
-      g.column do |assinatura|
-        link_to 'Excluir', assinatura, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a assinatura #{assinatura.nome}?" } 
-      end
-
-    end -%>
-
-<%end%>
-
-</div>
-
-
-
-<br>
-
-<%= link_to 'Nova Assinatura', new_assinatura_path, :class => 'btn btn-info'%>
 
 
 

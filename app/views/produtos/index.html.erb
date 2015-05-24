@@ -1,49 +1,6 @@
-<br /><br /><br /><br />
-<legend>Produtos cadastrados</legend>
+<%= render partial: 'layouts/panel/two_sides_geral' %>
 
-<div style="width:55%; margin-left:20%;">
 
-<% if !user_is_administrador? %>
-  
-    <%= grid(@produtos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'
-     
-
-      g.column do |produto|
-        link_to('Editar', edit_produto_path(produto), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-    end -%>
-
-<%end%>
-
-<% if user_is_administrador? %>
-
-<%= grid(@produtos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'
-     
-
-      g.column do |produto|
-        link_to('Editar', edit_produto_path(produto), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-      g.column do |produto|
-        link_to 'Excluir', produto, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o produto #{produto.tipo}?" } 
-      end
-
-    end -%>
-
-<%end%>
-
-</div>
-
-<br>
-
-<%= link_to 'Novo Produto', new_produto_path, :class => 'btn btn-info' %>
 
 
 <footer>

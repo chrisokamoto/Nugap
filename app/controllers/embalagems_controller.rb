@@ -1,11 +1,14 @@
 class EmbalagemsController < ApplicationController
   before_action :set_embalagem, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao
+  before_action :set_grid, only: [:index, :create, :edit, :update] 
+  before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
 
   # GET /embalagems
   # GET /embalagems.json
   def index
     @embalagems = Embalagem.all
+    @embalagem = Embalagem.new
     @embalagens_grid = initialize_grid(Embalagem, 
       :order => 'created_at',
       :order_direction => 'desc',
@@ -34,8 +37,8 @@ class EmbalagemsController < ApplicationController
 
     respond_to do |format|
       if @embalagem.save
-        format.html { redirect_to @embalagem, notice: 'Embalagem criada com sucesso!' }
-        format.json { render action: 'show', status: :created, location: @embalagem }
+        format.html { redirect_to embalagems_path, notice: 'Embalagem criada com sucesso!' }
+        format.json { render action: 'index', status: :created, location: @embalagem }
       else
         format.html { render action: 'new' }
         format.json { render json: @embalagem.errors, status: :unprocessable_entity }
@@ -48,10 +51,10 @@ class EmbalagemsController < ApplicationController
   def update
     respond_to do |format|
       if @embalagem.update(embalagem_params)
-        format.html { redirect_to @embalagem, notice: 'Embalagem atualizada com sucesso!' }
+        format.html { redirect_to embalagems_path, notice: 'Embalagem atualizada com sucesso!' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'index' }
         format.json { render json: @embalagem.errors, status: :unprocessable_entity }
       end
     end
@@ -68,6 +71,13 @@ class EmbalagemsController < ApplicationController
   end
 
   private
+    def set_grid
+      @embalagens_grid = initialize_grid(Embalagem,
+        :order => 'created_at',
+        :order_direction => 'desc',
+        :per_page => 10
+      )
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_embalagem
       @embalagem = Embalagem.find(params[:id])

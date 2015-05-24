@@ -1,0 +1,16 @@
+<% if modelo.errors.any? %>
+<div class="form-group">
+  <div class="col-lg-12">
+    <div class="panel panel-danger no-margin">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%=t('mensagens.erro_cadastrar_dados')%></h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li><%= modelo.errors.full_messages.first %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

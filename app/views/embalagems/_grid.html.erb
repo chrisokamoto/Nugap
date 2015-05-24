@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-2">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs2" aria-hidden="true">
+            <%= "Embalagens cadastradas" %>
+        </div>
+      </div>
+
+      <div class="widget-body">
+
+        <% if !user_is_administrador? %>
+          
+            <%= grid(@embalagens_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo' do |embalagem|  
+                link_to "#{embalagem.tipo}",embalagem, id:"mostrar-#{embalagem.tipo}"
+              end
+
+              g.column name: 'Editar' do |embalagem|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_embalagem_path(embalagem), id:"editar-#{embalagem.id}" }
+              end
+
+            end -%>
+
+        <%end%>
+
+        <% if user_is_administrador? %>
+
+        <%= grid(@embalagens_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo' do |embalagem|  
+                link_to "#{embalagem.tipo}",embalagem, id:"mostrar-#{embalagem.tipo}"
+              end 
+
+              g.column name: 'Editar' do |embalagem|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_embalagem_path(embalagem), id:"editar-#{embalagem.id}" }
+              end
+
+              g.column name: 'Excluir' do |embalagem|
+                render partial: 'layouts/grid_icons/delete', locals: {hyperlink:embalagem_path(embalagem), id:"deletar-#{embalagem.id}", message: 'Tem certeza que deseja excluir?'  }
+              end
+
+            end -%>
+
+        <%end%>
+
+        </div>
+
+      </div>
+  </div>
+
+</div>

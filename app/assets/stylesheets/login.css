@@ -41,17 +41,15 @@
 	color: #404040;
 }
 
-.logado {
-	position:fixed;
-	right:30px;
+.logado {	
+	padding-right:30px;
 	top: 0px;
 	height:0px;
-	padding: 5px 0px 5px;
+	
 }
 
 .logout {	
-	text-decoration: underline;
-	position:fixed;
+	text-decoration: underline;	
 	right:30px;
 	top:30px;
 	height:0px;		

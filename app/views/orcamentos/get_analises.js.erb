@@ -1,7 +1,7 @@
 <% if(request.original_url.include? "orcamentos") %>
-	$('.analise_seletor').empty();
-	$('.analise_seletor').append( $('<option></option>'));
+	$('#servico_orcamento_analise').empty();
+	$('#servico_orcamento_analise').append( $('<option></option>'));
 	<% @analises.each do |analise| %>
-	  $('.analise_seletor').append($('<option value="<%= analise.tipo %>"><%= analise.tipo %></option>'));
+	  $('#servico_orcamento_analise').append($('<option value="<%= analise.tipo %>"><%= analise.tipo %></option>'));
 	<% end %>
 <% end %>

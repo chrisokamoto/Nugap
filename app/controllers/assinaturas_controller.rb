@@ -1,11 +1,14 @@
 class AssinaturasController < ApplicationController
   before_action :set_assinatura, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao
+  before_action :set_grid, only: [:index, :create, :edit, :update]
+  before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new] 
 
   # GET /assinaturas
   # GET /assinaturas.json
   def index
     @assinaturas = Assinatura.all
+    @assinatura = Assinatura.new
     @assinaturas_grid = initialize_grid(Assinatura, 
       :order => 'created_at',
       :order_direction => 'desc',
@@ -34,8 +37,8 @@ class AssinaturasController < ApplicationController
 
     respond_to do |format|
       if @assinatura.save
-        format.html { redirect_to @assinatura, notice: 'Assinatura criada com sucesso!' }
-        format.json { render action: 'show', status: :created, location: @assinatura }
+        format.html { redirect_to assinaturas_path, notice: 'Assinatura criada com sucesso!' }
+        format.json { render action: 'index', status: :created, location: @assinatura }
       else
         format.html { render action: 'new' }
         format.json { render json: @assinatura.errors, status: :unprocessable_entity }
@@ -48,10 +51,10 @@ class AssinaturasController < ApplicationController
   def update
     respond_to do |format|
       if @assinatura.update(assinatura_params)
-        format.html { redirect_to @assinatura, notice: 'Assinatura atualizada com sucesso!' }
+        format.html { redirect_to assinaturas_path, notice: 'Assinatura atualizada com sucesso!' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'index' }
         format.json { render json: @assinatura.errors, status: :unprocessable_entity }
       end
     end
@@ -68,6 +71,13 @@ class AssinaturasController < ApplicationController
   end
 
   private
+    def set_grid
+      @assinaturas_grid = initialize_grid(Assinatura,
+        :order => 'created_at',
+        :order_direction => 'desc',
+        :per_page => 10
+      )
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_assinatura
       @assinatura = Assinatura.find(params[:id])

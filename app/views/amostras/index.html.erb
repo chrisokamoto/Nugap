@@ -1,20 +1,31 @@
-<br /><br /><br /><br />
+<br /><br />
 <legend>Amostras cadastradas</legend>
 
 <div style="width:95%; margin-left:3%;">
+
+  <%= link_to 'Nova Amostra', new_amostra_path, :class => 'btn btn-info' %>
+  <br /><br />
 
 <% if !user_is_administrador? %>
   
     <%= grid(@amostras_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
   
 
-      g.column :name => 'Amostra', html: {style: 'text-align: center'}, :attribute => 'certificado'
+      g.column :name => 'Amostra', html: {style: 'text-align: center'}, :attribute => 'certificado' do |amostra|
+        link_to "#{amostra.certificado}",amostra, id:"mostrar-#{amostra.certificado}"
+      end
 
-      g.column :name => 'Solicitante', html: {style: 'text-align: center'}, :attribute => 'solicitante' 
+      g.column :name => 'Solicitante', html: {style: 'text-align: center'}, :attribute => 'solicitante' do |amostra|
+        link_to "#{amostra.solicitante}",amostra, id:"mostrar-#{amostra.solicitante}"
+      end
 
-      g.column :name => 'Produto', html: {style: 'text-align: center'}, :attribute => 'produto' 
+      g.column :name => 'Produto', html: {style: 'text-align: center'}, :attribute => 'produto' do |amostra|
+        link_to "#{amostra.produto}",amostra, id:"mostrar-#{amostra.produto}"
+      end
 
-      g.column :name => 'Marca', html: {style: 'text-align: center'}, :attribute => 'marca' 
+      g.column :name => 'Marca', html: {style: 'text-align: center'}, :attribute => 'marca' do |amostra|
+        link_to "#{amostra.marca}",amostra, id:"mostrar-#{amostra.marca}"
+      end
 
       g.column :name => 'Status' do |amostra|
         if amostra.status == "Aberto"
@@ -22,18 +33,19 @@
         else amostra.status == "Fechado"
           [amostra.status, {style: 'text-align: center; color:red'}]        
         end
+        link_to "#{amostra.status}",amostra, id:"mostrar-#{amostra.status}"
       end
 
-      g.column do |amostra|
-        link_to('Copiar Dados', copy_amostra_path(amostra), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      g.column name: 'Copiar Dados' do |amostra|
+        render partial: 'layouts/grid_icons/copy', locals: {hyperlink:copy_amostra_path(amostra), id:"gerar_pdf-#{amostra.id}" }
       end
 
-      g.column do |amostra|
-        link_to('Detalhes', amostra, html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      g.column name: 'Gerar PDF' do |amostra|
+        render partial: 'layouts/grid_icons/pdf', locals: {hyperlink:amostra_path(amostra.id, format:'pdf'), id:"gerar_pdf-#{amostra.id}" }
       end
 
-      g.column do |amostra|
-        link_to('Editar', edit_amostra_path(amostra), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      g.column name: 'Editar' do |amostra|
+        render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_amostra_path(amostra), id:"editar-#{amostra.id}" }
       end
 
     end -%>
@@ -45,37 +57,47 @@
 <%= grid(@amostras_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
   
 
-  g.column :name => 'Amostra', html: {style: 'text-align: center'}, :attribute => 'certificado'
+  g.column :name => 'Amostra', html: {style: 'text-align: center'}, :attribute => 'certificado' do |amostra|
+        link_to "#{amostra.certificado}",amostra, id:"mostrar-#{amostra.certificado}"
+      end
 
-  g.column :name => 'Solicitante', html: {style: 'text-align: center'}, :attribute => 'solicitante' 
+      g.column :name => 'Solicitante', html: {style: 'text-align: center'}, :attribute => 'solicitante' do |amostra|
+        link_to "#{amostra.solicitante}",amostra, id:"mostrar-#{amostra.solicitante}"
+      end
 
-  g.column :name => 'Produto', html: {style: 'text-align: center'}, :attribute => 'produto' 
+      g.column :name => 'Produto', html: {style: 'text-align: center'}, :attribute => 'produto' do |amostra|
+        link_to "#{amostra.produto}",amostra, id:"mostrar-#{amostra.produto}"
+      end
 
-  g.column :name => 'Marca', html: {style: 'text-align: center'}, :attribute => 'marca' 
+      g.column :name => 'Marca', html: {style: 'text-align: center'}, :attribute => 'marca' do |amostra|
+        link_to "#{amostra.marca}",amostra, id:"mostrar-#{amostra.marca}"
+      end
 
-  g.column :name => 'Status' do |amostra|
-    if amostra.status == "Aberto"
-      [amostra.status, {style: 'text-align: center; color:green'}]        
-    else amostra.status == "Fechado"
-      [amostra.status, {style: 'text-align: center; color:red'}]        
-    end
+      g.column :name => 'Status' do |amostra|
+        if amostra.status == "Aberto"
+          [amostra.status, {style: 'text-align: center; color:green'}]        
+        else amostra.status == "Fechado"
+          [amostra.status, {style: 'text-align: center; color:red'}]        
+        end
+        link_to "#{amostra.status}",amostra, id:"mostrar-#{amostra.status}"
+      end
+
+  g.column name: 'Copiar Dados' do |amostra|
+    render partial: 'layouts/grid_icons/copy', locals: {hyperlink:copy_amostra_path(amostra), id:"gerar_pdf-#{amostra.id}" }
   end
 
-  g.column do |amostra|
-    link_to('Copiar Dados', copy_amostra_path(amostra), html: {style: 'text-align: center;'}, :class => 'btn btn-small')
+  g.column name: 'Gerar PDF' do |amostra|
+    render partial: 'layouts/grid_icons/pdf', locals: {hyperlink:amostra_path(amostra.id, format:'pdf'), id:"gerar_pdf-#{amostra.id}" }
   end
 
-  g.column do |amostra|
-    link_to('Detalhes', amostra, html: {style: 'text-align: center'}, :class => 'btn btn-small')
+  g.column name: 'Editar' do |amostra|
+    render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_amostra_path(amostra), id:"editar-#{amostra.id}" }
   end
 
-  g.column do |amostra|
-    link_to('Editar', edit_amostra_path(amostra), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-  end
-
-  g.column do |amostra|
-    link_to 'Excluir', amostra, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a amostra #{amostra.certificado}?" } 
-  end
+  g.column name: 'Excluir' do |amostra|
+    render partial: 'layouts/grid_icons/delete', locals: {hyperlink:amostra_path(amostra), id:"deletar-#{amostra.id}", message: 'Tem certeza que deseja excluir?'  }
+  end 
+  
 end -%>
 
 <%end%>
@@ -83,9 +105,6 @@ end -%>
 </div>
 
 <br>
-
-
-<%= link_to 'Nova Amostra', new_amostra_path, :class => 'btn btn-info' %>
 
 
 <footer>

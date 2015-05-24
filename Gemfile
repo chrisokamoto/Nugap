@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
@@ -41,7 +41,6 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'compass-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'twitter-bootstrap-rails'
 #  gem 'jquery-ui-rails'
 #  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
@@ -74,7 +73,9 @@ gem 'rails_12factor', group: :production
  gem 'dalli'
 
  #filter on datatables
- gem "wice_grid", '3.4.0'
+ gem "wice_grid", '3.4.3'
+
+ gem "font-awesome-rails"
 
 
 

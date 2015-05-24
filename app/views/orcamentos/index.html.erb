@@ -1,31 +1,43 @@
-<br /><br /><br /><br />
+<br /><br />
 <legend>Orçamentos cadastrados</legend>
 
 <div style="width:95%; margin-left:3%;">
+
+  <%= link_to 'Novo Orçamento', new_orcamento_path, :class => 'btn btn-info' %>
+  <br /><br />
 
 <% if !user_is_administrador? %>
   
     <%= grid(@orcamentos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
   
 
-      g.column :name => 'Identificador', html: {style: 'text-align: center'}, :attribute => 'numero'
+      g.column :name => 'Identificador', html: {style: 'text-align: center'}, :attribute => 'numero' do |orcamento|
+        link_to "#{orcamento.numero}",orcamento, id:"mostrar-#{orcamento.numero}"
+      end
 
-      g.column :name => 'Pessoa Solicitante', html: {style: 'text-align: center'}, :attribute => 'pessoa_solicitante' 
+      g.column :name => 'Pessoa Solicitante', html: {style: 'text-align: center'}, :attribute => 'pessoa_solicitante' do |orcamento|
+        link_to "#{orcamento.pessoa_solicitante}",orcamento, id:"mostrar-#{orcamento.pessoa_solicitante}"
+      end
 
-      g.column :name => 'Empresa Solicitante', html: {style: 'text-align: center'}, :attribute => 'empresa_solicitante' 
+      g.column :name => 'Empresa Solicitante', html: {style: 'text-align: center'}, :attribute => 'empresa_solicitante' do |orcamento|
+        link_to "#{orcamento.empresa_solicitante}",orcamento, id:"mostrar-#{orcamento.empresa_solicitante}"
+      end
 
       g.column :name => 'Total a Pagar (R$)', html: {style: 'text-align: center'} do |orcamento|
           number_to_currency(orcamento.total_pagar, :precision => 2, :unit => '', :separator => ',', :delimiter => '.')
+          link_to "#{orcamento.total_pagar}",orcamento, id:"mostrar-#{orcamento.total_pagar}"
       end 
 
-      g.column :name => 'Status', html: {style: 'text-align: center'}, :attribute => 'status' 
+      g.column :name => 'Status', html: {style: 'text-align: center'}, :attribute => 'status' do |orcamento|
+        link_to "#{orcamento.status}",orcamento, id:"mostrar-#{orcamento.status}"
+      end 
 
-      g.column do |orcamento|
-        link_to('Detalhes', orcamento, html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      g.column name: 'Gerar PDF' do |orcamento|
+        render partial: 'layouts/grid_icons/pdf', locals: {hyperlink:orcamento_path(orcamento.id, format:'pdf'), id:"gerar_pdf-#{orcamento.id}" }
       end
 
-      g.column do |orcamento|
-        link_to('Editar', edit_orcamento_path(orcamento), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      g.column name: 'Editar' do |orcamento|
+        render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_orcamento_path(orcamento), id:"editar-#{orcamento.id}" }
       end
 
     end -%>
@@ -37,39 +49,44 @@
 <%= grid(@orcamentos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
   
 
-      g.column :name => 'Identificador', html: {style: 'text-align: center'}, :attribute => 'numero'
+      g.column :name => 'Identificador', html: {style: 'text-align: center'}, :attribute => 'numero' do |orcamento|
+        link_to "#{orcamento.numero}",orcamento, id:"mostrar-#{orcamento.numero}"
+      end
 
-      g.column :name => 'Pessoa Solicitante', html: {style: 'text-align: center'}, :attribute => 'pessoa_solicitante' 
+      g.column :name => 'Pessoa Solicitante', html: {style: 'text-align: center'}, :attribute => 'pessoa_solicitante' do |orcamento|
+        link_to "#{orcamento.pessoa_solicitante}",orcamento, id:"mostrar-#{orcamento.pessoa_solicitante}"
+      end
 
-      g.column :name => 'Empresa Solicitante', html: {style: 'text-align: center'}, :attribute => 'empresa_solicitante' 
+      g.column :name => 'Empresa Solicitante', html: {style: 'text-align: center'}, :attribute => 'empresa_solicitante' do |orcamento|
+        link_to "#{orcamento.empresa_solicitante}",orcamento, id:"mostrar-#{orcamento.empresa_solicitante}"
+      end
 
       g.column :name => 'Total a Pagar (R$)', html: {style: 'text-align: center'} do |orcamento|
           number_to_currency(orcamento.total_pagar, :precision => 2, :unit => '', :separator => ',', :delimiter => '.')
+          link_to "#{orcamento.total_pagar}",orcamento, id:"mostrar-#{orcamento.total_pagar}"
       end 
 
-      g.column :name => 'Status', html: {style: 'text-align: center'}, :attribute => 'status'
+      g.column :name => 'Status', html: {style: 'text-align: center'}, :attribute => 'status' do |orcamento|
+        link_to "#{orcamento.status}",orcamento, id:"mostrar-#{orcamento.status}"
+      end 
 
-      g.column do |orcamento|
-        link_to('Detalhes', orcamento, html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      g.column name: 'Gerar PDF' do |orcamento|
+        render partial: 'layouts/grid_icons/pdf', locals: {hyperlink:orcamento_path(orcamento.id, format:'pdf'), id:"gerar_pdf-#{orcamento.id}" }
       end
 
-      g.column do |orcamento|
-        link_to('Editar', edit_orcamento_path(orcamento), html: {style: 'text-align: center'}, :class => 'btn btn-small')
+      g.column name: 'Editar' do |orcamento|
+        render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_orcamento_path(orcamento), id:"editar-#{orcamento.id}" }
       end
 
-      g.column do |orcamento|
-        link_to 'Excluir', orcamento, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o orcamento #{orcamento.numero}?" } 
-      end
+      g.column name: 'Excluir' do |orcamento|
+        render partial: 'layouts/grid_icons/delete', locals: {hyperlink:orcamento_path(orcamento), id:"deletar-#{orcamento.id}", message: 'Tem certeza que deseja excluir?'  }
+      end 
 
     end -%>
 
 <%end%>
 
 </div>
-
-<br>
-
-<%= link_to 'Novo Orçamento', new_orcamento_path, :class => 'btn btn-info' %>
 
 
 <footer>

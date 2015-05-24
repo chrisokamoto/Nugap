@@ -1,45 +1,85 @@
-<%= form_for(@usuario) do |f| %>
-  <% if @usuario.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@usuario.errors.count, "erro") %>:</h2>
 
-      <ul>      
-      <% @usuario.errors.full_messages.each do |msg| %>        
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs1" aria-hidden="true"></span>
+            <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'create')%>
+              <%= "Cadastrar Usuário" %>
+            <%else%>
+              <%= "Editar Usuário" %>
+            <%end%>
+        </div>
+      </div>
+      <div class="widget-body">
+
+          <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'create' || controller.action_name == 'edit')%>        
+
+          <%= form_for(@usuario,  html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+            <%= render partial: 'layouts/forms/error', locals: {modelo: @usuario} %>
+
+            <div class="form-group">
+              <%= f.label :login, class: 'col-lg-3 control-label' %>
+              <div class="col-lg-9">
+                <%= f.text_field :login, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :nome, class: 'col-lg-3 control-label' %>
+              <div class="col-lg-9">
+                <%= f.text_field :nome, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :sobrenome, class: 'col-lg-3 control-label' %>
+              <div class="col-lg-9">
+                <%= f.text_field :sobrenome, class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :senha, class: 'col-lg-3 control-label' %>
+              <div class="col-lg-9">
+                <%= f.password_field :senha , placeholder: 'Senha', class: 'form-control'%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label "Confirmação", class: 'col-lg-3 control-label' %>
+              <div class="col-lg-9">
+                <%= f.password_field :confirmacao , placeholder: 'Confirmação', class: 'form-control'%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label "Permissão", class: 'col-lg-3 control-label' %>  
+              <div class="col-lg-9">
+                <%= f.radio_button(:permissao, "estagiario") %> Estagiário  
+                <%= f.radio_button(:permissao, "tecnico") %> Técnico
+                <%= f.radio_button(:permissao, "administrador") %> Administrador
+              </div>
+            </div> 
+            
+            <div class="form-group">
+              <div class="col-lg-offset-3 col-lg-9">
+                <div class="col-lg-6">
+                  <%= f.submit "Salvar", class: 'btn btn-success btn-block' %>
+                </div>
+                <div class="col-lg-6">
+                  <%= link_to usuarios_path do %>
+                    <button type="button" class="btn btn-secondary btn-block"> <%= "Limpar" %> </button>
+                  <%end%>
+                </div>
+            </div>
+          </div>
+          <% end %>
+
+        <% end %>
+
+        </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :login %><br>
-    <%= f.text_field :login %>
   </div>
-  <div class="field">
-    <%= f.label :nome %><br>
-    <%= f.text_field :nome %>
-  </div>
-  <div class="field">
-    <%= f.label :sobrenome %><br>
-    <%= f.text_field :sobrenome %>
-  </div>
-  <div class="field">
-    <%= f.label :senha %><br>
-    <%= f.password_field :senha , placeholder: 'Senha'%>
-  </div>
-  <div class="field">
-    <%= f.label "Confirmação" %><br>
-    <%= f.password_field :confirmacao , placeholder: 'Confirmação'%>
-  </div>
-
-  <div class="field">
-    <%= f.label "Permissão" %><br>    
-    <%= f.radio_button(:permissao, "estagiario") %> Estagiário  
-    <%= f.radio_button(:permissao, "tecnico") %> Técnico
-    <%= f.radio_button(:permissao, "administrador") %> Administrador
-  </div> 
-  <br />
-  <div class="actions">
-    <%= f.submit "Salvar", :class => 'btn btn-info' %>
-  </div>
-<% end %>
+</div>

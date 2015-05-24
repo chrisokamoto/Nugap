@@ -1,0 +1,7 @@
+<% if(request.original_url.include? "amostras") %>
+	$('#parametro_resultado_id').val("<%= @resultado.id %>");
+	$('#parametro_resultado_tipo').val("<%= @resultado.tipo %>");
+	$('#parametro_resultado_parametro').val("<%= @resultado.parametro %>");	
+	$('#parametro_resultado_resultado').val("<%= @resultado.resultado %>");
+	$('#parametro_resultado_conclusao').val("<%= @resultado.conclusao %>");	
+<% end %>

@@ -2,6 +2,9 @@ class AmostrasController < ApplicationController
   before_action :set_amostra, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao    
   before_action :set_amostras, only: [:index, :new, :create, :edit, :update]
+  before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
+  before_action :set_is_new_or_create, only:[:new, :create]
+  before_action :set_grid, only: [:index, :create, :edit, :update, :new, :copy]
 
   # GET /amostras
   # GET /amostras.json
@@ -39,16 +42,72 @@ class AmostrasController < ApplicationController
   # GET /amostras/new
   def new
     @amostra = Amostra.new    
+    @parametro_resultado = ParametroResultado.new  
   end
 
   # GET /amostras/1/edit
   def edit
     @amostra = Amostra.find(params[:id])  
+    @parametro_resultado = ParametroResultado.new  
+  end
+
+  def saveVirtualParametroResultado
+      @parametro_resultado = ParametroResultado.new
+      @parametro_resultado.tipo = params[:tipo_analise] ? params[:tipo_analise] : params[:parametro_resultado][:tipo]      
+      tipo_analise = params[:tipo_analise] ? params[:tipo_analise] : params[:parametro_resultado][:tipo]      
+      @parametro_resultado.parametro = params[:parametro] ? params[:parametro] : params[:parametro_resultado][:parametro]      
+      parametro = params[:parametro] ? params[:parametro] : params[:parametro_resultado][:parametro]      
+      @parametro_resultado.resultado = params[:resultado] ? params[:resultado] : params[:parametro_resultado][:resultado]      
+      resultado = params[:resultado] ? params[:resultado] : params[:parametro_resultado][:resultado]
+      @parametro_resultado.conclusao = params[:conclusao] ? params[:conclusao] : params[:parametro_resultado][:conclusao]      
+      conclusao = params[:conclusao] ? params[:conclusao] : params[:parametro_resultado][:conclusao]
+      @parametro_resultado.amostra_id = params[:id]  
+      @amostra = Amostra.find(params[:id]) 
+
+      parametro_banco = Parametro.find_by_nome(@parametro_resultado.parametro)
+      if(parametro_banco)
+        @parametro_resultado.metodo_parametro = parametro_banco.metodo
+        metodo_parametro = parametro_banco.metodo
+        @parametro_resultado.referencia_parametro = parametro_banco.referencia
+        referencia_parametro = parametro_banco.referencia
+        @parametro_resultado.valor_referencia_parametro = parametro_banco.valor_referencia
+        valor_referencia_parametro = parametro_banco.valor_referencia
+      end
+
+      respond_to do |format|
+        if(params[:tipo_analise]) 
+          if(!params[:id_resultado].eql? "-1")            
+            @parametro_resultado = ParametroResultado.where(id: params[:id_resultado]).first
+            @parametro_resultado.update(parametro: parametro, resultado: resultado, tipo: tipo_analise, conclusao: conclusao, referencia_parametro: referencia_parametro, metodo_parametro: metodo_parametro, valor_referencia_parametro: valor_referencia_parametro)
+            format.html { redirect_to @amostra, notice: 'Amostra criada com sucesso.' }
+            format.json { head :no_content }
+          elsif(@parametro_resultado.save)
+            format.html { redirect_to @amostra, notice: 'Amostra criada com sucesso.' }
+            format.json { head :no_content }
+          else
+            format.html { render action: 'edit' }    
+            format.json { head :no_content }        
+          end
+        end
+      end
+
+  end
+
+  def set_resultado_edit
+    @resultado = ParametroResultado.where(id: params[:id]).first
+    @resultado   
+  end
+
+  def delete_resultado
+    @resultado = ParametroResultado.where(id: params[:id]).first
+    @resultado.destroy   
   end
 
   # GET /amostras/1/copy
   def copy
-    @existing_amostra = Amostra.find(params[:id])      
+    @existing_amostra = Amostra.find(params[:id])  
+    @parametro_resultado = ParametroResultado.new      
+    $is_copy = true
     #@existing_parametro_resultado = ParametroResultado.find_by_amostra_id(id) 
 
     #create new object with attributes of existing record 
@@ -168,36 +227,42 @@ class AmostrasController < ApplicationController
       if !@amostra.fabricante.nil?
 
         fabricante = Empresa.find_by_nome(@amostra.fabricante)
-        @amostra.fabricante_rua = fabricante.rua
-        @amostra.fabricante_numero = fabricante.numero
-        @amostra.fabricante_bairro = fabricante.bairro
-        @amostra.fabricante_cidade = fabricante.cidade
-        @amostra.fabricante_UF = fabricante.UF
-        @amostra.fabricante_CEP = fabricante.CEP
-        @amostra.fabricante_CNPJ = fabricante.CNPJ
-        @amostra.fabricante_telefone = fabricante.telefone
+        if(fabricante)
+          @amostra.fabricante_rua = fabricante.rua
+          @amostra.fabricante_numero = fabricante.numero
+          @amostra.fabricante_bairro = fabricante.bairro
+          @amostra.fabricante_cidade = fabricante.cidade
+          @amostra.fabricante_UF = fabricante.UF
+          @amostra.fabricante_CEP = fabricante.CEP
+          @amostra.fabricante_CNPJ = fabricante.CNPJ
+          @amostra.fabricante_telefone = fabricante.telefone
+        end
 
       end
 
       if !@amostra.solicitante.nil?
 
         solicitante = Empresa.find_by_nome(@amostra.solicitante)
-        @amostra.solicitante_rua = solicitante.rua
-        @amostra.solicitante_numero = solicitante.numero
-        @amostra.solicitante_bairro = solicitante.bairro
-        @amostra.solicitante_cidade = solicitante.cidade
-        @amostra.solicitante_UF = solicitante.UF
-        @amostra.solicitante_CEP = solicitante.CEP
-        @amostra.solicitante_CNPJ = solicitante.CNPJ
-        @amostra.solicitante_telefone = solicitante.telefone
+        if(solicitante)
+          @amostra.solicitante_rua = solicitante.rua
+          @amostra.solicitante_numero = solicitante.numero
+          @amostra.solicitante_bairro = solicitante.bairro
+          @amostra.solicitante_cidade = solicitante.cidade
+          @amostra.solicitante_UF = solicitante.UF
+          @amostra.solicitante_CEP = solicitante.CEP
+          @amostra.solicitante_CNPJ = solicitante.CNPJ
+          @amostra.solicitante_telefone = solicitante.telefone
+        end
 
       end
 
       if !@amostra.assinatura.nil?
 
         assinatura = Assinatura.find_by_nome(@amostra.assinatura)
-        @amostra.assinatura_tipo_conselho = assinatura.tipo_conselho
-        @amostra.assinatura_numero_conselho = assinatura.numero_conselho
+        if(assinatura)
+          @amostra.assinatura_tipo_conselho = assinatura.tipo_conselho
+          @amostra.assinatura_numero_conselho = assinatura.numero_conselho
+        end
 
       end
 
@@ -218,9 +283,18 @@ class AmostrasController < ApplicationController
       
 
       if @amostra.save
-
-        format.html { redirect_to @amostra, notice: 'Amostra criada com sucesso!' }
-        format.json { render action: 'show', status: :created, location: @amostra }
+        if !user_is_estagiario?
+          if(!$is_copy)
+            format.html { redirect_to edit_amostra_path(@amostra) }
+            format.json { head :no_content }
+          else
+            format.html { redirect_to amostras_path, notice: 'Amostra copiada com sucesso!' }
+            format.json { render action: 'index', status: :created, location: @amostra }
+          end
+        else
+          format.html { redirect_to amostras_path, notice: 'Amostra criada com sucesso!' }
+          format.json { render action: 'index', status: :created, location: @amostra }
+        end        
       else
         format.html { render action: 'new' }
         format.json { render json: @amostra.errors, status: :unprocessable_entity }
@@ -282,10 +356,10 @@ class AmostrasController < ApplicationController
       if @amostra.update(amostra_params)
         
 
-        format.html { redirect_to @amostra, notice: 'Amostra atualizada com sucesso!' }
+        format.html { redirect_to amostras_path, notice: 'Amostra atualizada com sucesso!' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'index' }
         format.json { render json: @amostra.errors, status: :unprocessable_entity }
       end
     end
@@ -301,16 +375,18 @@ class AmostrasController < ApplicationController
             atualizou_parametro = 1;
 
             parametro = Parametro.find_by_nome(parametro_resultado.parametro)
-            parametro_resultado.referencia_parametro = parametro.referencia
-            parametro_resultado.metodo_parametro = parametro.metodo
-            parametro_resultado.valor_referencia_parametro = parametro.valor_referencia
+            if(parametro)
+              parametro_resultado.referencia_parametro = parametro.referencia
+              parametro_resultado.metodo_parametro = parametro.metodo
+              parametro_resultado.valor_referencia_parametro = parametro.valor_referencia
+            end
 
 
           end
         end
       end
 
-      if(atualizou_parametro == 1)
+      if(atualizou_parametro == 1 && !params[:amostra][:parametro_resultados_attributes].nil?)
 
           @amostra.update(params[:amostra][:parametro_resultados_attributes][:referencia_parametro])        
           @amostra.update(params[:amostra][:parametro_resultados_attributes][:metodo_parametro])        
@@ -348,6 +424,10 @@ class AmostrasController < ApplicationController
     @amostra = Amostra.find_by_id( params[:id] )
   end
 
+  def set_is_new_or_create
+    @is_new_or_create = true
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
 
@@ -357,6 +437,14 @@ class AmostrasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     private
+    def set_grid
+      @parametro_resultado_grid = initialize_grid(ParametroResultado.where(amostra_id: params[:id]),
+        order: 'id',        
+        order_direction: 'desc',
+        per_page: 7
+      )
+    end
+
     def amostra_params
       params.require(:amostra).permit(:id, :data_fabricacao, :data_validade, :lote, :conteudo, 
         :descricao, :caracteristicas, :observacao, :solicitante, :fabricante, :produto, 

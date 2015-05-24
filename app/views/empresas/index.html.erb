@@ -1,67 +1,6 @@
-<br /><br /><br /><br />
-<legend>Empresas cadastradas</legend>
+<%= render partial: 'layouts/panel/two_sides_geral' %>
 
-<div style="width:95%; margin-left:3%;">
 
-<% if !user_is_administrador? %>
-  
-    <%= grid(@empresas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
-
-      g.column :name => 'Cidade', html: {style: 'text-align: center'}, :attribute => 'cidade' 
-
-      g.column :name => 'CNPJ', html: {style: 'text-align: center'}, :attribute => 'CNPJ' 
-
-      g.column :name => 'Telefone', html: {style: 'text-align: center'}, :attribute => 'telefone' 
-
-      g.column do |empresa|
-        link_to('Detalhes', empresa, html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-      g.column do |empresa|
-        link_to('Editar', edit_empresa_path(empresa), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-    end -%>
-
-<%end%>
-
-<% if user_is_administrador? %>
-
-<%= grid(@empresas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
-
-      g.column :name => 'Cidade', html: {style: 'text-align: center'}, :attribute => 'cidade' 
-
-      g.column :name => 'CNPJ', html: {style: 'text-align: center'}, :attribute => 'CNPJ' 
-
-      g.column :name => 'Telefone', html: {style: 'text-align: center'}, :attribute => 'telefone' 
-
-      g.column do |empresa|
-        link_to('Detalhes', empresa, html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-      g.column do |empresa|
-        link_to('Editar', edit_empresa_path(empresa), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-      g.column do |empresa|
-        link_to 'Excluir', empresa, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a empresa #{empresa.nome}?" } 
-      end
-
-    end -%>
-
-<%end%>
-
-</div>
-
-<br>
-
-<%= link_to 'Nova empresa', new_empresa_path, :class => 'btn btn-info'%>
 
 
 <footer>

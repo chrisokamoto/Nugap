@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs2" aria-hidden="true">
+            <%= "Assinaturas cadastradas" %>
+        </div>
+      </div>
+
+      <div class="widget-body">
+
+        <% if !user_is_administrador? %>
+          
+            <%= grid(@assinaturas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome' do |assinatura|
+                link_to "#{assinatura.nome}",assinatura, id:"mostrar-#{assinatura.nome}"
+              end
+
+              g.column :name => 'Conselho', html: {style: 'text-align: center'}, :attribute => 'tipo_conselho' do |assinatura|
+                link_to "#{assinatura.tipo_conselho}",assinatura, id:"mostrar-#{assinatura.tipo_conselho}"
+              end
+
+              g.column :name => 'Número', html: {style: 'text-align: center'}, :attribute => 'numero_conselho' do |assinatura|
+                link_to "#{assinatura.numero_conselho}",assinatura, id:"mostrar-#{assinatura.numero_conselho}"
+              end
+
+              g.column name: 'Editar' do |assinatura|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_assinatura_path(assinatura), id:"editar-#{assinatura.id}" }
+              end
+
+            end -%>
+
+        <%end%>
+
+        <% if user_is_administrador? %>
+
+        <%= grid(@assinaturas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome' do |assinatura|
+                link_to "#{assinatura.nome}",assinatura, id:"mostrar-#{assinatura.nome}"
+              end
+
+              g.column :name => 'Conselho', html: {style: 'text-align: center'}, :attribute => 'tipo_conselho' do |assinatura|
+                link_to "#{assinatura.tipo_conselho}",assinatura, id:"mostrar-#{assinatura.tipo_conselho}"
+              end
+
+              g.column :name => 'Número', html: {style: 'text-align: center'}, :attribute => 'numero_conselho' do |assinatura|
+                link_to "#{assinatura.numero_conselho}",assinatura, id:"mostrar-#{assinatura.numero_conselho}"
+              end
+
+              g.column name: 'Editar' do |assinatura|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_assinatura_path(assinatura), id:"editar-#{assinatura.id}" }
+              end
+
+              g.column name: 'Excluir' do |assinatura|
+                render partial: 'layouts/grid_icons/delete', locals: {hyperlink:assinatura_path(assinatura), id:"deletar-#{assinatura.id}", message: 'Tem certeza que deseja excluir?'  }
+              end              
+
+            end -%>
+
+        <%end%>
+
+        </div>
+
+      </div>
+  </div>
+
+</div>

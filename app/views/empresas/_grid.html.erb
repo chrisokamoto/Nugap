@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-lg-14">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs2" aria-hidden="true">
+            <%= "Empresas cadastradas" %>
+        </div>
+      </div>
+
+      <div class="widget-body">
+
+        <% if !user_is_administrador? %>
+          
+            <%= grid(@empresas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome' do |empresa|
+                link_to "#{empresa.nome}",empresa, id:"mostrar-#{empresa.nome}"
+              end
+
+              g.column :name => 'Cidade', html: {style: 'text-align: center'}, :attribute => 'cidade' do |empresa|
+                link_to "#{empresa.cidade}",empresa, id:"mostrar-#{empresa.cidade}"
+              end
+
+              g.column :name => 'CNPJ', html: {style: 'text-align: center'}, :attribute => 'CNPJ' do |empresa|
+                link_to "#{empresa.CNPJ}",empresa, id:"mostrar-#{empresa.CNPJ}"
+              end
+
+              g.column :name => 'Telefone', html: {style: 'text-align: center'}, :attribute => 'telefone' do |empresa|
+                link_to "#{empresa.telefone}",empresa, id:"mostrar-#{empresa.telefone}"
+              end
+
+              g.column name: 'Editar' do |empresa|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_empresa_path(empresa), id:"editar-#{empresa.id}" }
+              end
+
+            end -%>
+
+        <%end%>
+
+        <% if user_is_administrador? %>
+
+        <%= grid(@empresas_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+          
+
+              g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome' do |empresa|
+                link_to "#{empresa.nome}",empresa, id:"mostrar-#{empresa.nome}"
+              end
+
+              g.column :name => 'Cidade', html: {style: 'text-align: center'}, :attribute => 'cidade' do |empresa|
+                link_to "#{empresa.cidade}",empresa, id:"mostrar-#{empresa.cidade}"
+              end
+
+              g.column :name => 'CNPJ', html: {style: 'text-align: center'}, :attribute => 'CNPJ' do |empresa|
+                link_to "#{empresa.CNPJ}",empresa, id:"mostrar-#{empresa.CNPJ}"
+              end
+
+              g.column :name => 'Telefone', html: {style: 'text-align: center'}, :attribute => 'telefone' do |empresa|
+                link_to "#{empresa.telefone}",empresa, id:"mostrar-#{empresa.telefone}"
+              end
+
+              g.column name: 'Editar' do |empresa|
+                render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_empresa_path(empresa), id:"editar-#{empresa.id}" }
+              end
+
+              g.column name: 'Excluir' do |empresa|
+                render partial: 'layouts/grid_icons/delete', locals: {hyperlink:empresa_path(empresa), id:"deletar-#{empresa.id}", message: 'Tem certeza que deseja excluir?'  }
+              end
+
+            end -%>
+
+        <%end%>
+
+        </div>
+
+      </div>
+  </div>
+
+</div>

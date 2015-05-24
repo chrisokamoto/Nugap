@@ -1,43 +1,7 @@
-<br /><br /><br /><br />
-<legend>Editar preço</legend>
-
-<%= form_for(@preco_servico) do |f| %>
-  <% if @preco_servico.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@preco_servico.errors.count, "erro") %>:</h2>
-
-      <ul>
-      <% @preco_servico.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :produto %>
-    <%= collection_select(:preco_servico, :produto, Produto.order('tipo'), :tipo, :tipo, {}, {:disabled => 'disabled'}) %>
-  </div>
-  <div class="field" >
-    <%= f.label "Análise" %>
-    <%= collection_select(:preco_servico, :analise, TipoAnalise.order('tipo'), :tipo, :tipo, {}, {:disabled => 'disabled'}) %>
-  </div>
-  <div id="parametro-select">    
-  	<%= f.label "Parâmetro" %>
-  	<%= collection_select(:preco_servico, :parametro, Parametro.order('nome'), :nome, :nome, {}, {:disabled => 'disabled'}) %>
-  </div>  
-  <div class="field">
-    <%= f.label "Preço" %>
-    <%= f.text_field :preco, :id => "preco" %>    
-  </div>
-  <div class="actions">
-    <%= f.submit "Salvar", :class => 'btn btn-info' %>
-  </div>
-<% end %>
+<%= render partial: 'layouts/panel/two_sides_geral' %>
 
 
-<%= link_to 'Detalhes', @preco_servico, :class => 'btn btn-info' %>
-<%= link_to 'Voltar', preco_servicos_path, :class => 'btn btn-info' %>
+
 
 <footer>
       <div class="footerNugap">
@@ -48,3 +12,8 @@
         </center>
       </div>
     </footer>
+
+
+<script>
+	document.getElementById("botaoSalvarPreco").disabled = false; 
+</script>

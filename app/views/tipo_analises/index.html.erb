@@ -1,49 +1,6 @@
-<br /><br /><br /><br />
-<legend>Tipos de análise cadastrados</legend>
+<%= render partial: 'layouts/panel/two_sides_geral' %>
 
-<div style="width:35%; margin-left:30%;">
 
-<% if !user_is_administrador? %>
-  
-    <%= grid(@analises_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'
-     
-
-      g.column do |tipo_analise|
-        link_to('Editar', edit_tipo_analise_path(tipo_analise), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-    end -%>
-
-<%end%>
-
-<% if user_is_administrador? %>
-
-<%= grid(@analises_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Tipo', html: {style: 'text-align: center'}, :attribute => 'tipo'
-     
-
-      g.column do |tipo_analise|
-        link_to('Editar', edit_tipo_analise_path(tipo_analise), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-      g.column do |tipo_analise|
-        link_to 'Excluir', tipo_analise, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir a análise #{tipo_analise.tipo}?" } 
-      end
-
-    end -%>
-
-<%end%>
-
-</div>
-
-<br>
-
-<%= link_to 'Novo Tipo Análise', new_tipo_analise_path, :class => 'btn btn-info' %>
 
 
 <footer>

@@ -1,11 +1,14 @@
 class ParametrosController < ApplicationController
   before_action :set_parametro, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao
+  before_action :set_grid, only: [:index, :create, :edit, :update] 
+  before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
 
   # GET /parametros
   # GET /parametros.json
   def index
     @parametros = Parametro.all
+    @parametro = Parametro.new
     @parametros_grid = initialize_grid(Parametro, 
       :order => 'created_at',
       :order_direction => 'desc',
@@ -34,8 +37,8 @@ class ParametrosController < ApplicationController
 
     respond_to do |format|
       if @parametro.save
-        format.html { redirect_to @parametro, notice: 'Parâmetro criado com sucesso!' }
-        format.json { render action: 'show', status: :created, location: @parametro }
+        format.html { redirect_to parametros_path, notice: 'Parâmetro criado com sucesso!' }
+        format.json { render action: 'index', status: :created, location: @parametro }
       else
         format.html { render action: 'new' }
         format.json { render json: @parametro.errors, status: :unprocessable_entity }
@@ -48,10 +51,10 @@ class ParametrosController < ApplicationController
   def update
     respond_to do |format|
       if @parametro.update(parametro_params)
-        format.html { redirect_to @parametro, notice: 'Parâmetro atualizado com sucesso!' }
+        format.html { redirect_to parametros_path, notice: 'Parâmetro atualizado com sucesso!' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'index' }
         format.json { render json: @parametro.errors, status: :unprocessable_entity }
       end
     end
@@ -68,6 +71,13 @@ class ParametrosController < ApplicationController
   end
 
   private
+    def set_grid
+      @parametros_grid = initialize_grid(Parametro,
+        :order => 'created_at',
+        :order_direction => 'desc',
+        :per_page => 10
+      )
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_parametro
       @parametro = Parametro.find(params[:id])

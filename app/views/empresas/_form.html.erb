@@ -1,69 +1,98 @@
-<%= form_for(@empresa) do |f| %>
-  <% if @empresa.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@empresa.errors.count, "erro") %>:</h2>
 
-      <ul>
-      <% @empresa.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs1" aria-hidden="true"></span>
+            <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'create')%>
+              <%= "Cadastrar Empresa" %>
+            <%else%>
+              <%= "Editar Empresa" %>
+            <%end%>
+        </div>
+      </div>
+      <div class="widget-body">
+
+          <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'create' || controller.action_name == 'edit')%> 
+
+            <%= form_for(@empresa,  html: {class: 'form-horizontal', role: 'form'}) do |f| %>
+              <%= render partial: 'layouts/forms/error', locals: {modelo: @empresa} %>
+
+              <div class="form-group">
+                <%= f.label :nome, class: 'col-lg-3 control-label' %>
+                <div class="col-lg-9">
+                  <%= f.text_field :nome, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label "Endereço", class: 'col-lg-3 control-label' %>
+                <div class="col-lg-9">
+                  <%= f.text_field :rua, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :bairro, class: 'col-lg-3 control-label' %>
+                <div class="col-lg-9">
+                  <%= f.text_field :bairro, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :cidade, class: 'col-lg-3 control-label' %>
+                <div class="col-lg-9">
+                  <%= f.text_field :cidade, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label "UF", class: 'col-lg-3 control-label' %>
+                <div class="col-lg-9">
+                  <%= f.text_field :UF, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label "CEP", class: 'col-lg-3 control-label' %>
+                <div class="col-lg-9">
+                  <%= f.text_field :CEP, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label "CNPJ", class: 'col-lg-3 control-label' %>
+                <div class="col-lg-9">
+                  <%= f.text_field :CNPJ, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :telefone, class: 'col-lg-3 control-label' %>
+                <div class="col-lg-9">
+                  <%= f.text_field :telefone, class: 'form-control' %>
+                </div>
+              </div>
+
+              <div class="form-group">
+              <div class="col-lg-offset-3 col-lg-9">
+                <div class="col-lg-6">
+                  <%= f.submit "Salvar", class: 'btn btn-success btn-block' %>
+                </div>
+                <div class="col-lg-6">
+                  <%= link_to empresas_path do %>
+                    <button type="button" class="btn btn-secondary btn-block"> <%= "Limpar" %> </button>
+                  <%end%>
+                </div>
+            </div>
+          </div>
+          <% end %>
+
+        <% end %>
+
+        </div>
     </div>
-  <% end %>
+  </div>
+</div>
 
-  <div class="field">
-    <%= f.label :nome %>
-    <%= f.text_field :nome %>
-  </div>
-
-<!--div class="control-group">
-  <label class="control-label" for="selectbasic">Logradouro</label>
-  <div class="controls">
-    <select id="selectbasic" name="selectbasic" class="input-large">
-      <option>Rua</option>
-      <option>Avenida</option>
-      <option>Rodovia</option>
-      <option>Praça</option>
-    </select>
-  </div>
-</div-->
-
-  <div class="field">
-    <%= f.label "Endereço" %>
-    <%= f.text_field :rua %>
-  </div>
-  <!--div class="field">
-    <%= f.label "Número" %>
-    <%= f.text_field :numero %>
-  </div-->
-  <div class="field">
-    <%= f.label :bairro %>
-    <%= f.text_field :bairro %>
-  </div>
-  <div class="field">
-    <%= f.label :cidade %>
-    <%= f.text_field :cidade %>
-  </div>
-  <div class="field">
-    <%= f.label "UF" %>
-    <%= f.text_field :UF %>
-  </div>
-  <div class="field">
-    <%= f.label "CEP" %>
-    <%= f.text_field :CEP %>
-  </div>
-  <div class="field">
-    <%= f.label "CNPJ" %>
-    <%= f.text_field :CNPJ %>
-  </div>
-
-  <div class="field">
-    <%= f.label :telefone %>
-    <%= f.text_field :telefone %>    
-    <!-- <%= f.text_field :telefone, data: {autonumeric: {dGroup: '9', aDec: ',', aSep: '.'}} %> -->
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Salvar", :class => 'btn btn-info' %>
-  </div>
-<% end %>

@@ -1,19 +1,18 @@
 <% if(request.original_url.include? "orcamentos") %>
 	document.getElementById("addButtonServico").disabled = false; 
-	$('#orcamento_servico_orcamentos_attributes_<%= @id_number %>_valor_total').val("<%= @preco_total %>");	
-	addAll();
+	$('#servico_orcamento_valor_total').val("<%= @preco_total %>");		
 	
 <% end %>
 
 function limpa(){
 	<% if @tem_quantidade == 0 %>
-		$('.quantidade').val("");
+		$('#servico_orcamento_qtd_amostra').val("");
 	<%end%>
 }
 
 function zera(){	
 	<% if @tem_quantidade == 0 %>
-		$('.quantidade').val("0");
+		$('#servico_orcamento_qtd_amostra').val("0");
 	<%end%>
 }
 

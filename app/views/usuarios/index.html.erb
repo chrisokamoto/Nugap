@@ -1,54 +1,6 @@
-<br /><br /><br /><br />
-<legend>Usuários cadastrados</legend>
-<div style="width:75%; margin-left:10%;">
+<%= render partial: 'layouts/panel/two_sides_geral' %>
 
-<% if !user_is_administrador? %>
-  
-    <%= grid(@usuarios_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
 
-      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
-      g.column :name => 'Sobrenome', html: {style: 'text-align: center'}, :attribute => 'sobrenome'
-      g.column :name => 'Login', html: {style: 'text-align: center'}, :attribute => 'login'
-      g.column :name => 'Permissão', html: {style: 'text-align: center'}, :attribute => 'permissao'
-     
-
-      g.column do |usuario|
-        link_to('Editar', edit_usuario_path(usuario), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-    end -%>
-
-<%end%>
-
-<% if user_is_administrador? %>
-
-<%= grid(@usuarios_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
-  
-
-      g.column :name => 'Nome', html: {style: 'text-align: center'}, :attribute => 'nome'
-      g.column :name => 'Sobrenome', html: {style: 'text-align: center'}, :attribute => 'sobrenome'
-      g.column :name => 'Login', html: {style: 'text-align: center'}, :attribute => 'login'
-      g.column :name => 'Permissão', html: {style: 'text-align: center'}, :attribute => 'permissao'
-     
-
-      g.column do |usuario|
-        link_to('Editar', edit_usuario_path(usuario), html: {style: 'text-align: center'}, :class => 'btn btn-small')
-      end
-
-      g.column do |usuario|
-        link_to 'Excluir', usuario, method: :delete, html: {style: 'text-align: center'}, :class => 'btn btn-small', data: { confirm: "Você realmente deseja excluir o usuário #{usuario.nome}?" } 
-      end
-
-    end -%>
-
-<%end%>
-
-</div>
-
-<br>
-
-<%= link_to 'Novo usuário', new_usuario_path, :class => 'btn btn-info'%>
 
 
 <footer>

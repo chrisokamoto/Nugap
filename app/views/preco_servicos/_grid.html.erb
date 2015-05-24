@@ -1,0 +1,82 @@
+<div class = "grid_preco">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="title">
+          <span class="fs2" aria-hidden="true">
+            <%= "Preços Cadastrados" %>
+        </div>
+      </div>
+
+      <div class="widget-body">
+
+      <% if !user_is_administrador? %>
+        
+          <%= grid(@precos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+        
+
+            g.column :name => 'Produto', html: {style: 'text-align: center'}, :attribute => 'produto' do |preco|
+              link_to "#{preco.produto}",preco, id:"mostrar-#{preco.produto}"
+            end
+
+            g.column :name => 'Análise', html: {style: 'text-align: center'}, :attribute => 'analise' do |preco|
+              link_to "#{preco.analise}",preco, id:"mostrar-#{preco.analise}"
+            end
+
+            g.column :name => 'Parâmetro', html: {style: 'text-align: center'}, :attribute => 'parametro' do |preco|
+              link_to "#{preco.parametro}",preco, id:"mostrar-#{preco.parametro}"
+            end
+
+            g.column :name => 'Preço (R$)', html: {style: 'text-align: center'} do |preco_servico|
+               number_to_currency(preco_servico.preco, :precision => 2, :unit => '', :separator => ',', :delimiter => '.')
+               link_to "#{preco_servico.preco}",preco_servico, id:"mostrar-#{preco_servico.preco}"
+            end
+
+            g.column name: 'Editar' do |preco|
+              render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_preco_servico_path(preco), id:"editar-#{preco.id}" }
+            end
+
+          end -%>
+
+      <%end%>
+
+      <% if user_is_administrador? %>
+
+      <%= grid(@precos_grid, html: {class:'grid'}, :show_filters => :always, allow_showing_all_records: false) do |g|
+        
+
+            g.column :name => 'Produto', html: {style: 'text-align: center'}, :attribute => 'produto' do |preco|
+              link_to "#{preco.produto}",preco, id:"mostrar-#{preco.produto}"
+            end
+
+            g.column :name => 'Análise', html: {style: 'text-align: center'}, :attribute => 'analise' do |preco|
+              link_to "#{preco.analise}",preco, id:"mostrar-#{preco.analise}"
+            end
+
+            g.column :name => 'Parâmetro', html: {style: 'text-align: center'}, :attribute => 'parametro' do |preco|
+              link_to "#{preco.parametro}",preco, id:"mostrar-#{preco.parametro}"
+            end
+
+            g.column :name => 'Preço (R$)', html: {style: 'text-align: center'} do |preco_servico|
+               number_to_currency(preco_servico.preco, :precision => 2, :unit => '', :separator => ',', :delimiter => '.')
+               link_to "#{preco_servico.preco}",preco_servico, id:"mostrar-#{preco_servico.preco}"
+            end
+
+            g.column name: 'Editar' do |preco|
+              render partial: 'layouts/grid_icons/edit', locals: {hyperlink:edit_preco_servico_path(preco), id:"editar-#{preco.id}" }
+            end
+
+            g.column name: 'Excluir' do |preco|
+              render partial: 'layouts/grid_icons/delete', locals: {hyperlink:preco_servico_path(preco), id:"deletar-#{preco.id}", message: 'Tem certeza que deseja excluir?'  }
+            end
+
+          end %>
+
+      <%end%>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

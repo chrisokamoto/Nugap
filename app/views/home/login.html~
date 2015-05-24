@@ -7,13 +7,13 @@
     <title>Nugap</title>
     <meta name="description" content="">
     <meta name="author" content="Christiane M. Okamoto e Luiz Fernando M. Carvalho">
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <!--<link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
     <link href="css/datepicker.css" rel="stylesheet">
     <script src="js/prettify.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
-    <script>('.datepicker').datepicker()</script>
+    <script>('.datepicker').datepicker()</script>-->
     
     <script>
     if (top.location != location) {

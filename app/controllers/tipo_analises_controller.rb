@@ -1,11 +1,14 @@
 class TipoAnalisesController < ApplicationController
   before_action :set_tipo_analise, only: [:show, :edit, :update, :destroy]
   before_action :valida_sessao
+  before_action :set_grid, only: [:index, :create, :edit, :update] 
+  before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
 
   # GET /tipo_analises
   # GET /tipo_analises.json
   def index
     @tipo_analises = TipoAnalise.all
+    @tipo_analise = TipoAnalise.new
     @analises_grid = initialize_grid(TipoAnalise, 
       :order => 'created_at',
       :order_direction => 'desc',
@@ -34,8 +37,8 @@ class TipoAnalisesController < ApplicationController
 
     respond_to do |format|
       if @tipo_analise.save
-        format.html { redirect_to @tipo_analise, notice: 'Análise criada com sucesso!' }
-        format.json { render action: 'show', status: :created, location: @tipo_analise }
+        format.html { redirect_to tipo_analises_path, notice: 'Análise criada com sucesso!' }
+        format.json { render action: 'index', status: :created, location: @tipo_analise }
       else
         format.html { render action: 'new' }
         format.json { render json: @tipo_analise.errors, status: :unprocessable_entity }
@@ -48,10 +51,10 @@ class TipoAnalisesController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_analise.update(tipo_analise_params)
-        format.html { redirect_to @tipo_analise, notice: 'Análise atualizada com sucesso!' }
+        format.html { redirect_to tipo_analises_path, notice: 'Análise atualizada com sucesso!' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'index' }
         format.json { render json: @tipo_analise.errors, status: :unprocessable_entity }
       end
     end
@@ -68,6 +71,13 @@ class TipoAnalisesController < ApplicationController
   end
 
   private
+    def set_grid
+      @analises_grid = initialize_grid(TipoAnalise,
+        :order => 'created_at',
+        :order_direction => 'desc',
+        :per_page => 10
+      )
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_tipo_analise
       @tipo_analise = TipoAnalise.find(params[:id])
