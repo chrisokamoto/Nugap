@@ -242,7 +242,7 @@ $("#num_orcamento").on("change",function() {
 
 
 
-function addAll(has_to_save, callback) {	  
+function addAll(has_to_save, callback) {	   
 	var id_orcamento = $("#id_orcamento").val();      
       if(id_orcamento == null)    
         id_orcamento = ""
@@ -276,10 +276,7 @@ function edit_servico_orcamento(servico_orcamento_id){
 }
 
 function delete_servico_orcamento(servico_orcamento_id){  
-  setTimeout(
-    function() {
       $.get('/orcamentos/delete_servico/' + servico_orcamento_id , function(data){    
     
       })
-    }, 1000);   
 }
