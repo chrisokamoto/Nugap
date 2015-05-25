@@ -4,11 +4,12 @@ $(document).ready(function(){
     $("#wizard").bwizard();       
     $('.previous').hide();
     $('.next').hide();    
+
     //inicializa wizard end    
 
     var form = $("#orcamento_form").serialize();
 
-    $("#empresa").autocomplete({	
+    $("#empresa").autocomplete({  
         source: function (request, response) {
             $.ajax({
                 headers: {
@@ -38,8 +39,8 @@ $(document).ready(function(){
             $("#empresa").val(ui.item.value);
             var empresa = $('INPUT#empresa').val();              
      
-		      $.get('/orcamentos/get_telefone_empresa/' + empresa , function(data){           		           
-		        });         
+          $.get('/orcamentos/get_telefone_empresa/' + empresa , function(data){                          
+            });         
         },
 
         change: function(event, ui) {
@@ -173,7 +174,7 @@ jQuery(function($) {
     });
 
   
-$("#addButtonServico").on("click", function() {  	
+$("#addButtonServico").on("click", function() {   
   var produto = $("#servico_orcamento_produto").val();
       if(produto == null)    
         produto = ""
@@ -208,14 +209,15 @@ $("#addButtonServico").on("click", function() {
         id_servico_orcamento = "-1"
       
   $.get('/orcamentos/saveVirtualServicoOrcamento/' + produto + '/' + analise + '/' + parametro + '/' + valor_unitario + '/' + qtd_amostra + '/' + valor_total + '/' + id_orcamento + '/' + id_servico_orcamento, function(){
-  	addAll(true, location.reload());     
+    addAll(true);    
+    location.reload(); 
   })
 
 });
 
 
-$("#orcamento_desconto").on("input",function() {    	
-	addAll(false, null); 
+$("#orcamento_desconto").on("input",function() {      
+  addAll(false); 
 
     return false;
 });
@@ -242,8 +244,8 @@ $("#num_orcamento").on("change",function() {
 
 
 
-function addAll(has_to_save, callback) {	  
-	var id_orcamento = $("#id_orcamento").val();      
+function addAll(has_to_save) {    
+  var id_orcamento = $("#id_orcamento").val();      
       if(id_orcamento == null)    
         id_orcamento = ""
 
@@ -260,11 +262,10 @@ function addAll(has_to_save, callback) {
            total_pagar = data;
            $.get('/orcamentos/get_valor_impostos/' + total_pagar , function(data){
             
-        	})
+          })
         })      
         
   }) 
-  callback(); 
       
 }
 
