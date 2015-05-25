@@ -4,5 +4,7 @@
 	$('#orcamento_cssl').val("<%= @cssl %>");
 	$('#orcamento_cofins').val("<%= @cofins %>");
 	$('#orcamento_total_pagar').val("<%= @preco_total %>");	
+	//$('#tabela_servico_orcamento').html(""); 
+	$('#tabela_servico_orcamento').html("<%= raw escape_javascript render(:partial => 'grid') %>");
 <% end %>
 

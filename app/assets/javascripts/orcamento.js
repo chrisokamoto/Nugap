@@ -211,6 +211,7 @@ $("#addButtonServico").on("click", function() {
   $.get('/orcamentos/saveVirtualServicoOrcamento/' + produto + '/' + analise + '/' + parametro + '/' + valor_unitario + '/' + qtd_amostra + '/' + valor_total + '/' + id_orcamento + '/' + id_servico_orcamento, function(){
     addAll(true);    
     //location.reload(); 
+    //$('#tabela_servico_orcamento').html("<%= escape_javascript(render :partial => 'grid') %>");    
   })
 
 });

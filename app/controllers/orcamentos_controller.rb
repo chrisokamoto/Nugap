@@ -1,7 +1,7 @@
 class OrcamentosController < ApplicationController
   before_action :set_orcamento, only: [:show, :edit, :update, :destroy]  
   before_action :valida_sessao
-  before_action :set_grid, only: [:index, :create, :edit, :update, :new]
+  before_action :set_grid, only: [:index, :create, :edit, :update, :new, :get_valor_impostos]
   before_action :set_is_new_or_create, only:[:new, :create]
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
 
@@ -47,6 +47,8 @@ class OrcamentosController < ApplicationController
 
   # GET /orcamentos/1/edit
   def edit
+    $id_orcamento = params[:id]
+    puts "2222222222222222222"
     @orcamento = Orcamento.find(params[:id]) 
     @servico_orcamento = ServicoOrcamento.new 
     get_analises
@@ -139,7 +141,7 @@ class OrcamentosController < ApplicationController
 
   end
 
-  def get_valor_impostos 
+  def get_valor_impostos     
 
     @ir = 0  
     @pis = 0
@@ -295,7 +297,9 @@ class OrcamentosController < ApplicationController
     
   end
 
-  def saveVirtualServicoOrcamento        
+  def saveVirtualServicoOrcamento 
+      $id_orcamento = params[:id]
+
       @servico_orcamento = ServicoOrcamento.new
       @servico_orcamento.produto = params[:produto] ? params[:produto] : params[:servico_orcamento][:produto]
       produto = params[:produto] ? params[:produto] : params[:servico_orcamento][:produto]
@@ -395,7 +399,12 @@ class OrcamentosController < ApplicationController
     end
 
     def set_grid
-      @servico_orcamento_grid = initialize_grid(ServicoOrcamento.where(orcamento_id: params[:id]),
+
+      puts "!!!!!!"
+      puts $id_orcamento
+      id = !params[:id].nil? ? params[:id] : $id_orcamento
+
+      @servico_orcamento_grid = initialize_grid(ServicoOrcamento.where(orcamento_id: id),
         order: 'id',        
         order_direction: 'desc',
         per_page: 7
