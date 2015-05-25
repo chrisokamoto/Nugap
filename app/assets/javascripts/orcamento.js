@@ -208,14 +208,18 @@ $("#addButtonServico").on("click", function() {
         id_servico_orcamento = "-1"
       
   $.get('/orcamentos/saveVirtualServicoOrcamento/' + produto + '/' + analise + '/' + parametro + '/' + valor_unitario + '/' + qtd_amostra + '/' + valor_total + '/' + id_orcamento + '/' + id_servico_orcamento, function(){
-  	addAll(true, location.reload());            
+  	addAll(true);
+    setTimeout(
+    function() {
+      location.reload();
+    }, 2000);  	
   })
 
 });
 
 
 $("#orcamento_desconto").on("input",function() {    	
-	addAll(false, null); 
+	addAll(false); 
 
     return false;
 });
@@ -242,7 +246,7 @@ $("#num_orcamento").on("change",function() {
 
 
 
-function addAll(has_to_save, callback) {	   
+function addAll(has_to_save) {	  
 	var id_orcamento = $("#id_orcamento").val();      
       if(id_orcamento == null)    
         id_orcamento = ""
@@ -263,9 +267,7 @@ function addAll(has_to_save, callback) {
         	})
         })      
         
-  })
-
-  callback();  
+  })  
       
 }
 
@@ -276,7 +278,10 @@ function edit_servico_orcamento(servico_orcamento_id){
 }
 
 function delete_servico_orcamento(servico_orcamento_id){  
+  setTimeout(
+    function() {
       $.get('/orcamentos/delete_servico/' + servico_orcamento_id , function(data){    
     
       })
+    }, 2000);   
 }
