@@ -35,16 +35,10 @@ jQuery(function($) {
         var resultado = $("#parametro_resultado_resultado").val();      
         if(resultado == "")    
           resultado = " "  
-	var n = resultado.search("%");
-     	if(n != -1)
-        resultado = [resultado.slice(0, n+1), "25", resultado.slice(n+1)].join('');
 
         var conclusao = $("#parametro_resultado_conclusao").val();      
         if(conclusao == "")    
           conclusao = " " 
-	var n = conclusao.search("%");
-     	if(n != -1)
-        conclusao = [conclusao.slice(0, n+1), "25", conclusao.slice(n+1)].join('');
 
         var id_amostra = $("#id_amostra").val();      
         if(id_amostra == null)    
