@@ -20,11 +20,7 @@ class UsuariosController < ApplicationController
   def index
     @usuarios = Usuario.all
     @usuario = Usuario.new
-    @usuarios_grid = initialize_grid(Usuario, 
-      :order => 'created_at',
-      :order_direction => 'desc',
-      :per_page => 10
-    )
+    
   end
 
   # GET /usuarios/1
@@ -85,7 +81,8 @@ class UsuariosController < ApplicationController
 
   private
     def set_grid
-      @usuarios_grid = initialize_grid(Usuario,
+      usuarios = Usuario.where.not(id:1)
+      @usuarios_grid = initialize_grid(usuarios,
         :order => 'created_at',
         :order_direction => 'desc',
         :per_page => 10
