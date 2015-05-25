@@ -261,6 +261,7 @@ function addAll(has_to_save) {
            $.get('/orcamentos/get_valor_impostos/' + total_pagar , function(data){
             setTimeout(
               function() {
+                alert("teste");
                 location.reload();
               }, 2000); 
         	})
