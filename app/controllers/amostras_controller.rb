@@ -3,7 +3,7 @@ class AmostrasController < ApplicationController
   before_action :valida_sessao    
   before_action :set_amostras, only: [:index, :new, :create, :edit, :update]
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
-  before_action :set_is_new_or_create, only:[:new, :create]
+  before_action :set_is_new_or_create, only:[:new, :create, :copy]
   before_action :set_grid, only: [:index, :create, :edit, :update, :new, :copy]  
   before_action :set_copy_false, only: [:index, :edit, :update, :new, :show] 
   before_action :limpa_sessao_id_orcamento, only:[:show, :edit, :index, :new]

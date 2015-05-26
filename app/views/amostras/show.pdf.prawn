@@ -147,26 +147,26 @@ for tipo in tipos
 
 					tem_resultado = 1
 
-					if (resultado.valor_referencia_parametro == "" and resultado.conclusao == "")
+					if (resultado.valor_referencia_parametro.blank? and resultado.conclusao.blank?)						
 						data = [ ["Parâmetro: #{resultado.parametro}","Resultado: #{resultado.resultado}"] ]
 						table(data, :column_widths => [270,270], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5})
 					end	
 
-					if (resultado.valor_referencia_parametro != "" and resultado.conclusao == "")
+					if (!resultado.valor_referencia_parametro.blank? and resultado.conclusao.blank?)
 						data = [ ["Parâmetro: #{resultado.parametro}\nValor de referência: #{resultado.valor_referencia_parametro}","Resultado: #{resultado.resultado}"] ]
 						table(data, :column_widths => [270,270], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5})
 						#data = [ ["Valor de referência: #{resultado.valor_referencia_parametro}"] ]
 						#table(data, :column_widths => [540], :position => :center, :row_colors => ["FFFFFF"], :cell_style => { :border_width => 0.5})
 					end
 
-					if (resultado.valor_referencia_parametro == "" and resultado.conclusao != "")
+					if (resultado.valor_referencia_parametro.blank? and !resultado.conclusao.blank?)
 						data = [ ["Parâmetro: #{resultado.parametro}\nConclusão: #{resultado.conclusao}","Resultado: #{resultado.resultado}"] ]
 						table(data, :column_widths => [270,270], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5})
 						#data = [ ["Conclusão: #{resultado.conclusao}"] ]
 						#table(data, :column_widths => [540], :position => :center, :row_colors => ["FFFFFF"], :cell_style => { :border_width => 0.5})
 					end
 
-					if (resultado.valor_referencia_parametro != "" and resultado.conclusao != "")
+					if (!resultado.valor_referencia_parametro.blank? and !resultado.conclusao.blank?)
 						data = [ ["Parâmetro: #{resultado.parametro}\nValor de referência: #{resultado.valor_referencia_parametro}","Resultado: #{resultado.resultado}\nConclusão: #{resultado.conclusao}"] ]
 						table(data, :column_widths => [270,270], :position => :center, :row_colors => ["FFFFFF"], :cell_style => {:inline_format => true, :border_width => 0.5, :borders => [:left, :right, :top]})
 						#data = [ ["Valor de referência: #{resultado.valor_referencia_parametro}", "Conclusão: #{resultado.conclusao}"] ]
@@ -198,7 +198,7 @@ if (cursor < 80)
 	move_down 20
 end
 
-if @amostra.observacoes == ""
+if @amostra.observacoes.blank?
 	text  "Observação:<i> Resultado válido para a amostra analisada.</i>", :indent_paragraphs => 30, :inline_format => true
 else
 

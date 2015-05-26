@@ -16,16 +16,16 @@ Prawn::Document.new() do |pdf|
 	total_orcamento = 0
 
 	move_down 105
-	if ("#{@orcamento.status}" == "Aceito")
-		if !("#{@orcamento.data}" == "")
+	if ("#{@orcamento.status}".eql? "Aceito")
+		if !("#{@orcamento.data}".blank?)
 			text_box  "PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero} - Data: #{@orcamento.data}", :style => :bold, :size => 14, :align => :center, :at => [0, 685]	
-		elsif ("#{@orcamento.data}" == "")
+		elsif ("#{@orcamento.data}".blank?)
 			text_box  "PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero}", :style => :bold, :size => 14, :align => :center, :at => [0, 685]	
 		end		
-	elsif ("#{@orcamento.status}" == "Não Aceito")
-		if !("#{@orcamento.data}" == "")
+	elsif ("#{@orcamento.status}".eql? "Não Aceito")
+		if !("#{@orcamento.data}".blank?)
 			text  "PROPOSTA DE PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero} - Data: #{@orcamento.data}", :style => :bold, :size => 14, :align => :center
-		elsif ("#{@orcamento.data}" == "")
+		elsif ("#{@orcamento.data}".blank?)
 			text  "PROPOSTA DE PRESTAÇÃO DE SERVIÇO - N° #{@orcamento.numero}", :style => :bold, :size => 14, :align => :center
 		end
 	end	
@@ -36,7 +36,7 @@ Prawn::Document.new() do |pdf|
 	move_down 20
 
 	# DADOS DO ORCAMENTO	
-	if !("#{@orcamento.empresa_solicitante}" == "")
+	if !("#{@orcamento.empresa_solicitante}".blank?)
 		text  "<b>Solicitante: </b>#{@orcamento.empresa_solicitante}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
 	end
 
@@ -45,11 +45,11 @@ Prawn::Document.new() do |pdf|
 	entrou = 0
 
 	if !(empresa.nil?)
-		if !(empresa.CNPJ.nil? || empresa.CNPJ == "")
+		if !(empresa.CNPJ.nil? || empresa.CNPJ.blank?)
 			entrou = 1
 			dados_empresa += "<b>CNPJ:</b> #{empresa.CNPJ} \n"
 		end	
-		if !(empresa.rua.nil? || empresa.rua == "")
+		if !(empresa.rua.nil? || empresa.rua.blank?)
 			entrou = 1
 			dados_empresa += "<b>Endereço:</b> #{empresa.rua} - Bairro: #{empresa.bairro} - #{empresa.cidade}/#{empresa.UF} - CEP: #{empresa.CEP}"
 		end		
@@ -57,13 +57,13 @@ Prawn::Document.new() do |pdf|
 			text  dados_empresa, :size => 10, :indent_paragraphs => 30, :inline_format => true
 		end				
 	end
-	if !("#{@orcamento.pessoa_solicitante}" == "")
+	if !("#{@orcamento.pessoa_solicitante}".blank?)
 		text  "<b>A/C:</b> #{@orcamento.pessoa_solicitante}", :size => 10, :indent_paragraphs => 30, :inline_format => true		
 	end
-	if !("#{@orcamento.telefone}" == "")
+	if !("#{@orcamento.telefone}".blank?)
 		text  "<b>Telefone:</b> #{@orcamento.telefone}", :size => 10, :indent_paragraphs => 30, :inline_format => true	
 	end
-	if !("#{@orcamento.email}" == "")
+	if !("#{@orcamento.email}".blank?)
 		text  "<b>Email:</b> #{@orcamento.email}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 	move_down 5
@@ -201,13 +201,13 @@ Prawn::Document.new() do |pdf|
 	y_position = cursor - 10
 	bounding_box([30, y_position], :width => 530) do
 	transparent(0.0) { stroke_bounds }
-	if !("#{@orcamento.observacao}" == "")		
+	if !("#{@orcamento.observacao}".blank?)		
 				text "<b>Observação:</b> #{@orcamento.observacao}", :size => 10, :inline_format => true, :align => :justify
 	end
 	end
 	
 	
-	if !("#{@orcamento.quantidade}" == "")
+	if !("#{@orcamento.quantidade}".blank?)
 		text  "<b>Quantidade:</b> #{@orcamento.quantidade}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end	
 
@@ -217,7 +217,7 @@ Prawn::Document.new() do |pdf|
 		move_down 20
 	end
 
-	if !("#{@orcamento.prazo}" == "")
+	if !("#{@orcamento.prazo}".blank?)
 		text  "<b>Prazo de Entrega dos Resultados:</b> #{@orcamento.prazo}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 
