@@ -18,7 +18,16 @@ class ApplicationController < ActionController::Base
   end
 
   def limpa_sessao_preco
+    session[:is_from_limpa_sessao] = nil
     session[:preco_params] = nil   
+  end
+
+  def seta_sessao_copy_to_false
+    session[:is_from_copy] = false    
+  end
+
+  def limpa_sessao_id_orcamento
+    session[:id_orcamento] = nil
   end
 
   def index

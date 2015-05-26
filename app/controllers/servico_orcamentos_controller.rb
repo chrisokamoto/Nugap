@@ -2,6 +2,8 @@ class ServicoOrcamentosController < ApplicationController
 
   before_action :set_servico_orcamento, only: [:show, :edit, :update, :destroy] 
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
+  before_action :seta_sessao_copy_to_false, only:[:show, :edit, :index, :new]   
+  before_action :limpa_sessao_id_orcamento, only:[:show, :edit, :index, :new]
    
 
   def destroy

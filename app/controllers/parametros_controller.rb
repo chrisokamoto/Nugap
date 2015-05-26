@@ -3,6 +3,8 @@ class ParametrosController < ApplicationController
   before_action :valida_sessao
   before_action :set_grid, only: [:index, :create, :edit, :update] 
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
+  before_action :seta_sessao_copy_to_false, only:[:show, :edit, :index, :new]   
+  before_action :limpa_sessao_id_orcamento, only:[:show, :edit, :index, :new]
 
   # GET /parametros
   # GET /parametros.json

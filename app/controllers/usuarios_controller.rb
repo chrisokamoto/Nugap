@@ -3,6 +3,8 @@ class UsuariosController < ApplicationController
   before_action :valida_sessao, :valida_permissao_adm
   before_action :set_grid, only: [:index, :create, :edit, :update] 
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new] 
+  before_action :seta_sessao_copy_to_false, only:[:show, :edit, :index, :new]   
+  before_action :limpa_sessao_id_orcamento, only:[:show, :edit, :index, :new]
 
   before_filter :valida_permissao_chrisfernando, only: [:show, :edit, :update, :destroy]
 

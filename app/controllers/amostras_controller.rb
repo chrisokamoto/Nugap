@@ -4,8 +4,9 @@ class AmostrasController < ApplicationController
   before_action :set_amostras, only: [:index, :new, :create, :edit, :update]
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
   before_action :set_is_new_or_create, only:[:new, :create]
-  before_action :set_grid, only: [:index, :create, :edit, :update, :new, :copy]
-  before_action :set_is_copy, only: [:index, :edit, :update, :new]
+  before_action :set_grid, only: [:index, :create, :edit, :update, :new, :copy]  
+  before_action :set_copy_false, only: [:index, :edit, :update, :new, :show] 
+  before_action :limpa_sessao_id_orcamento, only:[:show, :edit, :index, :new]
 
   # GET /amostras
   # GET /amostras.json
@@ -108,9 +109,9 @@ class AmostrasController < ApplicationController
   def copy
     @existing_amostra = Amostra.find(params[:id])  
     @parametro_resultado = ParametroResultado.new      
-    $is_copy = true    
+    session[:is_from_copy] = true    
     puts "????????????"
-    puts $is_copy
+    puts session[:is_from_copy]    
 
     #create new object with attributes of existing record 
     @amostra = Amostra.new    
@@ -287,8 +288,8 @@ class AmostrasController < ApplicationController
       if @amostra.save
         if !user_is_estagiario?
           puts "!!!!!!!!!"
-          puts $is_copy
-          if($is_copy == false)
+          puts session[:is_from_copy]
+          if(session[:is_from_copy] == false)
             format.html { redirect_to edit_amostra_path(@amostra) }
             format.json { head :no_content }
           else
@@ -441,8 +442,8 @@ class AmostrasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     private
-    def set_is_copy
-      $is_copy = false
+    def set_copy_false
+      session[:is_from_copy] = false
     end
 
     def set_grid

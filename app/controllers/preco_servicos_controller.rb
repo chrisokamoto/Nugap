@@ -7,16 +7,13 @@ class PrecoServicosController < ApplicationController
 
   # GET /preco_servicos
   # GET /preco_servicos.json
-  def index
-    puts "?????????????????????"
-    puts $is_from_limpa_sessao
-    if($is_from_limpa_sessao)
+  def index    
+    if(session[:is_from_limpa_sessao])
       session[:preco_params] = nil 
     end
-    $is_from_limpa_sessao = false
+    session[:is_from_limpa_sessao] = false
     @preco_servicos = PrecoServico.all
-    @preco_servico = PrecoServico.new(session[:preco_params])
-    puts "22222222222222222222"
+    @preco_servico = PrecoServico.new(session[:preco_params])    
   end
 
   # GET /preco_servicos/1
@@ -40,12 +37,11 @@ class PrecoServicosController < ApplicationController
       params[:preco].to_f      
   end
 
-  def limpa_sessao
-    puts "!!!!!!!!!!!!LIMPA"
-    $is_from_limpa_sessao = true 
+  def limpa_sessao    
+    session[:is_from_limpa_sessao] = true 
     respond_to do |format|
       format.html { redirect_to preco_servicos_path, status: :ok}   
-      format.json { render json: $is_from_limpa_sessao }           
+      format.json { render json: session[:is_from_limpa_sessao] }           
     end
   end
 
