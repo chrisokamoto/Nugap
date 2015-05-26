@@ -37,7 +37,8 @@ $(document).ready(function(){
         minLength:1,
         select: function(event, ui){
             $("#empresa").val(ui.item.value);
-            var empresa = $('INPUT#empresa').val();              
+            var empresa = $('INPUT#empresa').val(); 
+            empresa = empresa.replace(/%/g, "%25");                    
      
           $.get('/orcamentos/get_telefone_empresa/' + empresa , function(data){                          
             });         
@@ -64,10 +65,12 @@ jQuery(function($) {
       var produto = $("#servico_orcamento_produto").val();
       if(produto == null)    
         produto = ""
+      produto = produto.replace(/%/g, "%25");       
 
       var analise = $("#servico_orcamento_analise").val();      
       if(analise == null)    
-        analise = ""          
+        analise = ""  
+      analise = analise.replace(/%/g, "%25");               
 
        $.get('/orcamentos/get_analises/' + produto , function(data){               
            $("#servico_orcamento_analise").html(data);           
@@ -90,14 +93,12 @@ jQuery(function($) {
       var produto = $("#servico_orcamento_produto").val();      
       if(produto == null)    
         produto = ""
+      produto = produto.replace(/%/g, "%25");       
 
       var analise = $("#servico_orcamento_analise").val();      
       if(analise == null)    
         analise = ""
-
-        var n = analise.search("%");
-        if(n != -1)
-          var analise = [analise.slice(0, n+1), "25", analise.slice(n+1)].join('');        
+      analise = analise.replace(/%/g, "%25");              
      
         $.get('/orcamentos/get_parametros/' + produto + '/' + analise, function(data){             
            $("#servico_orcamento_parametro").html(data);
@@ -111,22 +112,17 @@ jQuery(function($) {
       var produto = $("#servico_orcamento_produto").val();      
       if(produto == null)    
         produto = ""
+      produto = produto.replace(/%/g, "%25");       
 
       var analise = $("#servico_orcamento_analise").val();      
       if(analise == null)    
         analise = ""
-
-      var n = analise.search("%");
-      if(n != -1)
-        var analise = [analise.slice(0, n+1), "25", analise.slice(n+1)].join('');
+      analise = analise.replace(/%/g, "%25");       
 
       var parametro = $("#servico_orcamento_parametro").val();      
       if(parametro == null)    
         parametro = ""
-
-      var n = parametro.search("%");
-      if(n != -1)
-        var parametro = [parametro.slice(0, n+1), "25", parametro.slice(n+1)].join('');        
+      parametro = parametro.replace(/%/g, "%25");            
      
         $.get('/orcamentos/get_valor_unitario/' + produto + '/' + analise + '/' + parametro, function(data){          
            $("#servico_orcamento_valor_unitario").html(data).change();           
@@ -178,19 +174,18 @@ $("#addButtonServico").on("click", function() {
   var produto = $("#servico_orcamento_produto").val();
       if(produto == null)    
         produto = ""
+      produto = produto.replace(/%/g, "%25");       
 
       var analise = $("#servico_orcamento_analise").val();      
       if(analise == null)    
         analise = "" 
-      var n = analise.search("%");
-      if(n != -1)
-        var analise = [analise.slice(0, n+1), "25", analise.slice(n+1)].join('');
+      analise = analise.replace(/%/g, "%25");       
+
       var parametro = $("#servico_orcamento_parametro").val();      
       if(parametro == null)    
         parametro = ""
-      var n = parametro.search("%");
-      if(n != -1)
-        var parametro = [parametro.slice(0, n+1), "25", parametro.slice(n+1)].join('');
+      parametro = parametro.replace(/%/g, "%25");       
+
       var valor_unitario = $("#servico_orcamento_valor_unitario").val();      
       if(valor_unitario == null)    
         valor_unitario = ""  
@@ -209,9 +204,7 @@ $("#addButtonServico").on("click", function() {
         id_servico_orcamento = "-1"
       
   $.get('/orcamentos/saveVirtualServicoOrcamento/' + produto + '/' + analise + '/' + parametro + '/' + valor_unitario + '/' + qtd_amostra + '/' + valor_total + '/' + id_orcamento + '/' + id_servico_orcamento, function(){
-    addAll(true);    
-    //location.reload(); 
-    //$('#tabela_servico_orcamento').html("<%= escape_javascript(render :partial => 'grid') %>");    
+    addAll(true);        
   })
 
 });

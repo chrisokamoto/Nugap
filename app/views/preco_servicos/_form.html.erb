@@ -121,10 +121,12 @@
       var produto = $('SELECT#produto_preco_selection :selected').val();            
       if(produto == null)    
         produto = ""
+      produto = produto.replace(/%/g, "%25");       
 
       var analise = $('SELECT#analise_preco_selection :selected').val();      
       if(analise == null)    
         analise = ""
+      analise = analise.replace(/%/g, "%25");       
      
         $.get('/preco_servicos/get_parametros_preco/' + produto , function(data){               
            $("#analise_preco_selection").html(data);
@@ -143,14 +145,12 @@
       var produto = $('SELECT#produto_preco_selection :selected').val();      
       if(produto == null)    
         produto = ""
+      produto = produto.replace(/%/g, "%25");       
 
       var analise = $('SELECT#analise_preco_selection :selected').val();      
       if(analise == null)    
         analise = ""
-
-        var n = analise.search("%");
-        if(n != -1)
-          var analise = [analise.slice(0, n+1), "25", analise.slice(n+1)].join('');
+      analise = analise.replace(/%/g, "%25");       
      
         $.get('/preco_servicos/get_parametros_preco/' + produto + '/' + analise, function(data){             
            $("#parametro_preco_selection").html(data);

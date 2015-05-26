@@ -20,31 +20,22 @@ jQuery(function($) {
     var tipo_analise = $("#parametro_resultado_tipo").val();
         if(tipo_analise == null)    
           tipo_analise = ""
-
-        var n = tipo_analise.search("%");
-        if(n != -1)
-          var tipo_analise = [tipo_analise.slice(0, n+1), "25", tipo_analise.slice(n+1)].join('');        
+        tipo_analise = tipo_analise.replace(/%/g, "%25");        
 
         var parametro = $("#parametro_resultado_parametro").val();      
         if(parametro == "")    
           parametro = " "
-        var n = parametro.search("%");
-        if(n != -1)
-          var parametro = [parametro.slice(0, n+1), "25", parametro.slice(n+1)].join('');        
+        parametro = parametro.replace(/%/g, "%25");       
 
         var resultado = $("#parametro_resultado_resultado").val();      
         if(resultado == "")    
           resultado = " "  
-	var n = resultado.search("%");
-     	if(n != -1)
-        resultado = [resultado.slice(0, n+1), "25", resultado.slice(n+1)].join('');
+        resultado = resultado.replace(/%/g, "%25");       	     
 
         var conclusao = $("#parametro_resultado_conclusao").val();      
         if(conclusao == "")    
           conclusao = " " 
-	var n = conclusao.search("%");
-     	if(n != -1)
-        conclusao = [conclusao.slice(0, n+1), "25", conclusao.slice(n+1)].join('');
+	     conclusao = conclusao.replace(/%/g, "%25");       
 
         var id_amostra = $("#id_amostra").val();      
         if(id_amostra == null)    
