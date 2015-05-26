@@ -284,6 +284,8 @@ class AmostrasController < ApplicationController
 
       if @amostra.save
         if !user_is_estagiario?
+          puts "!!!!!!!!!"
+          puts $is_copy
           if(!$is_copy)
             format.html { redirect_to edit_amostra_path(@amostra) }
             format.json { head :no_content }
