@@ -107,8 +107,7 @@ class AmostrasController < ApplicationController
   def copy
     @existing_amostra = Amostra.find(params[:id])  
     @parametro_resultado = ParametroResultado.new      
-    $is_copy = true
-    #@existing_parametro_resultado = ParametroResultado.find_by_amostra_id(id) 
+    $is_copy = true    
 
     #create new object with attributes of existing record 
     @amostra = Amostra.new    
@@ -286,7 +285,7 @@ class AmostrasController < ApplicationController
         if !user_is_estagiario?
           puts "!!!!!!!!!"
           puts $is_copy
-          if(!$is_copy)
+          if($is_copy == false)
             format.html { redirect_to edit_amostra_path(@amostra) }
             format.json { head :no_content }
           else
