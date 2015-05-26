@@ -5,6 +5,7 @@ class AmostrasController < ApplicationController
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
   before_action :set_is_new_or_create, only:[:new, :create]
   before_action :set_grid, only: [:index, :create, :edit, :update, :new, :copy]
+  before_action :set_is_copy, only: [:index, :edit, :update, :new]
 
   # GET /amostras
   # GET /amostras.json
@@ -108,6 +109,8 @@ class AmostrasController < ApplicationController
     @existing_amostra = Amostra.find(params[:id])  
     @parametro_resultado = ParametroResultado.new      
     $is_copy = true    
+    puts "????????????"
+    puts $is_copy
 
     #create new object with attributes of existing record 
     @amostra = Amostra.new    
@@ -438,6 +441,10 @@ class AmostrasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     private
+    def set_is_copy
+      $is_copy = false
+    end
+
     def set_grid
       @parametro_resultado_grid = initialize_grid(ParametroResultado.where(amostra_id: params[:id]),
         order: 'id',        
