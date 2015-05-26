@@ -403,14 +403,11 @@ class OrcamentosController < ApplicationController
 
     def set_grid
       id = !params[:id].nil? ? params[:id] : session[:id_orcamento]
-      puts "222222222222222"
-      puts session[:id_orcamento]
-      puts params[:id]
 
       @servico_orcamento_grid = initialize_grid(ServicoOrcamento.where(orcamento_id: id),
         order: 'id',        
         order_direction: 'desc',
-        per_page: 7
+        per_page: 100
       )
     end
 end
