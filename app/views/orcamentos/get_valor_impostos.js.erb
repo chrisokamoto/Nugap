@@ -5,5 +5,12 @@
 	$('#orcamento_cofins').val("<%= @cofins %>");
 	$('#orcamento_total_pagar').val("<%= @preco_total %>");		
 	$('#tabela_servico_orcamento').html("<%= raw escape_javascript render(:partial => 'grid') %>");
+	var id_servico_orcamento = $('#servico_orcamento_id').val();    
+	$('#titulo_form').html("");
+    if(id_servico_orcamento != ""){
+      $('#titulo_form').append("Editar Serviço");
+    } else {
+      $('#titulo_form').append("Novo Serviço");
+  	}
 <% end %>
 

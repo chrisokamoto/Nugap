@@ -6,4 +6,11 @@
 	$('#servico_orcamento_qtd_amostra').val("<%= @servico.qtd_amostra %>");
 	$('#servico_orcamento_valor_unitario').val("<%= @servico.valor_unitario %>");
 	$('#servico_orcamento_valor_total').val("<%= @servico.valor_total %>");
+	var id_servico_orcamento = $('#servico_orcamento_id').val();    
+	$('#titulo_form').html("");
+    if(id_servico_orcamento != ""){
+      $('#titulo_form').append("Editar Serviço");
+    } else {
+      $('#titulo_form').append("Novo Serviço");
+  	}
 <% end %>

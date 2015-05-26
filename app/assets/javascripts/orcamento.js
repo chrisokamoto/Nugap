@@ -5,6 +5,14 @@ $(document).ready(function(){
     $('.previous').hide();
     $('.next').hide();    
 
+    var id_servico_orcamento = $('#servico_orcamento_id').val();    
+    $('#titulo_form').html("");
+      if(id_servico_orcamento != ""){
+        $('#titulo_form').append("Editar Serviço");
+      } else {
+        $('#titulo_form').append("Novo Serviço");
+      }
+
     //inicializa wizard end    
 
     var form = $("#orcamento_form").serialize();
