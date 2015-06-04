@@ -97,7 +97,7 @@
                     <div class="col-lg-offset-10 col-lg-2">                      
                         <input type="button" class="btn btn-info btn-block" value="Próximo" onClick="wizard_next()"/>
                       <% if not @is_new_or_create %>
-                        <%= f.submit "Salvar", :class => 'btn btn-success btn-block', :id => "submit" %>
+                        <%= f.submit "Salvar Amostra", :class => 'btn btn-success btn-block', :id => "submit" %>
                       <% end %>
                     </div>
                   </div>    
@@ -177,10 +177,12 @@
                       <input type="button" class="btn btn-info btn-block" value="Voltar" onClick="wizard_previous()"/>
                     </div>
                     <div class="col-lg-offset-10 col-lg-2">   
-                      <% if !user_is_estagiario? %>                   
-                        <input type="button" class="btn btn-info btn-block" value="Próximo" onClick="wizard_next()"/>  
+                      <% if !user_is_estagiario? %>         
+                        <% if not @is_new_or_create %>          
+                          <input type="button" class="btn btn-info btn-block" value="Próximo" onClick="wizard_next()"/>  
                         <% end %>                    
-                        <%= f.submit "Salvar", :class => 'btn btn-success btn-block', :id => "submit" %>                      
+                      <% end %>    
+                        <%= f.submit "Salvar Amostra", :class => 'btn btn-success btn-block', :id => "submit" %>                      
                     </div>
                   </div> 
                 </div>
@@ -197,8 +199,7 @@
                         <input type="button" class="btn btn-info btn-block" value="Voltar" onClick="wizard_previous()"/>
                       </div>
                       <div class="col-lg-offset-8 col-lg-2">                      
-                          <input type="button" class="btn btn-info btn-block" value="Próximo" onClick="wizard_next()"/>
-                        <%= f.submit "Salvar", :class => 'btn btn-success btn-block', :id => "submit" %>
+                        <%= f.submit "Salvar Amostra", :class => 'btn btn-success btn-block', :id => "submit" %>
                       </div>
                 </div>
             <% end %>
