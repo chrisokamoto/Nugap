@@ -4,9 +4,10 @@ class AmostrasController < ApplicationController
   before_action :set_amostras, only: [:index, :new, :create, :edit, :update]
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
   before_action :set_is_new_or_create, only:[:new, :create, :copy]
-  before_action :set_grid, only: [:index, :create, :edit, :update, :new, :copy]  
+  before_action :set_grid, only: [:index, :create, :edit, :update, :new, :copy, :atualiza_grid]  
   before_action :set_copy_false, only: [:index, :edit, :update, :new, :show] 
   before_action :limpa_sessao_id_orcamento, only:[:show, :edit, :index, :new]
+  before_action :limpa_sessao_id_amostra, only:[:index, :new] 
 
   # GET /amostras
   # GET /amostras.json
@@ -49,11 +50,14 @@ class AmostrasController < ApplicationController
 
   # GET /amostras/1/edit
   def edit
+    session[:id_amostra] = params[:id]   
     @amostra = Amostra.find(params[:id])  
     @parametro_resultado = ParametroResultado.new  
   end
 
   def saveVirtualParametroResultado
+    session[:id_amostra] = params[:id]   
+    
       @parametro_resultado = ParametroResultado.new
       @parametro_resultado.tipo = params[:tipo_analise] ? params[:tipo_analise] : params[:parametro_resultado][:tipo]      
       tipo_analise = params[:tipo_analise] ? params[:tipo_analise] : params[:parametro_resultado][:tipo]      
@@ -95,6 +99,9 @@ class AmostrasController < ApplicationController
 
   end
 
+  def atualiza_grid
+  end
+
   def set_resultado_edit
     @resultado = ParametroResultado.where(id: params[:id]).first
     @resultado   
@@ -110,9 +117,6 @@ class AmostrasController < ApplicationController
     @existing_amostra = Amostra.find(params[:id])  
     @parametro_resultado = ParametroResultado.new      
     session[:id_amostra_copy] = @existing_amostra.id    
-
-    puts "??????????????  copy"
-    puts @parametros_resultados_amostra_a_ser_copiada
 
     #create new object with attributes of existing record 
     @amostra = Amostra.new    
@@ -463,7 +467,9 @@ class AmostrasController < ApplicationController
     end
 
     def set_grid
-      @parametro_resultado_grid = initialize_grid(ParametroResultado.where(amostra_id: params[:id]),
+      id = !params[:id].nil? ? params[:id] : session[:id_amostra]
+
+      @parametro_resultado_grid = initialize_grid(ParametroResultado.where(amostra_id: id),
         order: 'id',        
         order_direction: 'desc',
         per_page: 7

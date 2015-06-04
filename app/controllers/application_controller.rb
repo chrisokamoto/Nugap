@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
     session[:id_orcamento] = nil
   end
 
+  def limpa_sessao_id_amostra
+    session[:id_amostra] = nil
+  end
+
   def index
   	if valida_id_sessao
       redirect_to home_path

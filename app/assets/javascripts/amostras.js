@@ -54,7 +54,7 @@ jQuery(function($) {
           id_parametro_resultado = "-1"
         
     $.get('/amostras/saveVirtualParametroResultado/' + tipo_analise + '/' + parametro + '/' + resultado + '/' + conclusao + '/' + id_amostra + '/' + id_parametro_resultado, function(){      
-      location.reload();
+      $.get('/amostras/atualiza_grid', function(){})
     })
 
   });
@@ -69,6 +69,6 @@ function edit_parametro_resultado(parametro_resultado_id){
 
 function delete_parametro_resultado(parametro_resultado_id){  
   $.get('/amostras/delete_resultado/' + parametro_resultado_id , function(data){    
-    
+    $.get('/amostras/atualiza_grid', function(){})
   })
 }

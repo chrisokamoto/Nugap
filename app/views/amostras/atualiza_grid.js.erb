@@ -1,0 +1,8 @@
+$('#tabela_parametro_resultado').html("<%= raw escape_javascript render(:partial => 'grid') %>");
+var id_parametro_resultado = $('#parametro_resultado_id').val();    
+$('#titulo_form').html("");
+if(id_parametro_resultado != ""){
+	$('#titulo_form').append("Editar Resultado");
+} else {
+    $('#titulo_form').append("Novo Resultado");
+}

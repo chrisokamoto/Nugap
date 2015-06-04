@@ -15,8 +15,6 @@ NugapSystem::Application.routes.draw do
 
   resources :analises
 
-  resources :amostras 
-
   resources :usuarios
 
   resources :embalagems
@@ -71,6 +69,9 @@ NugapSystem::Application.routes.draw do
   get '/amostras/saveVirtualParametroResultado/:tipo_analise/:parametro/:resultado/:conclusao/:id/:id_resultado', :controller=>'amostras', :action => 'saveVirtualParametroResultado', :parametro => /.+(\/.\%+)*/, :resultado => /.+(\/.\%+)*/, :tipo_analise => /.+(\/.\%+)*/, :conclusao => /.+(\/.\%+)*/
   get '/amostras/set_resultado/:id', :controller=>'amostras', :action => 'set_resultado_edit'
   get '/amostras/delete_resultado/:id', :controller=>'amostras', :action => 'delete_resultado'
+  get '/amostras/atualiza_grid', :controller=>'amostras', :action => 'atualiza_grid'
+
+  resources :amostras 
 
 
   root :to => 'application#index'

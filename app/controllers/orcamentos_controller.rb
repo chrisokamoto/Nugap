@@ -5,7 +5,8 @@ class OrcamentosController < ApplicationController
   before_action :set_is_new_or_create, only:[:new, :create]
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
   before_action :seta_sessao_copy_to_false, only:[:show, :edit, :index, :new] 
-  before_action :limpa_sessao_id_orcamento, only:[:index, :new]     
+  before_action :limpa_sessao_id_orcamento, only:[:index, :new] 
+  before_action :limpa_sessao_id_amostra, only:[:show, :edit, :index, :new]    
 
   # GET /orcamentos
   # GET /orcamentos.json
@@ -300,8 +301,6 @@ class OrcamentosController < ApplicationController
 
   def saveVirtualServicoOrcamento 
       session[:id_orcamento] = params[:id]
-      puts "333333333"
-      puts session[:id_orcamento]
 
       @servico_orcamento = ServicoOrcamento.new
       @servico_orcamento.produto = params[:produto] ? params[:produto] : params[:servico_orcamento][:produto]

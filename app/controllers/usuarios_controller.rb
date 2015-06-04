@@ -5,6 +5,7 @@ class UsuariosController < ApplicationController
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new] 
   before_action :seta_sessao_copy_to_false, only:[:show, :edit, :index, :new]   
   before_action :limpa_sessao_id_orcamento, only:[:show, :edit, :index, :new]
+  before_action :limpa_sessao_id_amostra, only:[:show, :edit, :index, :new]  
 
   before_filter :valida_permissao_chrisfernando, only: [:show, :edit, :update, :destroy]
 

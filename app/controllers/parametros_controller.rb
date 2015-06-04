@@ -5,6 +5,7 @@ class ParametrosController < ApplicationController
   before_action :limpa_sessao_preco, only:[:show, :edit, :index, :new]
   before_action :seta_sessao_copy_to_false, only:[:show, :edit, :index, :new]   
   before_action :limpa_sessao_id_orcamento, only:[:show, :edit, :index, :new]
+  before_action :limpa_sessao_id_amostra, only:[:show, :edit, :index, :new]  
 
   # GET /parametros
   # GET /parametros.json
