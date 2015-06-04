@@ -109,9 +109,10 @@ class AmostrasController < ApplicationController
   def copy
     @existing_amostra = Amostra.find(params[:id])  
     @parametro_resultado = ParametroResultado.new      
-    session[:is_from_copy] = true    
-    puts "????????????"
-    puts session[:is_from_copy]    
+    session[:id_amostra_copy] = @existing_amostra.id    
+
+    puts "??????????????  copy"
+    puts @parametros_resultados_amostra_a_ser_copiada
 
     #create new object with attributes of existing record 
     @amostra = Amostra.new    
@@ -286,15 +287,17 @@ class AmostrasController < ApplicationController
       
 
       if @amostra.save
-        if !user_is_estagiario?
-          puts "!!!!!!!!!"
-          puts session[:is_from_copy]
-          if(session[:is_from_copy] == false)
+        if !user_is_estagiario?          
+          if(session[:id_amostra_copy].nil?)
             format.html { redirect_to edit_amostra_path(@amostra) }
             format.json { head :no_content }
           else
-            format.html { redirect_to amostras_path, notice: 'Amostra copiada com sucesso!' }
-            format.json { render action: 'index', status: :created, location: @amostra }
+            @parametro_resultados_from_amostra = ParametroResultado.where(amostra_id: session[:id_amostra_copy])
+            @parametro_resultados_from_amostra.each do |parametro_resultado|    
+              copy_parametros_resultados(@amostra.id, parametro_resultado)
+            end
+            format.html { redirect_to edit_amostra_path(@amostra), notice: 'Amostra copiada com sucesso!' }
+            format.json { render action: 'edit', status: :created, location: @amostra }
           end
         else
           format.html { redirect_to amostras_path, notice: 'Amostra criada com sucesso!' }
@@ -307,6 +310,19 @@ class AmostrasController < ApplicationController
 
       
     end
+  end
+
+  def copy_parametros_resultados(amostra_id, parametro_resultado)
+    @new_parametro_resultado = ParametroResultado.new
+    @new_parametro_resultado.amostra_id = amostra_id
+    @new_parametro_resultado.parametro = parametro_resultado.parametro
+    @new_parametro_resultado.resultado = parametro_resultado.resultado
+    @new_parametro_resultado.tipo = parametro_resultado.tipo
+    @new_parametro_resultado.conclusao = parametro_resultado.conclusao
+    @new_parametro_resultado.referencia_parametro = parametro_resultado.referencia_parametro
+    @new_parametro_resultado.metodo_parametro = parametro_resultado.metodo_parametro
+    @new_parametro_resultado.valor_referencia_parametro = parametro_resultado.valor_referencia_parametro
+    @new_parametro_resultado.save
   end
 
   # PATCH/PUT /amostras/1
@@ -443,7 +459,7 @@ class AmostrasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     private
     def set_copy_false
-      session[:is_from_copy] = false
+      session[:id_amostra_copy] = nil
     end
 
     def set_grid

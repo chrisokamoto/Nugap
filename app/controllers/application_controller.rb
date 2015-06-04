@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def seta_sessao_copy_to_false
-    session[:is_from_copy] = false    
+    session[:id_amostra_copy] = nil
   end
 
   def limpa_sessao_id_orcamento
