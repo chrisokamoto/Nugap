@@ -46,7 +46,8 @@ $(document).ready(function(){
         select: function(event, ui){
             $("#empresa").val(ui.item.value);
             var empresa = $('INPUT#empresa').val(); 
-            empresa = empresa.replace(/%/g, "%25");                    
+            empresa = empresa.replace(/%/g, "%25");
+            empresa = empresa.replace(/#/g, "%23");                     
      
           $.get('/orcamentos/get_telefone_empresa/' + empresa , function(data){                          
             });         
@@ -73,12 +74,16 @@ jQuery(function($) {
       var produto = $("#servico_orcamento_produto").val();
       if(produto == null)    
         produto = ""
-      produto = produto.replace(/%/g, "%25");       
+      produto = produto.replace(/%/g, "%25"); 
+      produto = produto.replace(/#/g, "%23");    
+      produto = produto.replace(/\//g, "%2F");   
 
       var analise = $("#servico_orcamento_analise").val();      
       if(analise == null)    
         analise = ""  
-      analise = analise.replace(/%/g, "%25");               
+      analise = analise.replace(/%/g, "%25");  
+      analise = analise.replace(/#/g, "%23");   
+      analise = analise.replace(/\//g, "%2F");           
 
        $.get('/orcamentos/get_analises/' + produto , function(data){               
            $("#servico_orcamento_analise").html(data);           
@@ -101,12 +106,16 @@ jQuery(function($) {
       var produto = $("#servico_orcamento_produto").val();      
       if(produto == null)    
         produto = ""
-      produto = produto.replace(/%/g, "%25");       
+      produto = produto.replace(/%/g, "%25");  
+      produto = produto.replace(/#/g, "%23"); 
+      produto = produto.replace(/\//g, "%2F");     
 
       var analise = $("#servico_orcamento_analise").val();      
       if(analise == null)    
         analise = ""
-      analise = analise.replace(/%/g, "%25");              
+      analise = analise.replace(/%/g, "%25");   
+      analise = analise.replace(/#/g, "%23");   
+      analise = analise.replace(/\//g, "%2F");         
      
         $.get('/orcamentos/get_parametros/' + produto + '/' + analise, function(data){             
            $("#servico_orcamento_parametro").html(data);
@@ -120,17 +129,23 @@ jQuery(function($) {
       var produto = $("#servico_orcamento_produto").val();      
       if(produto == null)    
         produto = ""
-      produto = produto.replace(/%/g, "%25");       
+      produto = produto.replace(/%/g, "%25"); 
+      produto = produto.replace(/#/g, "%23");    
+      produto = produto.replace(/\//g, "%2F");   
 
       var analise = $("#servico_orcamento_analise").val();      
       if(analise == null)    
         analise = ""
-      analise = analise.replace(/%/g, "%25");       
+      analise = analise.replace(/%/g, "%25");  
+      analise = analise.replace(/#/g, "%23");    
+      analise = analise.replace(/\//g, "%2F");  
 
       var parametro = $("#servico_orcamento_parametro").val();      
       if(parametro == null)    
         parametro = ""
-      parametro = parametro.replace(/%/g, "%25");            
+      parametro = parametro.replace(/%/g, "%25"); 
+      parametro = parametro.replace(/#/g, "%23");
+      parametro = parametro.replace(/\//g, "%2F");            
      
         $.get('/orcamentos/get_valor_unitario/' + produto + '/' + analise + '/' + parametro, function(data){          
            $("#servico_orcamento_valor_unitario").html(data).change();           
@@ -182,17 +197,23 @@ $("#addButtonServico").on("click", function() {
   var produto = $("#servico_orcamento_produto").val();
       if(produto == null)    
         produto = ""
-      produto = produto.replace(/%/g, "%25");       
+      produto = produto.replace(/%/g, "%25");  
+      produto = produto.replace(/#/g, "%23");      
+      produto = produto.replace(/\//g, "%2F");
 
       var analise = $("#servico_orcamento_analise").val();      
       if(analise == null)    
         analise = "" 
-      analise = analise.replace(/%/g, "%25");       
+      analise = analise.replace(/%/g, "%25");   
+      analise = analise.replace(/#/g, "%23"); 
+      analise = analise.replace(/\//g, "%2F");    
 
       var parametro = $("#servico_orcamento_parametro").val();      
       if(parametro == null)    
         parametro = ""
-      parametro = parametro.replace(/%/g, "%25");       
+      parametro = parametro.replace(/%/g, "%25");
+      parametro = parametro.replace(/#/g, "%23");  
+      parametro = parametro.replace(/\//g, "%2F");      
 
       var valor_unitario = $("#servico_orcamento_valor_unitario").val();      
       if(valor_unitario == null)    

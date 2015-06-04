@@ -49,26 +49,26 @@ NugapSystem::Application.routes.draw do
 
   get '/preco_servicos/limpa_preco_servicos', :controller=>'preco_servicos', :action => 'limpa_sessao', :as => 'limpa_preco_servicos_path'
   get '/preco_servicos/:get_parametros_preco/:produto/:analise', :controller=>'preco_servicos', :action => 'get_parametros_preco'
-  get '/preco_servicos/:salvar_preco/:produto/:analise/:parametro/:preco', :controller=>'preco_servicos', :action => 'salvar_preco', :parametro => /.+(\/.\%+)*/
+  get '/preco_servicos/:salvar_preco/:produto/:analise/:parametro/:preco', :controller=>'preco_servicos', :action => 'salvar_preco', :parametro => /.+(\/.\%+)*/, :produto => /.+(\/.\%+)*/, :analise => /.+(\/.\%+)*/
 
   resources :preco_servicos
 
   get '/orcamentos/get_analises/:produto', :controller=>'orcamentos', :action => 'get_analises'
   get '/orcamentos/get_parametros/:produto/:analise', :controller=>'orcamentos', :action => 'get_parametros'
-  get '/orcamentos/get_valor_unitario/:produto/:analise/:parametro', :controller=>'orcamentos', :action => 'get_valor_unitario', :parametro => /.+(\/.\%+)*/
+  get '/orcamentos/get_valor_unitario/:produto/:analise/:parametro', :controller=>'orcamentos', :action => 'get_valor_unitario', :parametro => /.+(\/.\%+)*/, :produto => /.+(\/.\%+)*/, :analise => /.+(\/.\%+)*/
   get '/orcamentos/get_valor_total/:valor_unitario/:qtd_amostra', :controller=>'orcamentos', :action => 'get_valor_total', :valor_unitario => /[^\/]*/
   get '/orcamentos/get_valor_total/:valor_unitario', :controller=>'orcamentos', :action => 'get_valor_total', :valor_unitario => /[^\/]*/
   get '/orcamentos/get_valor_desconto/:bruto/:desconto', :controller=>'orcamentos', :action => 'get_valor_desconto', :bruto => /[^\/]*/, :total_pagar => /[^\/]*/
   get '/orcamentos/get_valor_impostos/:total_pagar', :controller=>'orcamentos', :action => 'get_valor_impostos', :total_pagar => /[^\/]*/
-  get '/orcamentos/get_telefone_empresa/:empresa', :controller=>'orcamentos', :action => 'get_telefone_empresa'
-  get '/orcamentos/saveVirtualServicoOrcamento/:produto/:analise/:parametro/:valor_unitario/:quantidade/:valor_total/:id/:id_servico', :controller=>'orcamentos', :action => 'saveVirtualServicoOrcamento', :parametro => /.+(\/.\%+)*/, :valor_unitario => /[^\/]*/, :valor_total => /[^\/]*/
+  get '/orcamentos/get_telefone_empresa/:empresa', :controller=>'orcamentos', :action => 'get_telefone_empresa', :empresa => /.+(\/.\%+)*/
+  get '/orcamentos/saveVirtualServicoOrcamento/:produto/:analise/:parametro/:valor_unitario/:quantidade/:valor_total/:id/:id_servico', :controller=>'orcamentos', :action => 'saveVirtualServicoOrcamento', :parametro => /.+(\/.\%+)*/, :valor_unitario => /[^\/]*/, :valor_total => /[^\/]*/, :produto => /.+(\/.\%+)*/, :analise => /.+(\/.\%+)*/
   get '/orcamentos/get_total/:id/:has_to_save', :controller=>'orcamentos', :action => 'get_valor_total_orcamento'
   get '/orcamentos/set_servico/:id', :controller=>'orcamentos', :action => 'set_servico_edit'
   get '/orcamentos/delete_servico/:id', :controller=>'orcamentos', :action => 'delete_servico'
   get '/get_empresas', :controller=>'orcamentos', :action => 'get_empresas'
 
   get '/amostras/get_filtro/:filtro', :controller=>'amostras', :action => 'get_filtro'
-  get '/amostras/saveVirtualParametroResultado/:tipo_analise/:parametro/:resultado/:conclusao/:id/:id_resultado', :controller=>'amostras', :action => 'saveVirtualParametroResultado', :parametro => /.+(\/.\%+)*/
+  get '/amostras/saveVirtualParametroResultado/:tipo_analise/:parametro/:resultado/:conclusao/:id/:id_resultado', :controller=>'amostras', :action => 'saveVirtualParametroResultado', :parametro => /.+(\/.\%+)*/, :resultado => /.+(\/.\%+)*/, :tipo_analise => /.+(\/.\%+)*/, :conclusao => /.+(\/.\%+)*/
   get '/amostras/set_resultado/:id', :controller=>'amostras', :action => 'set_resultado_edit'
   get '/amostras/delete_resultado/:id', :controller=>'amostras', :action => 'delete_resultado'
 
