@@ -4,4 +4,11 @@
 	$('#parametro_resultado_parametro').val("<%= @resultado.parametro %>");	
 	$('#parametro_resultado_resultado').val("<%= @resultado.resultado %>");
 	$('#parametro_resultado_conclusao').val("<%= @resultado.conclusao %>");	
+	var id_parametro_resultado = $('#parametro_resultado_id').val();    
+	$('#titulo_form_resultado').html("");	
+	if(id_parametro_resultado != ""){
+		$('#titulo_form_resultado').append("Editar Resultado");
+	} else {
+	    $('#titulo_form_resultado').append("Novo Resultado");
+	}
 <% end %>

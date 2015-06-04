@@ -2,6 +2,14 @@ $(window).load(function(){
   var id_amostra = $("#id_amostra").val();
   var id_orcamento = $("#id_orcamento").val();   
 
+  var id_parametro_resultado = $('#parametro_resultado_id').val();    
+  $('#titulo_form_resultado').html("");
+  if(id_parametro_resultado != ""){  
+    $('#titulo_form_resultado').append("Editar Resultado");
+  } else {
+      $('#titulo_form_resultado').append("Novo Resultado");
+  }
+
   if(id_orcamento){      
       $('a[href^="#step2"]').click();   
     }
