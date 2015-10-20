@@ -153,22 +153,22 @@ class OrcamentosController < ApplicationController
 
     if !params[:total_pagar].nil? 
 
-      if params[:total_pagar].to_f >= 666.67
-   
-        @ir = params[:total_pagar].to_f * 1.5 / 100.0
+      if params[:total_pagar].to_f >= 215.05
+        @pis = params[:total_pagar].to_f * 0.65 / 100.0
+        @cssl = params[:total_pagar].to_f * 1 / 100.0
+        @cofins = params[:total_pagar].to_f * 3 / 100.0
+
         @preco_total = params[:total_pagar].to_f
-        @preco_total  = @preco_total  - @ir
+        @preco_total  = @preco_total  - @pis - @cssl - @cofins
 
-        if params[:total_pagar].to_f >= 5000
-          @pis = params[:total_pagar].to_f * 0.65 / 100.0
-          @cssl = params[:total_pagar].to_f * 1 / 100.0
-          @cofins = params[:total_pagar].to_f * 3 / 100.0
-
+        if params[:total_pagar].to_f >= 666.66
+   
+          @ir = params[:total_pagar].to_f * 1.5 / 100.0
           @preco_total = params[:total_pagar].to_f
-          @preco_total  = @preco_total  - @ir - @pis - @cssl - @cofins
-        end
+          @preco_total  = @preco_total  - @ir - @pis - @cssl - @cofins      
 
-      end
+        end  
+      end        
       
     end
 
@@ -233,22 +233,22 @@ class OrcamentosController < ApplicationController
 
     if !@preco_desconto.nil? 
 
-      if @preco_desconto.to_f >= 666.67
-   
-        @ir = @preco_desconto.to_f * 1.5 / 100.0        
-        @preco_total = @preco_desconto.to_f
-        @preco_total  = @preco_total  - @ir - @pis - @cssl - @cofins
-
-        if @preco_desconto.to_f >= 5000
-          @pis = @preco_desconto.to_f * 0.65 / 100.0
-          @cssl = @preco_desconto.to_f * 1 / 100.0
-          @cofins = @preco_desconto.to_f * 3 / 100.0
+      if @preco_desconto.to_f >= 5000
+        @pis = @preco_desconto.to_f * 0.65 / 100.0
+        @cssl = @preco_desconto.to_f * 1 / 100.0
+        @cofins = @preco_desconto.to_f * 3 / 100.0
           
-          @preco_total = @preco_desconto.to_f
-          @preco_total  = @preco_total  - @ir - @pis - @cssl - @cofins
-        end
+        @preco_total = @preco_desconto.to_f
+        @preco_total  = @preco_total - @pis - @cssl - @cofins
 
-      end
+        if @preco_desconto.to_f >= 666.67
+   
+          @ir = @preco_desconto.to_f * 1.5 / 100.0        
+          @preco_total = @preco_desconto.to_f
+          @preco_total  = @preco_total  - @ir - @pis - @cssl - @cofins        
+
+        end
+      end      
       
     end
 
