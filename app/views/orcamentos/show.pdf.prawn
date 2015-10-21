@@ -238,7 +238,7 @@ Prawn::Document.new() do |pdf|
 		text  "<b>COFINS:</b> #{@orcamento.cofins}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end
 	if !("#{@orcamento.cssl}" == "0.0")
-		text  "<b>CSSL:</b> #{@orcamento.cssl}", :size => 10, :indent_paragraphs => 30, :inline_format => true
+		text  "<b>CSLL:</b> #{@orcamento.cssl}", :size => 10, :indent_paragraphs => 30, :inline_format => true
 	end	
 
 	text  "<b>Forma de Pagamento:</b> #{@orcamento.pagamento}", :size => 10, :indent_paragraphs => 30, :inline_format => true
