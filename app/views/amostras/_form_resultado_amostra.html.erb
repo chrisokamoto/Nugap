@@ -7,7 +7,7 @@
           <span class="fs1" aria-hidden="true"></span>
         </div>
       </div>
-      <div class="widget-body">
+      <div class="widget-body" style="width: 400px;">
       <%if(controller.action_name == 'index' || controller.action_name=='new' || controller.action_name == 'edit' || controller.action_name == 'copy')%>
         <%= form_for(@parametro_resultado, url: amostras_path, html: {class: 'form-horizontal', role: 'form'}) do |f| %>     
 
@@ -30,7 +30,7 @@
           <div class="form-group">
             <%= f.label 'Resultado', class: 'col-lg-3 control-label' %>
             <div class="col-lg-9">
-              <%= f.text_field(:resultado, :class => "form-control",  :presence => { :message => " precisa ser preenchido."} ) %>
+              <%= f.text_area(:resultado, :class => "form-control",  :presence => { :message => " precisa ser preenchido."}, :style => "height: 60px;" ) %>
             </div>
           </div>
 
